@@ -1,59 +1,78 @@
 <!doctype html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#171717">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1"
+>
+
+<meta
+name="theme-color"
+content="#171717"
+>
 
 <title>Espresso Dial-In Assistant</title>
 
+
 <style>
+
 body{
   margin:0;
   background:#f6f6f3;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",sans-serif;
-  color:#151515
+
+  /* KEEPING YOUR ORIGINAL FONT */
+  font-family:-apple-system,BlinkMacSystemFont,
+  "SF Pro Display","SF Pro Text",sans-serif;
+
+  color:#151515;
 }
 
 main{
   max-width:720px;
   margin:auto;
-  padding:20px 15px 50px
+  padding:20px 15px 50px;
 }
 
 .ey{
   color:#777;
-  letter-spacing:.08em
+  letter-spacing:.08em;
+  font-size:13px;
+  font-weight:650;
 }
 
 .title{
   font-size:32px;
   font-weight:750;
   line-height:1.12;
-  margin:8px 0
+  margin:8px 0;
 }
 
 .sub{
-  color:#777
+  color:#777;
 }
 
 .tabs{
   display:flex;
   gap:8px;
-  margin:18px 0
+  margin:18px 0;
 }
 
 .tabs b{
   flex:1;
   text-align:center;
-  padding:13px;
+  padding:13px 8px;
   border-radius:15px;
-  background:#eee
+  background:#eee;
+  cursor:pointer;
 }
 
 .tabs b:first-child{
   background:#7c3aed;
-  color:white
+  color:white;
 }
 
 .card{
@@ -61,24 +80,24 @@ main{
   border:1px solid #e1e1dc;
   border-radius:22px;
   padding:18px;
-  margin:12px 0
+  margin:12px 0;
 }
 
 h2{
   margin-top:0;
   font-size:26px;
   font-weight:700;
-  letter-spacing:-.02em
+  letter-spacing:-.02em;
 }
 
 h3{
-  margin-bottom:8px
+  margin-bottom:8px;
 }
 
 label{
   display:block;
   font-weight:650;
-  margin:10px 0 5px
+  margin:10px 0 5px;
 }
 
 input,
@@ -89,13 +108,13 @@ select{
   border-radius:13px;
   background:white;
   font-size:16px;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px
+  gap:10px;
 }
 
 .btn{
@@ -107,41 +126,44 @@ select{
   background:#171717;
   color:white;
   font-size:17px;
-  font-weight:700
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn:active{
+  transform:scale(.99);
 }
 
 .hide{
-  display:none
+  display:none !important;
 }
 
 .metrics{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:8px
+  gap:8px;
 }
 
-.metric,
-.shot{
+.metric{
   background:#f1f1ee;
   border-radius:14px;
-  padding:12px
+  padding:12px;
 }
 
-.metric small,
-.shot small{
+.metric small{
   display:block;
-  color:#777
+  color:#777;
 }
 
 .metric strong{
-  font-size:19px
+  font-size:19px;
 }
 
 .recipe{
   background:#f1f1ee;
   border-radius:14px;
   padding:14px;
-  line-height:1.6
+  line-height:1.6;
 }
 
 .action{
@@ -149,7 +171,7 @@ select{
   border-left:5px solid #7c3aed;
   border-radius:13px;
   padding:14px;
-  line-height:1.5
+  line-height:1.5;
 }
 
 .next{
@@ -157,17 +179,52 @@ select{
   color:#fff;
   border-radius:14px;
   padding:14px;
-  line-height:1.5
+  line-height:1.6;
+}
+
+.reason{
+  background:#f7f7f5;
+  border-left:4px solid #aaa;
+  border-radius:12px;
+  padding:13px;
+  margin-top:10px;
+  line-height:1.5;
+  color:#444;
+}
+
+.good{
+  background:#f0fdf4;
+  border-left:5px solid #22c55e;
+  border-radius:13px;
+  padding:14px;
+  line-height:1.5;
+}
+
+.warn{
+  background:#fff7ed;
+  border-left:5px solid #f97316;
+  border-radius:13px;
+  padding:14px;
+  line-height:1.5;
 }
 
 .history{
   display:flex;
   gap:8px;
-  overflow:auto
+  overflow:auto;
 }
 
 .shot{
-  min-width:140px
+  min-width:145px;
+  background:#f1f1ee;
+  border-radius:14px;
+  padding:12px;
+}
+
+.shot small{
+  display:block;
+  color:#777;
+  margin-top:4px;
 }
 
 .badge{
@@ -176,44 +233,83 @@ select{
   border-radius:99px;
   background:#eee;
   font-size:13px;
-  margin:3px
+  margin:3px;
 }
 
 .note{
   color:#777;
-  font-size:14px
+  font-size:14px;
+  line-height:1.5;
+}
+
+.divider{
+  height:1px;
+  background:#eee;
+  margin:18px 0;
+}
+
+.section-label{
+  color:#777;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+
+.big-result{
+  font-size:21px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.small{
+  font-size:14px;
+  color:#777;
 }
 
 @media(max-width:520px){
-  .grid,
-  .metrics{
-    grid-template-columns:1fr 1fr
+
+  .grid{
+    grid-template-columns:1fr 1fr;
   }
+
+  .metrics{
+    grid-template-columns:1fr 1fr;
+  }
+
 }
+
 </style>
+
 </head>
 
 
 <body>
 
+
 <main>
+
 
 <div class="ey">
 ☕ PERSONAL COFFEE TOOL
 </div>
 
+
 <div class="title">
 Espresso Dial-In Assistant
 </div>
 
+
 <div class="sub">
-Demo v2 · Recipe → Diagnosis → Next Shot
+Dial-In v3 · Recipe → Diagnosis → Next Shot
 </div>
 
 
 <div class="tabs">
 
-<b>New Dial-In</b>
+<b onclick="showNew()">
+New Dial-In
+</b>
 
 <b onclick="showHistory()">
 History
@@ -226,13 +322,17 @@ Guide
 </div>
 
 
-<!-- COFFEE PROFILE -->
+
+<!-- =========================
+     COFFEE PROFILE
+========================= -->
 
 <div class="card">
 
 <h2>
 1 · Coffee Profile
 </h2>
+
 
 <div class="grid">
 
@@ -255,6 +355,7 @@ Coffee type
 </div>
 
 
+
 <div>
 
 <label>
@@ -272,6 +373,7 @@ Roast
 </select>
 
 </div>
+
 
 
 <div>
@@ -292,6 +394,7 @@ Processing
 </div>
 
 
+
 <div>
 
 <label>
@@ -303,17 +406,20 @@ id="days"
 type="number"
 min="0"
 placeholder="Unknown"
-/>
+>
+
+</div>
+
 
 </div>
 
 </div>
 
-</div>
 
 
-
-<!-- SHOT -->
+<!-- =========================
+     SHOT DATA
+========================= -->
 
 <div class="card">
 
@@ -341,6 +447,7 @@ placeholder="18"
 </div>
 
 
+
 <div>
 
 <label>
@@ -355,6 +462,7 @@ placeholder="40"
 >
 
 </div>
+
 
 
 <div>
@@ -373,6 +481,7 @@ placeholder="28"
 </div>
 
 
+
 <div>
 
 <label>
@@ -383,7 +492,7 @@ Temperature (°C)
 id="temp"
 type="number"
 step=".5"
-placeholder="Unknown"
+placeholder="93"
 >
 
 </div>
@@ -392,9 +501,11 @@ placeholder="Unknown"
 </div>
 
 
+
 <label>
 👅 What do you taste?
 </label>
+
 
 <select id="taste">
 
@@ -423,7 +534,7 @@ Weak / hollow
 </option>
 
 <option value="strong">
-Too strong
+Too strong / harsh
 </option>
 
 <option value="balanced">
@@ -437,9 +548,11 @@ Unknown
 </select>
 
 
+
 <label>
 💧 Flow / puck
 </label>
+
 
 <select id="flow">
 
@@ -466,6 +579,7 @@ Uneven / channeling signs
 </select>
 
 
+
 <button
 class="btn"
 onclick="generate()"
@@ -475,11 +589,14 @@ Generate Recipe & Diagnose
 
 </button>
 
+
 </div>
 
 
 
-<!-- RESULT -->
+<!-- =========================
+     RESULT
+========================= -->
 
 <div
 class="card hide"
@@ -487,7 +604,7 @@ id="result"
 >
 
 <h2>
-3 · Result
+3 · Dial-In Result
 </h2>
 
 
@@ -495,9 +612,27 @@ id="result"
 </div>
 
 
+<div class="divider"></div>
+
+
+<div class="section-label">
+Your shot
+</div>
+
+
+<div
+class="metrics"
+id="shotMetrics"
+>
+
+</div>
+
+
+
 <h3>
 🎯 Starting Recipe
 </h3>
+
 
 <div
 class="recipe"
@@ -506,9 +641,24 @@ id="recipe"
 </div>
 
 
+
+<h3>
+🧠 Why?
+</h3>
+
+
+<div
+class="reason"
+id="reason"
+>
+</div>
+
+
+
 <h3>
 🔧 First Move
 </h3>
+
 
 <div
 class="action"
@@ -517,9 +667,11 @@ id="firstMove"
 </div>
 
 
+
 <h3>
 ➡️ Next Shot
 </h3>
+
 
 <div
 class="next"
@@ -527,11 +679,14 @@ id="nextShot"
 >
 </div>
 
+
 </div>
 
 
 
-<!-- HISTORY -->
+<!-- =========================
+     HISTORY
+========================= -->
 
 <div
 class="card hide"
@@ -542,21 +697,34 @@ id="history"
 4 · Shot History
 </h2>
 
+
 <div
 class="history"
 id="historyList"
 >
 </div>
 
+
+<div
+class="note"
+id="historyNote"
+>
+Your last shots will appear here.
 </div>
+
+
+</div>
+
 
 
 <p class="note">
 
-Starting point only.
+☕ Starting point only.
+The assistant uses recipe, time, flow and taste together.
 Change one major variable at a time and let taste lead.
 
 </p>
+
 
 </main>
 
@@ -564,12 +732,18 @@ Change one major variable at a time and let taste lead.
 
 <script>
 
+
+/* =====================================================
+   DATA
+===================================================== */
+
 let shots=[];
 
 
-/* =========================
+
+/* =====================================================
    STARTING RECIPE
-========================= */
+===================================================== */
 
 function getStartingRecipe(){
 
@@ -585,13 +759,17 @@ document.getElementById("process").value;
 const daysValue =
 document.getElementById("days").value;
 
+
 let dose=18;
 
 let ratio=2.2;
 
 let temperature=93;
 
-let time="25–30";
+let timeMin=25;
+
+let timeMax=30;
+
 
 
 /* ROAST */
@@ -600,33 +778,41 @@ if(roast==="Light"){
 
 ratio=2.2;
 temperature=94;
-time="27–32";
+timeMin=27;
+timeMax=32;
 
 }
+
 
 else if(roast==="Medium"){
 
 ratio=2.2;
 temperature=93;
-time="25–30";
+timeMin=25;
+timeMax=30;
 
 }
+
 
 else if(roast==="Medium-Dark"){
 
 ratio=2.0;
 temperature=91;
-time="24–28";
+timeMin=24;
+timeMax=28;
 
 }
+
 
 else if(roast==="Dark"){
 
 ratio=1.9;
 temperature=89;
-time="22–26";
+timeMin=22;
+timeMax=26;
 
 }
+
 
 
 /* COMMERCIAL */
@@ -638,7 +824,8 @@ ratio=Math.min(ratio,2.1);
 }
 
 
-/* NATURAL LIGHT */
+
+/* NATURAL */
 
 if(
 process==="Natural" &&
@@ -650,6 +837,7 @@ temperature=93;
 }
 
 
+
 /* DAYS OFF ROAST */
 
 if(daysValue!==""){
@@ -657,16 +845,17 @@ if(daysValue!==""){
 const days=parseFloat(daysValue);
 
 
-/* very fresh */
+/* VERY FRESH */
 
 if(days<7){
 
-time="25–32";
+timeMin-=1;
+timeMax+=2;
 
 }
 
 
-/* older coffee */
+/* 21–45 DAYS */
 
 if(days>=21 && days<=45){
 
@@ -675,7 +864,7 @@ temperature+=1;
 }
 
 
-/* very old */
+/* VERY OLD */
 
 if(days>45){
 
@@ -692,7 +881,7 @@ ratio-0.1
 
 
 const yieldValue =
-(dose*ratio).toFixed(1);
+dose*ratio;
 
 
 return{
@@ -701,7 +890,8 @@ dose,
 ratio,
 yieldValue,
 temperature,
-time
+timeMin,
+timeMax
 
 };
 
@@ -709,11 +899,299 @@ time
 
 
 
-/* =========================
+/* =====================================================
+   DIAGNOSIS ENGINE
+===================================================== */
+
+function diagnose(
+taste,
+flow,
+actualRatio,
+actualTime,
+recipe
+){
+
+let diagnosis=
+"Looks close.";
+
+let reason=
+"Your shot is within a reasonable starting range. Taste should decide the next move.";
+
+let firstMove=
+"<b>Keep the recipe stable.</b><br>Make one small controlled change at a time.";
+
+let nextShot=
+"Repeat the shot once to confirm the result.";
+
+let status="neutral";
+
+
+
+/* CHANNELING */
+
+if(flow==="channel"){
+
+diagnosis=
+"⚠️ Possible channeling";
+
+reason=
+"The uneven flow suggests the puck may not be extracting evenly. Changing grind first could hide the real problem.";
+
+firstMove=
+"<b>Fix puck preparation first.</b><br>" +
+"Improve distribution, WDT if available, and tamp consistency.";
+
+nextShot=
+"Repeat the same dose, yield and grind after improving puck preparation. Compare the flow.";
+
+status="warn";
+
+return{
+diagnosis,
+reason,
+firstMove,
+nextShot,
+status
+};
+
+}
+
+
+
+/* BALANCED */
+
+if(taste==="balanced"){
+
+diagnosis=
+"⭐ Balanced shot";
+
+reason=
+"Sweetness and balance are more important than forcing the recipe toward a theoretical number.";
+
+firstMove=
+"<b>Don't change the recipe.</b><br>Use this shot as your reference.";
+
+nextShot=
+"Pull one confirmation shot with the same recipe. If it repeats, keep it.";
+
+status="good";
+
+return{
+diagnosis,
+reason,
+firstMove,
+nextShot,
+status
+};
+
+}
+
+
+
+/* SOUR */
+
+if(taste==="sour"){
+
+diagnosis=
+"🔵 Likely under-extracted";
+
+reason=
+"Sour or sharp acidity can indicate that the coffee needs more extraction. The cleanest first test is a slightly finer grind while keeping the other variables stable.";
+
+firstMove=
+"<b>Go slightly finer.</b><br>Keep dose and yield stable.";
+
+nextShot=
+"Go one small grind step finer. Keep the same dose and yield. Aim for a similar extraction time, then retaste.";
+
+status="blue";
+
+}
+
+
+
+/* BITTER */
+
+else if(taste==="bitter"){
+
+diagnosis=
+"🟠 Likely over-extracted";
+
+reason=
+"Bitter or drying flavours can indicate excessive extraction. A small coarsening is the simplest first test.";
+
+firstMove=
+"<b>Go slightly coarser.</b><br>Keep dose and yield stable.";
+
+nextShot=
+"Go one small grind step coarser. Keep dose and yield the same, then retaste.";
+
+status="warn";
+
+}
+
+
+
+/* FAST */
+
+else if(flow==="fast"){
+
+diagnosis=
+"🔵 Shot running fast";
+
+reason=
+"The flow is faster than expected. Before changing several variables, use grind size as the main correction.";
+
+firstMove=
+"<b>Go slightly finer.</b><br>Keep dose and yield stable.";
+
+nextShot=
+"Go one small grind step finer. Keep dose and yield unchanged and compare the new time and taste.";
+
+status="blue";
+
+}
+
+
+
+/* SLOW */
+
+else if(flow==="slow"){
+
+diagnosis=
+"🟠 Shot running slow";
+
+reason=
+"The puck is restricting flow more than expected. A small coarsening should increase flow without changing the whole recipe.";
+
+firstMove=
+"<b>Go slightly coarser.</b><br>Keep dose and yield stable.";
+
+nextShot=
+"Go one small grind step coarser. Keep dose and yield unchanged and compare the new time and taste.";
+
+status="warn";
+
+}
+
+
+
+/* THIN */
+
+else if(
+taste==="thin" ||
+taste==="weak"
+){
+
+diagnosis=
+"🟣 Low concentration";
+
+reason=
+"The shot may not have enough dissolved coffee relative to the beverage volume. Reducing yield increases concentration without immediately changing grind.";
+
+firstMove=
+"<b>Reduce yield slightly.</b><br>Keep grind and dose stable.";
+
+nextShot=
+"Keep the grind and try " +
+(actualRatio>2.1 ? "about " : "") +
+Math.max(1,actualRatio-0.15).toFixed(2) +
+" ratio. Example: " +
+recipe.dose.toFixed(1) +
+" g in → " +
+(recipe.dose*Math.max(1,actualRatio-0.15)).toFixed(0) +
+" g out.";
+
+status="purple";
+
+}
+
+
+
+/* HEAVY */
+
+else if(
+taste==="heavy" ||
+taste==="strong"
+){
+
+diagnosis=
+"🟢 High concentration";
+
+reason=
+"The coffee may be too concentrated for the flavour profile you want. Increasing yield slightly can open the cup without immediately changing grind.";
+
+firstMove=
+"<b>Increase yield slightly.</b><br>Keep grind and dose stable.";
+
+nextShot=
+"Keep the grind and increase yield by about 3–4 g. Then retaste.";
+
+status="good";
+
+}
+
+
+
+/* RATIO CHECK */
+
+else if(actualRatio < 1.7){
+
+diagnosis=
+"🟠 Very short ratio";
+
+reason=
+"The current yield is quite low relative to the dose. This can create a very concentrated and intense shot.";
+
+firstMove=
+"<b>Increase yield slightly.</b><br>Test a longer ratio before making a large grind change.";
+
+nextShot=
+"Keep dose and grind stable and increase yield by about 3 g.";
+
+status="warn";
+
+}
+
+
+else if(actualRatio > 2.7){
+
+diagnosis=
+"🔵 Long ratio";
+
+reason=
+"The current yield is relatively high compared with the dose. This can produce a lighter, more diluted cup.";
+
+firstMove=
+"<b>Reduce yield slightly.</b><br>Test a shorter ratio before making a large grind change.";
+
+nextShot=
+"Keep dose and grind stable and reduce yield by about 3 g.";
+
+status="blue";
+
+}
+
+
+
+return{
+diagnosis,
+reason,
+firstMove,
+nextShot,
+status
+};
+
+}
+
+
+
+/* =====================================================
    GENERATE
-========================= */
+===================================================== */
 
 function generate(){
+
 
 const dose=
 parseFloat(
@@ -733,6 +1211,12 @@ document.getElementById("time").value
 ) || 28;
 
 
+const tempInput=
+parseFloat(
+document.getElementById("temp").value
+);
+
+
 const taste=
 document.getElementById("taste").value;
 
@@ -741,7 +1225,7 @@ const flow=
 document.getElementById("flow").value;
 
 
-const ratio=
+const actualRatio=
 yieldValue/dose;
 
 
@@ -749,256 +1233,231 @@ const recipe=
 getStartingRecipe();
 
 
-let diagnosis=
-"Looks close — let taste lead.";
+
+/* DIAGNOSIS */
+
+const result=
+diagnose(
+taste,
+flow,
+actualRatio,
+time,
+recipe
+);
 
 
-let firstMove=
-"<b>Keep the recipe stable.</b><br>Make only one small change at a time.";
 
-
-let nextShot=
-"Repeat the shot once to confirm the result.";
-
-
-
-/* CHANNELING */
-
-if(flow==="channel"){
-
-diagnosis=
-"⚠️ Possible channeling";
-
-firstMove=
-"<b>Fix puck preparation first.</b><br>" +
-"Improve distribution and tamp consistency before changing grind.";
-
-nextShot=
-"Repeat with the same recipe after improving puck preparation.";
-
-}
-
-
-/* SOUR */
-
-else if(
-taste==="sour"
-){
-
-diagnosis=
-"🔵 Likely under-extracted";
-
-firstMove=
-"<b>Go slightly finer.</b><br>" +
-"Keep dose and yield stable.";
-
-nextShot=
-"Go one small step finer. Keep the same dose and yield, then retaste.";
-
-}
-
-
-/* FAST + NO TASTE */
-
-else if(
-flow==="fast"
-){
-
-diagnosis=
-"🔵 Shot running fast";
-
-firstMove=
-"<b>Go slightly finer.</b><br>" +
-"Keep dose and yield stable.";
-
-nextShot=
-"Go one small step finer and aim for the target time.";
-
-}
-
-
-/* BITTER */
-
-else if(
-taste==="bitter"
-){
-
-diagnosis=
-"🟠 Likely over-extracted";
-
-firstMove=
-"<b>Go slightly coarser.</b><br>" +
-"Keep dose and yield stable.";
-
-nextShot=
-"Go one small step coarser and retaste.";
-
-}
-
-
-/* SLOW */
-
-else if(
-flow==="slow"
-){
-
-diagnosis=
-"🟠 Shot running slow";
-
-firstMove=
-"<b>Go slightly coarser.</b><br>" +
-"Keep dose and yield stable.";
-
-nextShot=
-"Go one small step coarser and aim for the target time.";
-
-}
-
-
-/* THIN */
-
-else if(
-taste==="thin" ||
-taste==="weak"
-){
-
-diagnosis=
-"🟣 Low concentration";
-
-firstMove=
-"<b>Reduce yield slightly.</b><br>" +
-"This increases concentration without immediately changing grind.";
-
-nextShot=
-"Keep the grind and try " +
-dose.toFixed(1) +
-" g in → " +
-Math.max(1,yieldValue-3).toFixed(0) +
-"–" +
-Math.max(1,yieldValue-2).toFixed(0) +
-" g out.";
-
-}
-
-
-/* HEAVY */
-
-else if(
-taste==="heavy" ||
-taste==="strong"
-){
-
-diagnosis=
-"🟢 High concentration";
-
-firstMove=
-"<b>Increase yield slightly.</b><br>" +
-"This can open the cup without immediately changing grind.";
-
-nextShot=
-"Keep the grind and try " +
-dose.toFixed(1) +
-" g in → " +
-(yieldValue+3).toFixed(0) +
-"–" +
-(yieldValue+4).toFixed(0) +
-" g out.";
-
-}
-
-
-/* BALANCED */
-
-else if(
-taste==="balanced"
-){
-
-diagnosis=
-"⭐ Good shot — reference it";
-
-firstMove=
-"<b>Don't change the recipe.</b><br>" +
-"Save this as your baseline.";
-
-nextShot=
-"Pull one confirmation shot. If it repeats, keep it.";
-
-}
-
-
-/* DISPLAY */
+/* =========================
+   DIAGNOSIS DISPLAY
+========================= */
 
 document.getElementById("diagnosis").innerHTML=
 
-'<div style="font-size:21px;font-weight:800">' +
-diagnosis +
+'<div class="big-result">' +
+result.diagnosis +
 '</div>' +
 
 '<span class="badge">' +
 "Current 1:" +
-ratio.toFixed(2) +
+actualRatio.toFixed(2) +
 '</span>' +
 
 '<span class="badge">' +
 time +
 " s" +
-'</span>';
+'</span>' +
+
+(
+tempInput
+?
+'<span class="badge">' +
+tempInput +
+"°C" +
+'</span>'
+:
+''
+);
 
 
+
+/* =========================
+   SHOT METRICS
+========================= */
+
+const timeDifference=
+time-recipe.timeMax;
+
+
+let timeStatus="On target";
+
+
+if(time < recipe.timeMin){
+
+timeStatus=
+"Faster than target";
+
+}
+
+else if(time > recipe.timeMax){
+
+timeStatus=
+"Slower than target";
+
+}
+
+
+document.getElementById("shotMetrics").innerHTML=
+
+'<div class="metric">' +
+'<small>Dose</small>' +
+'<strong>' +
+dose.toFixed(1) +
+' g</strong>' +
+'</div>' +
+
+'<div class="metric">' +
+'<small>Yield</small>' +
+'<strong>' +
+yieldValue.toFixed(1) +
+' g</strong>' +
+'</div>' +
+
+'<div class="metric">' +
+'<small>Ratio</small>' +
+'<strong>1:' +
+actualRatio.toFixed(2) +
+'</strong>' +
+'</div>' +
+
+'<div class="metric">' +
+'<small>Time</small>' +
+'<strong>' +
+time +
+' s</strong>' +
+'</div>' +
+
+'<div class="metric">' +
+'<small>Target</small>' +
+'<strong>' +
+recipe.timeMin +
+'–' +
+recipe.timeMax +
+' s</strong>' +
+'</div>' +
+
+'<div class="metric">' +
+'<small>Flow</small>' +
+'<strong>' +
+flowLabel(flow) +
+'</strong>' +
+'</div>';
+
+
+
+/* =========================
+   STARTING RECIPE
+========================= */
 
 document.getElementById("recipe").innerHTML=
 
 "<b>" +
-recipe.dose +
+
+recipe.dose.toFixed(1) +
+
 " g in → " +
-recipe.yieldValue +
+
+recipe.yieldValue.toFixed(1) +
+
 " g out" +
+
 "</b><br>" +
 
 "Ratio <b>1:" +
+
 recipe.ratio.toFixed(2) +
+
 "</b>" +
 
 " · Time <b>" +
-recipe.time +
+
+recipe.timeMin +
+
+"–" +
+
+recipe.timeMax +
+
 " s</b>" +
 
 " · Temp <b>" +
+
 recipe.temperature +
+
 "°C</b>";
 
 
 
+/* =========================
+   WHY
+========================= */
+
+document.getElementById("reason")
+.innerHTML=
+result.reason;
+
+
+
+/* =========================
+   FIRST MOVE
+========================= */
+
 document.getElementById("firstMove")
 .innerHTML=
-firstMove;
+result.firstMove;
 
+
+
+/* =========================
+   NEXT SHOT
+========================= */
 
 document.getElementById("nextShot")
-.textContent=
-nextShot;
+.innerHTML=
+result.nextShot;
 
 
-document.getElementById("result")
+
+/* =========================
+   SHOW RESULT
+========================= */
+
+document
+.getElementById("result")
 .classList.remove("hide");
 
 
 
-/* HISTORY */
+/* =========================
+   HISTORY
+========================= */
 
 shots.unshift({
 
 dose,
 yieldValue,
 time,
-ratio,
-diagnosis
+ratio:actualRatio,
+diagnosis:result.diagnosis
 
 });
 
 
 renderHistory();
 
+
+
+/* =========================
+   SCROLL
+========================= */
 
 document
 .getElementById("result")
@@ -1013,23 +1472,70 @@ block:"start"
 
 
 
-/* =========================
+/* =====================================================
+   FLOW LABEL
+===================================================== */
+
+function flowLabel(flow){
+
+if(flow==="normal") return "Even";
+
+if(flow==="fast") return "Fast";
+
+if(flow==="slow") return "Slow";
+
+if(flow==="channel") return "Uneven";
+
+return "Unknown";
+
+}
+
+
+
+/* =====================================================
    HISTORY
-========================= */
+===================================================== */
 
 function renderHistory(){
 
+
+const history=
+document.getElementById("history");
+
+const list=
+document.getElementById("historyList");
+
+
+
+if(shots.length===0){
+
+list.innerHTML="";
+
 document
-.getElementById("history")
-.classList.remove("hide");
+.getElementById("historyNote")
+.textContent=
+"No shots recorded yet.";
+
+return;
+
+}
+
+
+
+history.classList.remove("hide");
 
 
 document
-.getElementById("historyList")
-.innerHTML=
+.getElementById("historyNote")
+.textContent=
+"Your most recent shots appear first.";
+
+
+
+list.innerHTML=
 
 shots
-.slice(0,6)
+.slice(0,8)
 .map(
 
 (s,i)=>`
@@ -1041,17 +1547,19 @@ Shot ${shots.length-i}
 </b>
 
 <small>
-${s.dose} g → ${s.yieldValue} g
+${s.dose.toFixed(1)} g →
+${s.yieldValue.toFixed(1)} g
 </small>
 
 <small>
-${s.time} s · 1:${s.ratio.toFixed(2)}
+${s.time} s ·
+1:${s.ratio.toFixed(2)}
 </small>
 
 <span class="badge">
 ${s.diagnosis
 .replace(/<[^>]+>/g,"")
-.slice(0,20)}
+.slice(0,24)}
 </span>
 
 </div>
@@ -1065,20 +1573,23 @@ ${s.diagnosis
 
 
 
-/* =========================
-   HISTORY BUTTON
-========================= */
+/* =====================================================
+   NEW DIAL-IN
+===================================================== */
 
-function showHistory(){
+function showNew(){
+
+document
+.getElementById("result")
+.classList.add("hide");
 
 document
 .getElementById("history")
-.classList.remove("hide");
+.classList.add("hide");
 
-document
-.getElementById("history")
-.scrollIntoView({
+window.scrollTo({
 
+top:0,
 behavior:"smooth"
 
 });
@@ -1087,35 +1598,83 @@ behavior:"smooth"
 
 
 
-/* =========================
+/* =====================================================
+   HISTORY BUTTON
+===================================================== */
+
+function showHistory(){
+
+renderHistory();
+
+
+document
+.getElementById("history")
+.classList.remove("hide");
+
+
+document
+.getElementById("history")
+.scrollIntoView({
+
+behavior:"smooth",
+block:"start"
+
+});
+
+}
+
+
+
+/* =====================================================
    GUIDE
-========================= */
+===================================================== */
 
 function showGuide(){
 
 alert(
 
-"Dial-In Guide\n\n" +
+"ESPRESSO DIAL-IN GUIDE\n\n" +
 
-"Start with the suggested recipe.\n\n" +
+"1. Start with the suggested recipe.\n\n" +
 
-"If sour / fast → go slightly finer.\n\n" +
+"2. Taste first.\n\n" +
 
-"If bitter / slow → go slightly coarser.\n\n" +
+"SOUR / SHARP\n" +
+"→ Usually needs more extraction.\n" +
+"→ Try slightly finer.\n\n" +
 
-"If thin → reduce yield.\n\n" +
+"BITTER / DRY\n" +
+"→ Usually needs less extraction.\n" +
+"→ Try slightly coarser.\n\n" +
 
-"If heavy → increase yield.\n\n" +
+"FAST FLOW\n" +
+"→ Go slightly finer.\n\n" +
 
-"If channeling → fix puck preparation first.\n\n" +
+"SLOW FLOW\n" +
+"→ Go slightly coarser.\n\n" +
 
-"Change one major variable at a time."
+"THIN / WEAK\n" +
+"→ Try a slightly shorter yield.\n\n" +
+
+"HEAVY / STRONG\n" +
+"→ Try a slightly longer yield.\n\n" +
+
+"CHANNELING\n" +
+"→ Fix puck preparation before changing grind.\n\n" +
+
+"IMPORTANT\n" +
+"Change one major variable at a time.\n" +
+"Let taste lead the dial-in."
 
 );
 
 }
 
+
+
 </script>
 
+
 </body>
+
 </html>
