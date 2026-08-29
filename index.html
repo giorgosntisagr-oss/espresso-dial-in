@@ -1,225 +1,1120 @@
 <!doctype html>
-<html lang="el">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#171717">
+
 <title>Espresso Dial-In Assistant</title>
+
 <style>
-:root{color-scheme:light dark;--bg:#faf9f7;--card:#fff;--text:#171717;--muted:#777;--line:#e7e2dc;--soft:#f5f2ee;--accent:#7c3aed}
-@media(prefers-color-scheme:dark){:root{--bg:#111;--card:#1b1b1b;--text:#f5f5f5;--muted:#aaa;--line:#333;--soft:#242424}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
-.app{max-width:720px;margin:auto;padding:20px 16px 30px}.muted{color:var(--muted);font-size:13px}
-h1{font-size:27px;letter-spacing:-.5px;margin:3px 0 4px}h2{font-size:19px;margin:0 0 12px}
-.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}
-button,select,input{font:inherit}button{min-height:46px;border:0;border-radius:11px;padding:10px 15px;font-weight:750;cursor:pointer}
-.nav button,.secondary{background:var(--soft);color:var(--text)}.nav button.active{background:var(--accent);color:#fff}
-.primary{background:#171717;color:#fff;width:100%;margin-top:13px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;margin-top:14px}
-.grid{display:grid;gap:11px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
-select,input{width:100%;min-height:46px;border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:var(--card);color:var(--text)}
-.recipe{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.metric{background:var(--soft);border-radius:12px;padding:12px}.metric span{font-size:12px;color:var(--muted)}.metric strong{display:block;font-size:20px;margin-top:3px}
-.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--soft);font-size:12px;font-weight:700;margin:2px}
-.step{padding:12px 0;border-bottom:1px solid var(--line)}.step:last-child{border:0}
-.adjust{background:#faf5ff;border-left:3px solid var(--accent);padding:12px;border-radius:9px;margin-top:12px}
-.notice{background:#fff7ed;border-left:3px solid #f97316;padding:12px;border-radius:9px;margin-top:10px}
-.good{background:#f0fdf4;border-left:3px solid #22c55e;padding:12px;border-radius:9px;margin-top:10px}
-.hidden{display:none!important}.footer{margin-top:18px;color:var(--muted);font-size:11px;line-height:1.5}
-@media(max-width:560px){.two{grid-template-columns:1fr}.recipe{grid-template-columns:repeat(2,1fr)}}
-@media(prefers-color-scheme:dark){.primary{background:#f5f5f5;color:#111}.adjust{background:#211a29}.notice{background:#251b11}.good{background:#132018}}
+body{
+  margin:0;
+  background:#f6f6f3;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",sans-serif;
+  color:#151515
+}
+
+main{
+  max-width:720px;
+  margin:auto;
+  padding:20px 15px 50px
+}
+
+.ey{
+  color:#777;
+  letter-spacing:.08em
+}
+
+.title{
+  font-size:32px;
+  font-weight:750;
+  line-height:1.12;
+  margin:8px 0
+}
+
+.sub{
+  color:#777
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  margin:18px 0
+}
+
+.tabs b{
+  flex:1;
+  text-align:center;
+  padding:13px;
+  border-radius:15px;
+  background:#eee
+}
+
+.tabs b:first-child{
+  background:#7c3aed;
+  color:white
+}
+
+.card{
+  background:white;
+  border:1px solid #e1e1dc;
+  border-radius:22px;
+  padding:18px;
+  margin:12px 0
+}
+
+h2{
+  margin-top:0;
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:-.02em
+}
+
+h3{
+  margin-bottom:8px
+}
+
+label{
+  display:block;
+  font-weight:650;
+  margin:10px 0 5px
+}
+
+input,
+select{
+  width:100%;
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:13px;
+  background:white;
+  font-size:16px;
+  box-sizing:border-box
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+
+.btn{
+  width:100%;
+  padding:16px;
+  margin-top:16px;
+  border:0;
+  border-radius:15px;
+  background:#171717;
+  color:white;
+  font-size:17px;
+  font-weight:700
+}
+
+.hide{
+  display:none
+}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px
+}
+
+.metric,
+.shot{
+  background:#f1f1ee;
+  border-radius:14px;
+  padding:12px
+}
+
+.metric small,
+.shot small{
+  display:block;
+  color:#777
+}
+
+.metric strong{
+  font-size:19px
+}
+
+.recipe{
+  background:#f1f1ee;
+  border-radius:14px;
+  padding:14px;
+  line-height:1.6
+}
+
+.action{
+  background:#f1eaff;
+  border-left:5px solid #7c3aed;
+  border-radius:13px;
+  padding:14px;
+  line-height:1.5
+}
+
+.next{
+  background:#171717;
+  color:#fff;
+  border-radius:14px;
+  padding:14px;
+  line-height:1.5
+}
+
+.history{
+  display:flex;
+  gap:8px;
+  overflow:auto
+}
+
+.shot{
+  min-width:140px
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:99px;
+  background:#eee;
+  font-size:13px;
+  margin:3px
+}
+
+.note{
+  color:#777;
+  font-size:14px
+}
+
+@media(max-width:520px){
+  .grid,
+  .metrics{
+    grid-template-columns:1fr 1fr
+  }
+}
 </style>
-
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Dial-In">
-<link rel="apple-touch-icon" href="icon.svg">
-
 </head>
+
+
 <body>
-<main class="app" id="app">
-<div><div class="muted">☕ PERSONAL COFFEE TOOL</div><h1>Espresso Dial-In Assistant</h1><div class="muted">Version 1.0 · Starting recipe + sensory diagnosis</div></div>
 
-<div class="nav">
-<button class="active" data-tab="new">New Dial-In</button>
-<button data-tab="diagnose">Diagnosis</button>
-<button data-tab="guide">Guide</button>
+<main>
+
+<div class="ey">
+☕ PERSONAL COFFEE TOOL
 </div>
 
-<section id="new">
+<div class="title">
+Espresso Dial-In Assistant
+</div>
+
+<div class="sub">
+Demo v2 · Recipe → Diagnosis → Next Shot
+</div>
+
+
+<div class="tabs">
+
+<b>New Dial-In</b>
+
+<b onclick="showHistory()">
+History
+</b>
+
+<b onclick="showGuide()">
+Guide
+</b>
+
+</div>
+
+
+<!-- COFFEE PROFILE -->
+
 <div class="card">
-<h2>1 · Coffee Profile</h2>
-<div class="grid two">
-<div><label>Drink</label><select id="drink"><option value="espresso">Espresso</option><option value="freddo">Freddo Espresso</option><option value="ristretto">Ristretto</option></select></div>
-<div><label>Coffee type</label><select id="type"><option value="single">Single Origin</option><option value="blend">Blend</option><option value="commercial">Commercial Blend</option><option value="unknown">Unknown Coffee</option></select></div>
-<div><label>Roast</label><select id="roast"><option value="light">Light</option><option value="medium" selected>Medium</option><option value="medium-dark">Medium-Dark</option><option value="dark">Dark</option></select></div>
-<div id="processBox"><label>Processing</label><select id="process"><option value="washed">Washed</option><option value="natural">Natural</option><option value="honey">Honey</option></select></div>
-<div><label>Days off roast</label><input id="age" type="number" min="0" max="365" value="10"></div>
-<div id="blendBox"><label>Blend composition</label><select id="blend"><option value="arabica">100% Arabica</option><option value="arob">Arabica + Robusta</option><option value="highrob">High Robusta</option></select></div>
-</div>
-<button class="primary" id="generate">Generate Recipe</button>
-</div>
-<div id="recipeCard" class="card hidden"></div>
-</section>
 
-<section id="diagnose" class="hidden">
+<h2>
+1 · Coffee Profile
+</h2>
+
+<div class="grid">
+
+
+<div>
+
+<label>
+Coffee type
+</label>
+
+<select id="type">
+
+<option>Unknown</option>
+<option>Single Origin</option>
+<option>Blend</option>
+<option>Commercial</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Roast
+</label>
+
+<select id="roast">
+
+<option>Unknown</option>
+<option>Light</option>
+<option selected>Medium</option>
+<option>Medium-Dark</option>
+<option>Dark</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Processing
+</label>
+
+<select id="process">
+
+<option>Unknown</option>
+<option>Washed</option>
+<option>Natural</option>
+<option>Honey</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Days off roast
+</label>
+
+<input
+id="days"
+type="number"
+min="0"
+placeholder="Unknown"
+/>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- SHOT -->
+
 <div class="card">
-<h2>2 · Taste Diagnosis</h2>
-<div class="muted">Πες τι γεύτηκες. Η εφαρμογή επιλέγει την πρώτη μεταβλητή που πρέπει να αλλάξεις.</div>
-<div class="grid two" style="margin-top:12px">
-<div><label>Αποτέλεσμα</label><select id="symptom">
-<option value="sour">Ξινός</option><option value="bitter">Πικρός</option><option value="watery">Νερουλός</option><option value="heavy">Βαρύς</option><option value="empty">Άδειος / χωρίς ένταση</option><option value="weak">Αδύναμος</option><option value="strong">Υπερβολικά δυνατός</option><option value="flat">Flat</option><option value="astringent">Στυφός / dry</option><option value="sourbitter">Ξινός + πικρός μαζί</option>
-</select></div>
-<div><label>Actual shot time</label><input id="actualTime" type="number" min="0" step=".1" placeholder="π.χ. 24.5"></div>
-<div><label>Dose used</label><input id="actualDose" type="number" min="0" step=".1" placeholder="π.χ. 18"></div>
-<div><label>Yield out</label><input id="actualYield" type="number" min="0" step=".1" placeholder="π.χ. 40"></div>
-</div>
-<button class="primary" id="diagnoseBtn">Find Next Adjustment</button>
-<div id="diagnosisResult"></div>
-</div>
-</section>
 
-<section id="guide" class="hidden">
-<div class="card">
-<h2>Guide Logic</h2>
-<div class="step"><b>1. Grind</b><div class="muted">Κύριος έλεγχος εκχύλισης.</div></div>
-<div class="step"><b>2. Yield</b><div class="muted">Κύριος έλεγχος ισορροπίας.</div></div>
-<div class="step"><b>3. Temperature</b><div class="muted">Fine tuning γλυκύτητας / οξύτητας.</div></div>
-<div class="step"><b>4. Dose</b><div class="muted">Έλεγχος έντασης και σώματος.</div></div>
-<div class="step"><b>Golden rule</b><div class="muted">Άλλαξε μία μεταβλητή κάθε φορά και αξιολόγησε τη γεύση.</div></div>
-</div>
-</section>
+<h2>
+2 · Shot Data
+</h2>
 
-<div class="footer">Starting point only. Η τελική ρύθμιση γίνεται από τη γεύση και τη συμπεριφορά της εκχύλισης.</div>
+
+<div class="grid">
+
+
+<div>
+
+<label>
+Dose (g)
+</label>
+
+<input
+id="dose"
+type="number"
+step=".1"
+placeholder="18"
+>
+
+</div>
+
+
+<div>
+
+<label>
+Yield (g)
+</label>
+
+<input
+id="yield"
+type="number"
+step=".1"
+placeholder="40"
+>
+
+</div>
+
+
+<div>
+
+<label>
+Extraction time (s)
+</label>
+
+<input
+id="time"
+type="number"
+step=".5"
+placeholder="28"
+>
+
+</div>
+
+
+<div>
+
+<label>
+Temperature (°C)
+</label>
+
+<input
+id="temp"
+type="number"
+step=".5"
+placeholder="Unknown"
+>
+
+</div>
+
+
+</div>
+
+
+<label>
+👅 What do you taste?
+</label>
+
+<select id="taste">
+
+<option value="">
+Choose...
+</option>
+
+<option value="sour">
+Sour / sharp
+</option>
+
+<option value="bitter">
+Bitter / dry
+</option>
+
+<option value="thin">
+Watery / thin
+</option>
+
+<option value="heavy">
+Heavy / intense
+</option>
+
+<option value="weak">
+Weak / hollow
+</option>
+
+<option value="strong">
+Too strong
+</option>
+
+<option value="balanced">
+Balanced / sweet
+</option>
+
+<option value="unknown">
+Unknown
+</option>
+
+</select>
+
+
+<label>
+💧 Flow / puck
+</label>
+
+<select id="flow">
+
+<option value="unknown">
+Unknown
+</option>
+
+<option value="normal">
+Normal / even
+</option>
+
+<option value="fast">
+Fast
+</option>
+
+<option value="slow">
+Slow / choking
+</option>
+
+<option value="channel">
+Uneven / channeling signs
+</option>
+
+</select>
+
+
+<button
+class="btn"
+onclick="generate()"
+>
+
+Generate Recipe & Diagnose
+
+</button>
+
+</div>
+
+
+
+<!-- RESULT -->
+
+<div
+class="card hide"
+id="result"
+>
+
+<h2>
+3 · Result
+</h2>
+
+
+<div id="diagnosis">
+</div>
+
+
+<h3>
+🎯 Starting Recipe
+</h3>
+
+<div
+class="recipe"
+id="recipe"
+>
+</div>
+
+
+<h3>
+🔧 First Move
+</h3>
+
+<div
+class="action"
+id="firstMove"
+>
+</div>
+
+
+<h3>
+➡️ Next Shot
+</h3>
+
+<div
+class="next"
+id="nextShot"
+>
+</div>
+
+</div>
+
+
+
+<!-- HISTORY -->
+
+<div
+class="card hide"
+id="history"
+>
+
+<h2>
+4 · Shot History
+</h2>
+
+<div
+class="history"
+id="historyList"
+>
+</div>
+
+</div>
+
+
+<p class="note">
+
+Starting point only.
+Change one major variable at a time and let taste lead.
+
+</p>
+
 </main>
 
-<script>
-(() => {
-const root=document.getElementById("app");
-const $=s=>root.querySelector(s);
-const $$=s=>[...root.querySelectorAll(s)];
 
-const ranges={
- light:{washed:[19.5,54,2.75,33,96],natural:[18.5,46,2.45,31,95],honey:[19,49.5,2.55,31,95]},
- medium:{washed:[18.5,44,2.25,29.5,93],natural:[17.5,41.5,2.25,27.5,92],honey:[18,44,2.25,27.5,93]},
- dark:{washed:[17.5,37,2.1,25.5,91],natural:[16.5,35,2,24.5,90],honey:[17,37,2.1,25.5,90]}
+
+<script>
+
+let shots=[];
+
+
+/* =========================
+   STARTING RECIPE
+========================= */
+
+function getStartingRecipe(){
+
+const roast =
+document.getElementById("roast").value;
+
+const type =
+document.getElementById("type").value;
+
+const process =
+document.getElementById("process").value;
+
+const daysValue =
+document.getElementById("days").value;
+
+let dose=18;
+
+let ratio=2.2;
+
+let temperature=93;
+
+let time="25–30";
+
+
+/* ROAST */
+
+if(roast==="Light"){
+
+ratio=2.2;
+temperature=94;
+time="27–32";
+
+}
+
+else if(roast==="Medium"){
+
+ratio=2.2;
+temperature=93;
+time="25–30";
+
+}
+
+else if(roast==="Medium-Dark"){
+
+ratio=2.0;
+temperature=91;
+time="24–28";
+
+}
+
+else if(roast==="Dark"){
+
+ratio=1.9;
+temperature=89;
+time="22–26";
+
+}
+
+
+/* COMMERCIAL */
+
+if(type==="Commercial"){
+
+ratio=Math.min(ratio,2.1);
+
+}
+
+
+/* NATURAL LIGHT */
+
+if(
+process==="Natural" &&
+roast==="Light"
+){
+
+temperature=93;
+
+}
+
+
+/* DAYS OFF ROAST */
+
+if(daysValue!==""){
+
+const days=parseFloat(daysValue);
+
+
+/* very fresh */
+
+if(days<7){
+
+time="25–32";
+
+}
+
+
+/* older coffee */
+
+if(days>=21 && days<=45){
+
+temperature+=1;
+
+}
+
+
+/* very old */
+
+if(days>45){
+
+dose=18.5;
+
+ratio=Math.max(
+1.9,
+ratio-0.1
+);
+
+}
+
+}
+
+
+const yieldValue =
+(dose*ratio).toFixed(1);
+
+
+return{
+
+dose,
+ratio,
+yieldValue,
+temperature,
+time
+
 };
 
-function ageAdj(x,age){
- if(age<=21)return x;
- if(age<=45)return [x[0],x[1]-1,x[2],x[3]+1,x[4]+1];
- return [x[0]+.5,x[1]-2,x[2],x[3]+2,x[4]+1];
 }
 
-function makeRecipe(){
- const drink=$("#drink").value,type=$("#type").value,roast=$("#roast").value,
- process=$("#process").value,age=Math.max(0,+$("#age").value||0),blend=$("#blend").value;
- let d,y,ratio,t,temp,notes=[];
- if(drink==="freddo"){
-  if(type==="commercial"||(type==="blend"&&blend==="highrob"))[d,y,ratio,t,temp]=[16.5,60,3.65,25,90];
-  else if(type==="blend"&&blend==="arob")[d,y,ratio,t,temp]=[17,56,3.3,27,91.5];
-  else if(roast==="light")[d,y,ratio,t,temp]=[19,56,3,37,96];
-  else if(roast==="dark")[d,y,ratio,t,temp]=[18,51,2.85,28.5,92];
-  else[d,y,ratio,t,temp]=[18.5,54,2.95,32,94];
-  notes.push("Freddo: μεγαλύτερο yield ώστε ο espresso να κρατήσει χαρακτήρα μέσα στον πάγο.");
- } else if(drink==="ristretto"){
-  if(roast==="light")[d,y,ratio,t,temp]=[18.5,24,1.3,27.5,96];
-  else if(roast==="dark")[d,y,ratio,t,temp]=[16.5,22,1.3,24,91];
-  else[d,y,ratio,t,temp]=[17.5,24,1.4,25.5,93];
-  notes.push("Ristretto: κοντό ratio για πιο συμπυκνωμένο σώμα και ένταση.");
- } else if(type==="single"){
-  let r=ranges[roast]?.[process]||[18,40,2.2,27.5,93];
-  [d,y,ratio,t,temp]=ageAdj(r,age);
- } else if(type==="blend"){
-  if(roast==="dark")[d,y,ratio,t,temp]=[16.5,33,1.9,24,91];
-  else if(roast==="medium-dark")[d,y,ratio,t,temp]=[17.5,36,2.1,27,93];
-  else[d,y,ratio,t,temp]=[18.5,39,2.1,28.5,94];
-  if(age>45){d+=.5;y-=1;temp+=1}
-  notes.push("Blend: στόχος σταθερότητα, σώμα και επαναληψιμότητα.");
- } else if(type==="commercial"){
-  if(blend==="highrob")[d,y,ratio,t,temp]=[16,30,1.85,24,88.5];
-  else if(blend==="arob")[d,y,ratio,t,temp]=[16.5,32,1.95,24,90.5];
-  else[d,y,ratio,t,temp]=[17,37,2.1,26,93];
-  if(roast==="dark")temp-=1;
-  notes.push("Commercial / Robusta: χαμηλότερη θερμοκρασία και προσοχή στην πίκρα.");
- } else {
-  [d,y,ratio,t,temp]=drink==="freddo"?[18,54,3,30,94]:[18,40,2.2,27.5,93];
-  notes.push("Unknown coffee: ασφαλές starting point. Μετά μία αλλαγή κάθε φορά.");
- }
- if(age>90)notes.push("Ο καφές είναι >90 ημερών· το Guide δεν δίνει ξεχωριστό range μετά τις 90 ημέρες.");
- return {d,y,ratio,t,temp,notes};
+
+
+/* =========================
+   GENERATE
+========================= */
+
+function generate(){
+
+const dose=
+parseFloat(
+document.getElementById("dose").value
+) || 18;
+
+
+const yieldValue=
+parseFloat(
+document.getElementById("yield").value
+) || 40;
+
+
+const time=
+parseFloat(
+document.getElementById("time").value
+) || 28;
+
+
+const taste=
+document.getElementById("taste").value;
+
+
+const flow=
+document.getElementById("flow").value;
+
+
+const ratio=
+yieldValue/dose;
+
+
+const recipe=
+getStartingRecipe();
+
+
+let diagnosis=
+"Looks close — let taste lead.";
+
+
+let firstMove=
+"<b>Keep the recipe stable.</b><br>Make only one small change at a time.";
+
+
+let nextShot=
+"Repeat the shot once to confirm the result.";
+
+
+
+/* CHANNELING */
+
+if(flow==="channel"){
+
+diagnosis=
+"⚠️ Possible channeling";
+
+firstMove=
+"<b>Fix puck preparation first.</b><br>" +
+"Improve distribution and tamp consistency before changing grind.";
+
+nextShot=
+"Repeat with the same recipe after improving puck preparation.";
+
 }
 
-function renderRecipe(){
- const r=makeRecipe();
- $("#recipeCard").classList.remove("hidden");
- $("#recipeCard").innerHTML=`
- <div class="muted">RECOMMENDED STARTING RECIPE</div>
- <h2 style="margin-top:3px">${$("#drink").value==="freddo"?"🧊 Freddo Espresso":$("#drink").value==="ristretto"?"🎯 Ristretto":"☕ Espresso"}</h2>
- <div><span class="pill">${$("#type").value}</span><span class="pill">${$("#roast").value}</span><span class="pill">${$("#age").value} days</span></div>
- <div class="recipe" style="margin-top:12px">
- <div class="metric"><span>Dose</span><strong>${r.d.toFixed(1)}g</strong></div>
- <div class="metric"><span>Yield</span><strong>${r.y.toFixed(1)}g</strong></div>
- <div class="metric"><span>Ratio</span><strong>1:${r.ratio.toFixed(2)}</strong></div>
- <div class="metric"><span>Time</span><strong>${r.t.toFixed(1)}s</strong></div>
- <div class="metric"><span>Temp</span><strong>${r.temp.toFixed(1)}°C</strong></div>
- </div>
- <div style="margin-top:15px"><b>Dial-in sequence</b>
- <div class="step">① Ρύθμισε άλεση ώστε να κινηθείς προς τον χρόνο στόχο.</div>
- <div class="step">② Κράτα Dose σταθερό και στόχευσε το Yield.</div>
- <div class="step">③ Κάνε fine tuning με Temperature.</div>
- <div class="step">④ Μετά πείραξε Dose για ένταση / σώμα.</div></div>
- ${r.notes.map(x=>`<div class="notice">${x}</div>`).join("")}
- <button class="secondary" id="goDiag" style="width:100%;margin-top:14px">Έβγαλα το shot → Diagnose</button>`;
- $("#goDiag").addEventListener("click",()=>document.querySelector('[data-tab="diagnose"]').click());
+
+/* SOUR */
+
+else if(
+taste==="sour"
+){
+
+diagnosis=
+"🔵 Likely under-extracted";
+
+firstMove=
+"<b>Go slightly finer.</b><br>" +
+"Keep dose and yield stable.";
+
+nextShot=
+"Go one small step finer. Keep the same dose and yield, then retaste.";
+
 }
 
-function diagnose(){
- const s=$("#symptom").value,time=parseFloat($("#actualTime").value),
- dose=parseFloat($("#actualDose").value),yieldg=parseFloat($("#actualYield").value);
- let msg="",detail="";
- if(s==="sour"){msg="Πιο ψιλή άλεση";detail="Πρώτη κίνηση για under-extraction. Εναλλακτικά μπορείς να αυξήσεις ελαφρά τη θερμοκρασία."}
- else if(s==="bitter"){msg="Πιο χοντρή άλεση";detail="Πρώτη κίνηση για over-extraction. Εναλλακτικά -1°C."}
- else if(s==="watery"){msg="Μείωσε το Yield";detail="Θα αυξήσει συγκέντρωση, σώμα και ένταση."}
- else if(s==="heavy"){msg="Αύξησε το Yield";detail="Θα ανοίξει το αποτέλεσμα και θα μειώσει τη συγκέντρωση."}
- else if(s==="empty"){msg="Μείωσε το Yield ή αύξησε Dose";detail="Στόχος περισσότερη ένταση χωρίς να αλλάξεις πολλές μεταβλητές."}
- else if(s==="weak"){msg="Dose +0.5g";detail="Η Dose είναι η βασική μεταβλητή για δύναμη / ένταση."}
- else if(s==="strong"){msg="Dose -0.5g";detail="Μείωσε τη δύναμη κρατώντας τις υπόλοιπες μεταβλητές σταθερές."}
- else if(s==="flat"){msg="Αύξησε ελαφρά Yield ή Temperature";detail="Σε παλαιότερο καφέ μπορεί να χρειαστεί και λίγο πιο ψιλή άλεση."}
- else if(s==="astringent"){msg="Πιο χοντρή άλεση ή -1°C";detail="Στόχος να μειωθεί η υπερεκχύλιση / ξηρότητα."}
- else{msg="Έλεγξε πρώτα το puck prep";detail="Ξινός + πικρός μαζί μπορεί να δείχνει channeling. Έλεγξε distribution και tamp."}
- let timeNote="";
- if(Number.isFinite(time)){if(time<22)timeNote="Το shot είναι αρκετά γρήγορο — έλεγξε πρώτα άλεση / ροή.";else if(time>40)timeNote="Το shot είναι αρκετά αργό — έλεγξε πρώτα άλεση / flow.";else timeNote="Ο χρόνος είναι σε λογικό παράθυρο· άφησε τη γεύση να αποφασίσει."}
- let ratioNote="";
- if(dose>0&&yieldg>0)ratioNote=`Actual ratio: 1:${(yieldg/dose).toFixed(2)}`;
- $("#diagnosisResult").innerHTML=`
- <div class="adjust"><div class="muted">NEXT ADJUSTMENT</div><h2 style="margin:3px 0">${msg}</h2><div>${detail}</div></div>
- ${timeNote?`<div class="good">⏱ ${timeNote}</div>`:""}
- ${ratioNote?`<div class="card" style="margin-top:10px;padding:12px"><b>${ratioNote}</b></div>`:""}
- <div class="muted" style="margin-top:12px">Κάνε μόνο αυτή την αλλαγή, ξανακάνε shot και αξιολόγησε ξανά.</div>`;
+
+/* FAST + NO TASTE */
+
+else if(
+flow==="fast"
+){
+
+diagnosis=
+"🔵 Shot running fast";
+
+firstMove=
+"<b>Go slightly finer.</b><br>" +
+"Keep dose and yield stable.";
+
+nextShot=
+"Go one small step finer and aim for the target time.";
+
 }
 
-$$(".nav button").forEach(btn=>btn.addEventListener("click",()=>{
- $$(".nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active");
- ["new","diagnose","guide"].forEach(id=>$("#"+id).classList.toggle("hidden",id!==btn.dataset.tab));
-}));
 
-$("#generate").addEventListener("click",renderRecipe);
-$("#diagnoseBtn").addEventListener("click",diagnose);
-$("#type").addEventListener("change",()=>{
- const x=$("#type").value;
- $("#processBox").style.display=x==="single"?"block":"none";
- $("#blendBox").style.display=(x==="blend"||x==="commercial")?"block":"none";
+/* BITTER */
+
+else if(
+taste==="bitter"
+){
+
+diagnosis=
+"🟠 Likely over-extracted";
+
+firstMove=
+"<b>Go slightly coarser.</b><br>" +
+"Keep dose and yield stable.";
+
+nextShot=
+"Go one small step coarser and retaste.";
+
+}
+
+
+/* SLOW */
+
+else if(
+flow==="slow"
+){
+
+diagnosis=
+"🟠 Shot running slow";
+
+firstMove=
+"<b>Go slightly coarser.</b><br>" +
+"Keep dose and yield stable.";
+
+nextShot=
+"Go one small step coarser and aim for the target time.";
+
+}
+
+
+/* THIN */
+
+else if(
+taste==="thin" ||
+taste==="weak"
+){
+
+diagnosis=
+"🟣 Low concentration";
+
+firstMove=
+"<b>Reduce yield slightly.</b><br>" +
+"This increases concentration without immediately changing grind.";
+
+nextShot=
+"Keep the grind and try " +
+dose.toFixed(1) +
+" g in → " +
+Math.max(1,yieldValue-3).toFixed(0) +
+"–" +
+Math.max(1,yieldValue-2).toFixed(0) +
+" g out.";
+
+}
+
+
+/* HEAVY */
+
+else if(
+taste==="heavy" ||
+taste==="strong"
+){
+
+diagnosis=
+"🟢 High concentration";
+
+firstMove=
+"<b>Increase yield slightly.</b><br>" +
+"This can open the cup without immediately changing grind.";
+
+nextShot=
+"Keep the grind and try " +
+dose.toFixed(1) +
+" g in → " +
+(yieldValue+3).toFixed(0) +
+"–" +
+(yieldValue+4).toFixed(0) +
+" g out.";
+
+}
+
+
+/* BALANCED */
+
+else if(
+taste==="balanced"
+){
+
+diagnosis=
+"⭐ Good shot — reference it";
+
+firstMove=
+"<b>Don't change the recipe.</b><br>" +
+"Save this as your baseline.";
+
+nextShot=
+"Pull one confirmation shot. If it repeats, keep it.";
+
+}
+
+
+/* DISPLAY */
+
+document.getElementById("diagnosis").innerHTML=
+
+'<div style="font-size:21px;font-weight:800">' +
+diagnosis +
+'</div>' +
+
+'<span class="badge">' +
+"Current 1:" +
+ratio.toFixed(2) +
+'</span>' +
+
+'<span class="badge">' +
+time +
+" s" +
+'</span>';
+
+
+
+document.getElementById("recipe").innerHTML=
+
+"<b>" +
+recipe.dose +
+" g in → " +
+recipe.yieldValue +
+" g out" +
+"</b><br>" +
+
+"Ratio <b>1:" +
+recipe.ratio.toFixed(2) +
+"</b>" +
+
+" · Time <b>" +
+recipe.time +
+" s</b>" +
+
+" · Temp <b>" +
+recipe.temperature +
+"°C</b>";
+
+
+
+document.getElementById("firstMove")
+.innerHTML=
+firstMove;
+
+
+document.getElementById("nextShot")
+.textContent=
+nextShot;
+
+
+document.getElementById("result")
+.classList.remove("hide");
+
+
+
+/* HISTORY */
+
+shots.unshift({
+
+dose,
+yieldValue,
+time,
+ratio,
+diagnosis
+
 });
-$("#type").dispatchEvent(new Event("change"));
-})();
-</script>
 
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+
+renderHistory();
+
+
+document
+.getElementById("result")
+.scrollIntoView({
+
+behavior:"smooth",
+block:"start"
+
+});
+
 }
+
+
+
+/* =========================
+   HISTORY
+========================= */
+
+function renderHistory(){
+
+document
+.getElementById("history")
+.classList.remove("hide");
+
+
+document
+.getElementById("historyList")
+.innerHTML=
+
+shots
+.slice(0,6)
+.map(
+
+(s,i)=>`
+
+<div class="shot">
+
+<b>
+Shot ${shots.length-i}
+</b>
+
+<small>
+${s.dose} g → ${s.yieldValue} g
+</small>
+
+<small>
+${s.time} s · 1:${s.ratio.toFixed(2)}
+</small>
+
+<span class="badge">
+${s.diagnosis
+.replace(/<[^>]+>/g,"")
+.slice(0,20)}
+</span>
+
+</div>
+
+`
+
+)
+.join("");
+
+}
+
+
+
+/* =========================
+   HISTORY BUTTON
+========================= */
+
+function showHistory(){
+
+document
+.getElementById("history")
+.classList.remove("hide");
+
+document
+.getElementById("history")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+}
+
+
+
+/* =========================
+   GUIDE
+========================= */
+
+function showGuide(){
+
+alert(
+
+"Dial-In Guide\n\n" +
+
+"Start with the suggested recipe.\n\n" +
+
+"If sour / fast → go slightly finer.\n\n" +
+
+"If bitter / slow → go slightly coarser.\n\n" +
+
+"If thin → reduce yield.\n\n" +
+
+"If heavy → increase yield.\n\n" +
+
+"If channeling → fix puck preparation first.\n\n" +
+
+"Change one major variable at a time."
+
+);
+
+}
+
 </script>
 
 </body>
