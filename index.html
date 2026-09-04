@@ -1,281 +1,372 @@
 <!doctype html>
-<html lang="en">
+<html lang="el">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta
 name="viewport"
-content="width=device-width,initial-scale=1"
+content="width=device-width,initial-scale=1,viewport-fit=cover"
 >
 
-<meta
-name="theme-color"
-content="#171717"
->
+<meta name="theme-color" content="#171717">
 
 <title>Espresso Dial-In Assistant</title>
 
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon.svg">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Dial-In">
 
 <style>
 
+:root{
+--bg:#f6f6f3;
+--card:#fff;
+--text:#151515;
+--muted:#777;
+--soft:#f1f1ee;
+--border:#e1e1dc;
+--purple:#7c3aed;
+--dark:#171717;
+}
+
+*{
+box-sizing:border-box;
+}
+
 body{
-  margin:0;
-  background:#f6f6f3;
+margin:0;
+background:var(--bg);
 
-  /* KEEPING YOUR ORIGINAL FONT */
-  font-family:-apple-system,BlinkMacSystemFont,
-  "SF Pro Display","SF Pro Text",sans-serif;
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"SF Pro Display",
+"SF Pro Text",
+sans-serif;
 
-  color:#151515;
+color:var(--text);
+}
+
+button,input,select{
+font:inherit;
 }
 
 main{
-  max-width:720px;
-  margin:auto;
-  padding:20px 15px 50px;
+max-width:720px;
+margin:auto;
+
+padding:
+max(20px,env(safe-area-inset-top))
+15px
+calc(55px + env(safe-area-inset-bottom));
 }
 
+
+/* HEADER */
+
 .ey{
-  color:#777;
-  letter-spacing:.08em;
-  font-size:13px;
-  font-weight:650;
+color:var(--muted);
+letter-spacing:.08em;
+font-size:13px;
+font-weight:650;
 }
 
 .title{
-  font-size:32px;
-  font-weight:750;
-  line-height:1.12;
-  margin:8px 0;
+font-size:32px;
+font-weight:750;
+line-height:1.12;
+margin:8px 0;
+letter-spacing:-.03em;
 }
 
 .sub{
-  color:#777;
+color:var(--muted);
+line-height:1.4;
 }
+
+
+/* TABS */
 
 .tabs{
-  display:flex;
-  gap:8px;
-  margin:18px 0;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:7px;
+margin:18px 0;
 }
 
-.tabs b{
-  flex:1;
-  text-align:center;
-  padding:13px 8px;
-  border-radius:15px;
-  background:#eee;
-  cursor:pointer;
+.tab{
+border:0;
+padding:13px 5px;
+border-radius:15px;
+background:#eee;
+color:var(--text);
+cursor:pointer;
+font-weight:700;
+min-height:50px;
 }
 
-.tabs b:first-child{
-  background:#7c3aed;
-  color:white;
+.tab small{
+display:block;
+font-size:10px;
+font-weight:500;
+margin-top:2px;
 }
+
+.tab.active{
+background:var(--purple);
+color:white;
+}
+
+
+/* CARDS */
 
 .card{
-  background:white;
-  border:1px solid #e1e1dc;
-  border-radius:22px;
-  padding:18px;
-  margin:12px 0;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:22px;
+padding:18px;
+margin:12px 0;
 }
 
 h2{
-  margin-top:0;
-  font-size:26px;
-  font-weight:700;
-  letter-spacing:-.02em;
+margin:0 0 15px;
+font-size:26px;
+font-weight:700;
+letter-spacing:-.02em;
 }
 
 h3{
-  margin-bottom:8px;
+margin:18px 0 8px;
+}
+
+.divider{
+height:1px;
+background:#eee;
+margin:18px 0;
+}
+
+.section-label{
+color:var(--muted);
+font-size:13px;
+font-weight:700;
+letter-spacing:.05em;
+text-transform:uppercase;
+}
+
+
+/* FORM */
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
 }
 
 label{
-  display:block;
-  font-weight:650;
-  margin:10px 0 5px;
+display:block;
+font-weight:650;
+margin:10px 0 5px;
+}
+
+.helper{
+display:block;
+font-size:12px;
+font-weight:400;
+color:var(--muted);
+margin-top:2px;
 }
 
 input,
 select{
-  width:100%;
-  padding:14px;
-  border:1px solid #ddd;
-  border-radius:13px;
-  background:white;
-  font-size:16px;
-  box-sizing:border-box;
+width:100%;
+min-height:52px;
+padding:14px;
+border:1px solid #ddd;
+border-radius:13px;
+background:white;
+color:var(--text);
+font-size:16px;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+input::placeholder{
+color:#aaa;
 }
+
+
+/* BUTTONS */
 
 .btn{
-  width:100%;
-  padding:16px;
-  margin-top:16px;
-  border:0;
-  border-radius:15px;
-  background:#171717;
-  color:white;
-  font-size:17px;
-  font-weight:700;
-  cursor:pointer;
+width:100%;
+min-height:54px;
+padding:15px;
+margin-top:16px;
+border:0;
+border-radius:15px;
+background:var(--dark);
+color:white;
+font-size:17px;
+font-weight:700;
+cursor:pointer;
 }
 
 .btn:active{
-  transform:scale(.99);
+transform:scale(.99);
 }
+
+.secondary{
+background:#eee;
+color:#151515;
+}
+
+
+/* RESULTS */
 
 .hide{
-  display:none !important;
-}
-
-.metrics{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-}
-
-.metric{
-  background:#f1f1ee;
-  border-radius:14px;
-  padding:12px;
-}
-
-.metric small{
-  display:block;
-  color:#777;
-}
-
-.metric strong{
-  font-size:19px;
-}
-
-.recipe{
-  background:#f1f1ee;
-  border-radius:14px;
-  padding:14px;
-  line-height:1.6;
-}
-
-.action{
-  background:#f1eaff;
-  border-left:5px solid #7c3aed;
-  border-radius:13px;
-  padding:14px;
-  line-height:1.5;
-}
-
-.next{
-  background:#171717;
-  color:#fff;
-  border-radius:14px;
-  padding:14px;
-  line-height:1.6;
-}
-
-.reason{
-  background:#f7f7f5;
-  border-left:4px solid #aaa;
-  border-radius:12px;
-  padding:13px;
-  margin-top:10px;
-  line-height:1.5;
-  color:#444;
-}
-
-.good{
-  background:#f0fdf4;
-  border-left:5px solid #22c55e;
-  border-radius:13px;
-  padding:14px;
-  line-height:1.5;
-}
-
-.warn{
-  background:#fff7ed;
-  border-left:5px solid #f97316;
-  border-radius:13px;
-  padding:14px;
-  line-height:1.5;
-}
-
-.history{
-  display:flex;
-  gap:8px;
-  overflow:auto;
-}
-
-.shot{
-  min-width:145px;
-  background:#f1f1ee;
-  border-radius:14px;
-  padding:12px;
-}
-
-.shot small{
-  display:block;
-  color:#777;
-  margin-top:4px;
-}
-
-.badge{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:99px;
-  background:#eee;
-  font-size:13px;
-  margin:3px;
-}
-
-.note{
-  color:#777;
-  font-size:14px;
-  line-height:1.5;
-}
-
-.divider{
-  height:1px;
-  background:#eee;
-  margin:18px 0;
-}
-
-.section-label{
-  color:#777;
-  font-size:13px;
-  font-weight:700;
-  letter-spacing:.05em;
-  text-transform:uppercase;
+display:none !important;
 }
 
 .big-result{
-  font-size:21px;
-  font-weight:800;
-  margin-bottom:8px;
+font-size:21px;
+font-weight:800;
+margin-bottom:8px;
 }
 
-.small{
-  font-size:14px;
-  color:#777;
+.metrics{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
 }
 
-@media(max-width:520px){
+.metric{
+background:var(--soft);
+border-radius:14px;
+padding:12px;
+}
 
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
+.metric small{
+display:block;
+color:var(--muted);
+margin-bottom:3px;
+}
 
-  .metrics{
-    grid-template-columns:1fr 1fr;
-  }
+.metric strong{
+font-size:18px;
+}
+
+.recipe{
+background:var(--soft);
+border-radius:14px;
+padding:14px;
+line-height:1.6;
+}
+
+.reason{
+background:#f7f7f5;
+border-left:4px solid #aaa;
+border-radius:12px;
+padding:13px;
+line-height:1.5;
+color:#444;
+}
+
+.action{
+background:#f1eaff;
+border-left:5px solid var(--purple);
+border-radius:13px;
+padding:14px;
+line-height:1.5;
+}
+
+.next{
+background:var(--dark);
+color:white;
+border-radius:14px;
+padding:14px;
+line-height:1.55;
+}
+
+.badge{
+display:inline-block;
+padding:5px 9px;
+border-radius:99px;
+background:#eee;
+font-size:13px;
+margin:3px;
+}
+
+
+/* HISTORY */
+
+.history-list{
+display:flex;
+gap:8px;
+overflow-x:auto;
+padding-bottom:4px;
+}
+
+.shot{
+min-width:165px;
+background:var(--soft);
+border-radius:14px;
+padding:12px;
+}
+
+.shot small{
+display:block;
+color:var(--muted);
+margin-top:4px;
+}
+
+.note{
+color:var(--muted);
+font-size:14px;
+line-height:1.5;
+}
+
+
+/* GUIDE */
+
+.guide-item{
+padding:13px 0;
+border-bottom:1px solid #eee;
+}
+
+.guide-item:last-child{
+border-bottom:0;
+}
+
+.guide-item b{
+display:block;
+margin-bottom:4px;
+}
+
+.guide-item span{
+color:#555;
+line-height:1.5;
+}
+
+
+@media(max-width:560px){
+
+.tabs{
+grid-template-columns:1fr 1fr;
+}
+
+.grid{
+grid-template-columns:1fr 1fr;
+}
+
+.metrics{
+grid-template-columns:1fr 1fr;
+}
+
+.title{
+font-size:31px;
+}
 
 }
 
@@ -286,7 +377,6 @@ select{
 
 <body>
 
-
 <main>
 
 
@@ -294,43 +384,68 @@ select{
 ☕ PERSONAL COFFEE TOOL
 </div>
 
-
 <div class="title">
 Espresso Dial-In Assistant
 </div>
 
-
 <div class="sub">
-Dial-In v3 · Recipe → Diagnosis → Next Shot
+Unified v4 · Recipe → Diagnosis → Next Shot
 </div>
+
 
 
 <div class="tabs">
 
-<b onclick="showNew()">
-New Dial-In
-</b>
+<button
+class="tab active"
+id="tabQuick"
+onclick="showTab('quick')"
+>
+Quick Recipe
+<small>Γρήγορη συνταγή</small>
+</button>
 
-<b onclick="showHistory()">
+<button
+class="tab"
+id="tabDial"
+onclick="showTab('dial')"
+>
+Dial-In
+<small>Ρύθμιση</small>
+</button>
+
+<button
+class="tab"
+id="tabHistory"
+onclick="showTab('history')"
+>
 History
-</b>
+<small>Ιστορικό</small>
+</button>
 
-<b onclick="showGuide()">
+<button
+class="tab"
+id="tabGuide"
+onclick="showTab('guide')"
+>
 Guide
-</b>
+<small>Οδηγός</small>
+</button>
 
 </div>
 
 
 
-<!-- =========================
-     COFFEE PROFILE
-========================= -->
+<!-- COFFEE PROFILE -->
 
-<div class="card">
+<div class="card" id="profileCard">
 
 <h2>
 1 · Coffee Profile
+<br>
+<span class="helper">
+Προφίλ Καφέ
+</span>
 </h2>
 
 
@@ -340,7 +455,8 @@ Guide
 <div>
 
 <label>
-Coffee type
+Coffee Type
+<span class="helper">Τύπος καφέ</span>
 </label>
 
 <select id="type">
@@ -360,6 +476,7 @@ Coffee type
 
 <label>
 Roast
+<span class="helper">Καβούρδισμα</span>
 </label>
 
 <select id="roast">
@@ -380,6 +497,7 @@ Roast
 
 <label>
 Processing
+<span class="helper">Επεξεργασία</span>
 </label>
 
 <select id="process">
@@ -399,6 +517,7 @@ Processing
 
 <label>
 Days off roast
+<span class="helper">Ημέρες από καβούρδισμα</span>
 </label>
 
 <input
@@ -417,14 +536,91 @@ placeholder="Unknown"
 
 
 
-<!-- =========================
-     SHOT DATA
-========================= -->
+<!-- QUICK RECIPE -->
+
+<section id="quickPanel">
+
+
+<div class="card">
+
+<h2>
+2 · Quick Recipe
+<br>
+<span class="helper">
+Γρήγορη αρχική συνταγή
+</span>
+</h2>
+
+<p class="note">
+Χρησιμοποίησέ το πριν το πρώτο shot για να πάρεις ένα καλό starting point.
+</p>
+
+<button
+class="btn"
+onclick="generateQuickRecipe()"
+>
+Generate Starting Recipe
+<br>
+<small>Δημιουργία αρχικής συνταγής</small>
+</button>
+
+</div>
+
+
+
+<div class="card hide" id="quickResult">
+
+<h2>
+🎯 Starting Recipe
+<span class="helper">
+Προτεινόμενη αρχική συνταγή
+</span>
+</h2>
+
+<div class="metrics" id="quickMetrics"></div>
+
+
+<h3>
+☕ Recipe · Συνταγή
+</h3>
+
+<div class="recipe" id="quickRecipe"></div>
+
+
+<h3>
+🧠 Why? · Γιατί;
+</h3>
+
+<div class="reason" id="quickReason"></div>
+
+
+<button
+class="btn"
+onclick="startDialInFromRecipe()"
+>
+Continue to Dial-In →
+<br>
+<small>Συνέχεια στη ρύθμιση</small>
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- DIAL IN -->
+
+<section id="dialPanel" class="hide">
+
 
 <div class="card">
 
 <h2>
 2 · Shot Data
+<span class="helper">
+Δεδομένα Εκχύλισης
+</span>
 </h2>
 
 
@@ -435,6 +631,7 @@ placeholder="Unknown"
 
 <label>
 Dose (g)
+<span class="helper">Δόση</span>
 </label>
 
 <input
@@ -452,6 +649,7 @@ placeholder="18"
 
 <label>
 Yield (g)
+<span class="helper">Απόδοση</span>
 </label>
 
 <input
@@ -468,7 +666,8 @@ placeholder="40"
 <div>
 
 <label>
-Extraction time (s)
+Extraction Time
+<span class="helper">Χρόνος εκχύλισης</span>
 </label>
 
 <input
@@ -485,7 +684,8 @@ placeholder="28"
 <div>
 
 <label>
-Temperature (°C)
+Temperature °C
+<span class="helper">Θερμοκρασία</span>
 </label>
 
 <input
@@ -503,46 +703,45 @@ placeholder="93"
 
 
 <label>
-👅 What do you taste?
+👅 Taste · Γεύση
 </label>
-
 
 <select id="taste">
 
 <option value="">
-Choose...
+Choose · Επίλεξε
 </option>
 
 <option value="sour">
-Sour / sharp
+Sour / Ξινό
 </option>
 
 <option value="bitter">
-Bitter / dry
+Bitter / Πικρό
 </option>
 
 <option value="thin">
-Watery / thin
+Thin / Νερουλό
 </option>
 
 <option value="heavy">
-Heavy / intense
+Heavy / Βαρύ
 </option>
 
 <option value="weak">
-Weak / hollow
+Weak / Αδύναμο
 </option>
 
 <option value="strong">
-Too strong / harsh
+Too strong / Πολύ έντονο
 </option>
 
 <option value="balanced">
-Balanced / sweet
+Balanced / Ισορροπημένο
 </option>
 
 <option value="unknown">
-Unknown
+Unknown / Δεν ξέρω
 </option>
 
 </select>
@@ -550,30 +749,29 @@ Unknown
 
 
 <label>
-💧 Flow / puck
+💧 Flow / Puck · Ροή
 </label>
-
 
 <select id="flow">
 
 <option value="unknown">
-Unknown
+Unknown / Δεν ξέρω
 </option>
 
 <option value="normal">
-Normal / even
+Normal / Ομοιόμορφη
 </option>
 
 <option value="fast">
-Fast
+Fast / Γρήγορη
 </option>
 
 <option value="slow">
-Slow / choking
+Slow / Αργή
 </option>
 
 <option value="channel">
-Uneven / channeling signs
+Channeling / Ανομοιόμορφη
 </option>
 
 </select>
@@ -582,50 +780,39 @@ Uneven / channeling signs
 
 <button
 class="btn"
-onclick="generate()"
+onclick="generateDialIn()"
 >
-
-Generate Recipe & Diagnose
-
+Generate & Diagnose
+<br>
+<small>Ανάλυση εκχύλισης</small>
 </button>
-
 
 </div>
 
 
 
-<!-- =========================
-     RESULT
-========================= -->
-
-<div
-class="card hide"
-id="result"
->
+<div class="card hide" id="dialResult">
 
 <h2>
 3 · Dial-In Result
+<span class="helper">
+Αποτέλεσμα Ρύθμισης
+</span>
 </h2>
 
 
-<div id="diagnosis">
-</div>
+<div id="diagnosis"></div>
 
 
 <div class="divider"></div>
 
 
 <div class="section-label">
-Your shot
+Your Shot · Το Shot σου
 </div>
 
 
-<div
-class="metrics"
-id="shotMetrics"
->
-
-</div>
+<div class="metrics" id="shotMetrics"></div>
 
 
 
@@ -633,95 +820,232 @@ id="shotMetrics"
 🎯 Starting Recipe
 </h3>
 
-
-<div
-class="recipe"
-id="recipe"
->
-</div>
+<div class="recipe" id="recipe"></div>
 
 
 
 <h3>
-🧠 Why?
+🧠 Why? · Γιατί;
 </h3>
 
-
-<div
-class="reason"
-id="reason"
->
-</div>
+<div class="reason" id="reason"></div>
 
 
 
 <h3>
-🔧 First Move
+🔧 First Move · Πρώτη αλλαγή
 </h3>
 
-
-<div
-class="action"
-id="firstMove"
->
-</div>
+<div class="action" id="firstMove"></div>
 
 
 
 <h3>
-➡️ Next Shot
+➡️ Next Shot · Επόμενο Shot
 </h3>
 
-
-<div
-class="next"
-id="nextShot"
->
-</div>
-
+<div class="next" id="nextShot"></div>
 
 </div>
 
 
+</section>
 
-<!-- =========================
-     HISTORY
-========================= -->
 
-<div
-class="card hide"
-id="history"
->
+
+<!-- HISTORY -->
+
+<section id="historyPanel" class="hide">
+
+
+<div class="card">
 
 <h2>
-4 · Shot History
+Shot History
+<span class="helper">
+Ιστορικό Εκχυλίσεων
+</span>
 </h2>
 
-
 <div
-class="history"
+class="history-list"
 id="historyList"
->
-</div>
+></div>
 
-
-<div
+<p
 class="note"
 id="historyNote"
 >
-Your last shots will appear here.
+Δεν υπάρχουν ακόμα αποθηκευμένα shots.
+</p>
+
+
+<button
+class="btn secondary"
+onclick="clearHistory()"
+>
+Clear History · Καθαρισμός
+</button>
+
+</div>
+
+
+</section>
+
+
+
+<!-- GUIDE -->
+
+<section id="guidePanel" class="hide">
+
+
+<div class="card">
+
+<h2>
+Dial-In Guide
+<span class="helper">
+Οδηγός Ρύθμισης Espresso
+</span>
+</h2>
+
+
+
+<div class="guide-item">
+
+<b>
+🔵 Sour · Ξινό
+</b>
+
+<span>
+Πιθανό under-extraction. Δοκίμασε λίγο πιο ψιλή άλεση.
+</span>
+
+</div>
+
+
+
+<div class="guide-item">
+
+<b>
+🟠 Bitter · Πικρό
+</b>
+
+<span>
+Πιθανό over-extraction. Δοκίμασε λίγο πιο χοντρή άλεση.
+</span>
+
+</div>
+
+
+
+<div class="guide-item">
+
+<b>
+💧 Fast Flow · Γρήγορη ροή
+</b>
+
+<span>
+Go slightly finer · Άλεσε λίγο πιο ψιλά.
+</span>
+
+</div>
+
+
+
+<div class="guide-item">
+
+<b>
+🐢 Slow Flow · Αργή ροή
+</b>
+
+<span>
+Go slightly coarser · Άλεσε λίγο πιο χοντρά.
+</span>
+
+</div>
+
+
+
+<div class="guide-item">
+
+<b>
+🟣 Thin / Weak · Νερουλό / Αδύναμο
+</b>
+
+<span>
+Δοκίμασε ελαφρώς μικρότερο yield για περισσότερη συγκέντρωση.
+</span>
+
+</div>
+
+
+
+<div class="guide-item">
+
+<b>
+🟢 Heavy / Strong · Βαρύ / Πολύ έντονο
+</b>
+
+<span>
+Δοκίμασε λίγο μεγαλύτερο yield.
+</span>
+
+</div>
+
+
+
+<div class="guide-item">
+
+<b>
+⚠️ Channeling
+</b>
+
+<span>
+Διόρθωσε distribution, WDT και tamp πριν αλλάξεις grind.
+</span>
+
+</div>
+
+
+
+<div class="guide-item">
+
+<b>
+⭐ Balanced · Ισορροπημένο
+</b>
+
+<span>
+Μην αλλάξεις κάτι μόνο για να κυνηγήσεις συγκεκριμένους αριθμούς.
+</span>
+
+</div>
+
+
+
+<div class="guide-item">
+
+<b>
+☕ Golden Rule · Χρυσός κανόνας
+</b>
+
+<span>
+Change one major variable at a time · Άλλαζε μία βασική μεταβλητή κάθε φορά.
+</span>
+
 </div>
 
 
 </div>
+
+
+</section>
 
 
 
 <p class="note">
 
-☕ Starting point only.
-The assistant uses recipe, time, flow and taste together.
-Change one major variable at a time and let taste lead.
+☕ Οι starting recipes είναι σημεία εκκίνησης.
+Το τελικό dial-in πρέπει πάντα να καθοδηγείται από τη γεύση.
 
 </p>
 
@@ -729,50 +1053,119 @@ Change one major variable at a time and let taste lead.
 </main>
 
 
-
 <script>
 
 
-/* =====================================================
-   DATA
-===================================================== */
+/* STORAGE */
+
+const STORAGE_KEY=
+"espresso-dial-in-history-v4";
 
 let shots=[];
 
+try{
+
+shots=
+JSON.parse(
+localStorage.getItem(STORAGE_KEY)
+) || [];
+
+}catch(e){
+
+shots=[];
+
+}
 
 
-/* =====================================================
-   STARTING RECIPE
-===================================================== */
+
+/* NAVIGATION */
+
+function showTab(tab){
+
+["quick","dial","history","guide"]
+.forEach(name=>{
+
+document
+.getElementById(name+"Panel")
+.classList.add("hide");
+
+});
+
+
+document
+.getElementById(tab+"Panel")
+.classList.remove("hide");
+
+
+document
+.getElementById("profileCard")
+.classList.toggle(
+"hide",
+tab==="history" ||
+tab==="guide"
+);
+
+
+document
+.querySelectorAll(".tab")
+.forEach(button=>
+button.classList.remove("active")
+);
+
+
+const buttonMap={
+
+quick:"tabQuick",
+dial:"tabDial",
+history:"tabHistory",
+guide:"tabGuide"
+
+};
+
+
+document
+.getElementById(buttonMap[tab])
+.classList.add("active");
+
+
+if(tab==="history"){
+renderHistory();
+}
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+
+/* STARTING RECIPE */
 
 function getStartingRecipe(){
 
-const roast =
+const roast=
 document.getElementById("roast").value;
 
-const type =
+const type=
 document.getElementById("type").value;
 
-const process =
+const process=
 document.getElementById("process").value;
 
-const daysValue =
+const daysValue=
 document.getElementById("days").value;
 
 
 let dose=18;
-
 let ratio=2.2;
-
 let temperature=93;
-
 let timeMin=25;
-
 let timeMax=30;
 
 
-
-/* ROAST */
 
 if(roast==="Light"){
 
@@ -783,7 +1176,6 @@ timeMax=32;
 
 }
 
-
 else if(roast==="Medium"){
 
 ratio=2.2;
@@ -793,7 +1185,6 @@ timeMax=30;
 
 }
 
-
 else if(roast==="Medium-Dark"){
 
 ratio=2.0;
@@ -802,7 +1193,6 @@ timeMin=24;
 timeMax=28;
 
 }
-
 
 else if(roast==="Dark"){
 
@@ -815,17 +1205,17 @@ timeMax=26;
 
 
 
-/* COMMERCIAL */
-
 if(type==="Commercial"){
 
-ratio=Math.min(ratio,2.1);
+ratio=
+Math.min(
+ratio,
+2.1
+);
 
 }
 
 
-
-/* NATURAL */
 
 if(
 process==="Natural" &&
@@ -838,14 +1228,11 @@ temperature=93;
 
 
 
-/* DAYS OFF ROAST */
-
 if(daysValue!==""){
 
-const days=parseFloat(daysValue);
+const days=
+parseFloat(daysValue);
 
-
-/* VERY FRESH */
 
 if(days<7){
 
@@ -855,8 +1242,6 @@ timeMax+=2;
 }
 
 
-/* 21–45 DAYS */
-
 if(days>=21 && days<=45){
 
 temperature+=1;
@@ -864,13 +1249,12 @@ temperature+=1;
 }
 
 
-/* VERY OLD */
-
 if(days>45){
 
 dose=18.5;
 
-ratio=Math.max(
+ratio=
+Math.max(
 1.9,
 ratio-0.1
 );
@@ -880,7 +1264,7 @@ ratio-0.1
 }
 
 
-const yieldValue =
+const yieldValue=
 dose*ratio;
 
 
@@ -899,9 +1283,195 @@ timeMax
 
 
 
-/* =====================================================
-   DIAGNOSIS ENGINE
-===================================================== */
+/* QUICK RECIPE */
+
+function generateQuickRecipe(){
+
+const recipe=
+getStartingRecipe();
+
+
+document
+.getElementById("quickMetrics")
+.innerHTML=
+
+metric(
+"Dose · Δόση",
+recipe.dose.toFixed(1)+" g"
+)+
+
+metric(
+"Yield · Απόδοση",
+recipe.yieldValue.toFixed(1)+" g"
+)+
+
+metric(
+"Ratio",
+"1:"+recipe.ratio.toFixed(2)
+)+
+
+metric(
+"Time · Χρόνος",
+recipe.timeMin+"–"+recipe.timeMax+" s"
+)+
+
+metric(
+"Temp",
+recipe.temperature+"°C"
+);
+
+
+document
+.getElementById("quickRecipe")
+.innerHTML=
+
+"<b>"+
+
+recipe.dose.toFixed(1)+
+
+" g in → "+
+
+recipe.yieldValue.toFixed(1)+
+
+" g out</b><br>"+
+
+"Ratio <b>1:"+
+
+recipe.ratio.toFixed(2)+
+
+"</b> · Time <b>"+
+
+recipe.timeMin+
+
+"–"+
+
+recipe.timeMax+
+
+" s</b> · Temp <b>"+
+
+recipe.temperature+
+
+"°C</b>";
+
+
+document
+.getElementById("quickReason")
+.innerHTML=
+getRecipeReason();
+
+
+document
+.getElementById("quickResult")
+.classList.remove("hide");
+
+
+document
+.getElementById("quickResult")
+.scrollIntoView({
+
+behavior:"smooth",
+block:"start"
+
+});
+
+}
+
+
+
+function getRecipeReason(){
+
+const roast=
+document.getElementById("roast").value;
+
+const process=
+document.getElementById("process").value;
+
+const days=
+document.getElementById("days").value;
+
+
+let text=
+"Αυτό είναι ένα neutral starting point για το πρώτο shot. Μετά χρησιμοποιούμε taste και flow για το πραγματικό dial-in.";
+
+
+if(roast==="Light"){
+
+text=
+"Το Light roast συνήθως χρειάζεται περισσότερη extraction energy, γι' αυτό ξεκινάμε με υψηλότερη temperature και μεγαλύτερο extraction window.";
+
+}
+
+else if(roast==="Dark"){
+
+text=
+"Το Dark roast εκχυλίζεται πιο εύκολα, οπότε χρησιμοποιούμε χαμηλότερη temperature και μικρότερο ratio.";
+
+}
+
+else if(roast==="Medium-Dark"){
+
+text=
+"Το Medium-Dark χρειάζεται συνήθως λιγότερη extraction energy από ένα Light roast.";
+
+}
+
+
+if(
+process==="Natural" &&
+roast==="Light"
+){
+
+text+=
+" Στο Light Natural κρατάμε λίγο χαμηλότερη temperature για sweetness και fruit character.";
+
+}
+
+
+if(
+days!=="" &&
+parseFloat(days)>45
+){
+
+text+=
+" Ο καφές είναι αρκετά παλιός, οπότε αυξάνεται λίγο η dose και μικραίνει το ratio.";
+
+}
+
+
+return text;
+
+}
+
+
+
+/* QUICK → DIAL IN */
+
+function startDialInFromRecipe(){
+
+const recipe=
+getStartingRecipe();
+
+
+document
+.getElementById("dose").value=
+recipe.dose.toFixed(1);
+
+document
+.getElementById("yield").value=
+recipe.yieldValue.toFixed(1);
+
+document
+.getElementById("temp").value=
+recipe.temperature;
+
+
+showTab("dial");
+
+}
+
+
+
+/* DIAGNOSIS */
 
 function diagnose(
 taste,
@@ -912,18 +1482,16 @@ recipe
 ){
 
 let diagnosis=
-"Looks close.";
+"Looks close · Φαίνεται κοντά";
 
 let reason=
-"Your shot is within a reasonable starting range. Taste should decide the next move.";
+"Το shot βρίσκεται σε λογικό starting range. Η γεύση θα καθορίσει την επόμενη αλλαγή.";
 
 let firstMove=
-"<b>Keep the recipe stable.</b><br>Make one small controlled change at a time.";
+"<b>Keep the recipe stable.</b><br>Κράτησε σταθερή τη συνταγή και άλλαξε μόνο μία μεταβλητή.";
 
 let nextShot=
-"Repeat the shot once to confirm the result.";
-
-let status="neutral";
+"Repeat the shot · Επανάλαβε το shot για επιβεβαίωση.";
 
 
 
@@ -931,27 +1499,20 @@ let status="neutral";
 
 if(flow==="channel"){
 
-diagnosis=
-"⚠️ Possible channeling";
-
-reason=
-"The uneven flow suggests the puck may not be extracting evenly. Changing grind first could hide the real problem.";
-
-firstMove=
-"<b>Fix puck preparation first.</b><br>" +
-"Improve distribution, WDT if available, and tamp consistency.";
-
-nextShot=
-"Repeat the same dose, yield and grind after improving puck preparation. Compare the flow.";
-
-status="warn";
-
 return{
-diagnosis,
-reason,
-firstMove,
-nextShot,
-status
+
+diagnosis:
+"⚠️ Possible Channeling",
+
+reason:
+"Η ανομοιόμορφη ροή δείχνει πιθανό channeling. Μην αλλάξεις αμέσως το grind γιατί μπορεί να κρύψεις το πραγματικό πρόβλημα.",
+
+firstMove:
+"<b>Fix puck preparation first.</b><br>Βελτίωσε distribution, WDT και tamp consistency.",
+
+nextShot:
+"Κράτησε ίδια dose, yield και grind. Διόρθωσε το puck preparation και ξαναδοκίμασε."
+
 };
 
 }
@@ -962,26 +1523,20 @@ status
 
 if(taste==="balanced"){
 
-diagnosis=
-"⭐ Balanced shot";
-
-reason=
-"Sweetness and balance are more important than forcing the recipe toward a theoretical number.";
-
-firstMove=
-"<b>Don't change the recipe.</b><br>Use this shot as your reference.";
-
-nextShot=
-"Pull one confirmation shot with the same recipe. If it repeats, keep it.";
-
-status="good";
-
 return{
-diagnosis,
-reason,
-firstMove,
-nextShot,
-status
+
+diagnosis:
+"⭐ Balanced Shot · Ισορροπημένο",
+
+reason:
+"Sweetness και balance έχουν μεγαλύτερη σημασία από το να κυνηγάς έναν θεωρητικά τέλειο αριθμό.",
+
+firstMove:
+"<b>Don't change anything.</b><br>Μην αλλάξεις τη συνταγή.",
+
+nextShot:
+"Τράβηξε ένα confirmation shot με ακριβώς τις ίδιες ρυθμίσεις."
+
 };
 
 }
@@ -993,18 +1548,16 @@ status
 if(taste==="sour"){
 
 diagnosis=
-"🔵 Likely under-extracted";
+"🔵 Under-extracted · Υποεκχυλισμένο";
 
 reason=
-"Sour or sharp acidity can indicate that the coffee needs more extraction. The cleanest first test is a slightly finer grind while keeping the other variables stable.";
+"Το sour / sharp αποτέλεσμα δείχνει ότι πιθανόν χρειάζεται περισσότερη extraction.";
 
 firstMove=
-"<b>Go slightly finer.</b><br>Keep dose and yield stable.";
+"<b>Go slightly finer.</b><br>Άλεσε λίγο πιο ψιλά. Κράτησε dose και yield σταθερά.";
 
 nextShot=
-"Go one small grind step finer. Keep the same dose and yield. Aim for a similar extraction time, then retaste.";
-
-status="blue";
+"Πήγαινε ένα μικρό grind step finer και κράτησε ίδια dose και yield.";
 
 }
 
@@ -1015,62 +1568,56 @@ status="blue";
 else if(taste==="bitter"){
 
 diagnosis=
-"🟠 Likely over-extracted";
+"🟠 Over-extracted · Υπερεκχυλισμένο";
 
 reason=
-"Bitter or drying flavours can indicate excessive extraction. A small coarsening is the simplest first test.";
+"Το bitter / dry αποτέλεσμα μπορεί να δείχνει υπερβολική extraction.";
 
 firstMove=
-"<b>Go slightly coarser.</b><br>Keep dose and yield stable.";
+"<b>Go slightly coarser.</b><br>Άλεσε λίγο πιο χοντρά.";
 
 nextShot=
-"Go one small grind step coarser. Keep dose and yield the same, then retaste.";
-
-status="warn";
+"Πήγαινε ένα μικρό grind step coarser. Κράτησε ίδια dose και yield.";
 
 }
 
 
 
-/* FAST */
+/* FAST FLOW */
 
 else if(flow==="fast"){
 
 diagnosis=
-"🔵 Shot running fast";
+"🔵 Fast Flow · Γρήγορη ροή";
 
 reason=
-"The flow is faster than expected. Before changing several variables, use grind size as the main correction.";
+"Η εκχύλιση τρέχει γρηγορότερα από το επιθυμητό.";
 
 firstMove=
-"<b>Go slightly finer.</b><br>Keep dose and yield stable.";
+"<b>Go slightly finer.</b><br>Άλεσε λίγο πιο ψιλά.";
 
 nextShot=
-"Go one small grind step finer. Keep dose and yield unchanged and compare the new time and taste.";
-
-status="blue";
+"Ένα μικρό grind step finer και ξαναδοκίμασε.";
 
 }
 
 
 
-/* SLOW */
+/* SLOW FLOW */
 
 else if(flow==="slow"){
 
 diagnosis=
-"🟠 Shot running slow";
+"🟠 Slow Flow · Αργή ροή";
 
 reason=
-"The puck is restricting flow more than expected. A small coarsening should increase flow without changing the whole recipe.";
+"Το puck περιορίζει περισσότερο τη ροή από όσο θέλουμε.";
 
 firstMove=
-"<b>Go slightly coarser.</b><br>Keep dose and yield stable.";
+"<b>Go slightly coarser.</b><br>Άλεσε λίγο πιο χοντρά.";
 
 nextShot=
-"Go one small grind step coarser. Keep dose and yield unchanged and compare the new time and taste.";
-
-status="warn";
+"Ένα μικρό grind step coarser και ξαναδοκίμασε.";
 
 }
 
@@ -1084,25 +1631,32 @@ taste==="weak"
 ){
 
 diagnosis=
-"🟣 Low concentration";
+"🟣 Low Concentration · Χαμηλή συγκέντρωση";
 
 reason=
-"The shot may not have enough dissolved coffee relative to the beverage volume. Reducing yield increases concentration without immediately changing grind.";
+"Το shot πιθανόν έχει πολύ beverage volume σε σχέση με τη συγκέντρωση του καφέ.";
 
 firstMove=
-"<b>Reduce yield slightly.</b><br>Keep grind and dose stable.";
+"<b>Reduce yield slightly.</b><br>Μείωσε λίγο το yield.";
+
+const newRatio=
+Math.max(
+1,
+actualRatio-0.15
+);
+
 
 nextShot=
-"Keep the grind and try " +
-(actualRatio>2.1 ? "about " : "") +
-Math.max(1,actualRatio-0.15).toFixed(2) +
-" ratio. Example: " +
-recipe.dose.toFixed(1) +
-" g in → " +
-(recipe.dose*Math.max(1,actualRatio-0.15)).toFixed(0) +
-" g out.";
 
-status="purple";
+"Try approximately 1:"+
+newRatio.toFixed(2)+
+". Παράδειγμα: "+
+recipe.dose.toFixed(1)+
+" g in → "+
+(
+recipe.dose*newRatio
+).toFixed(0)+
+" g out.";
 
 }
 
@@ -1116,99 +1670,138 @@ taste==="strong"
 ){
 
 diagnosis=
-"🟢 High concentration";
+"🟢 High Concentration · Υψηλή συγκέντρωση";
 
 reason=
-"The coffee may be too concentrated for the flavour profile you want. Increasing yield slightly can open the cup without immediately changing grind.";
+"Ο espresso μπορεί να είναι περισσότερο concentrated από όσο θέλεις.";
 
 firstMove=
-"<b>Increase yield slightly.</b><br>Keep grind and dose stable.";
+"<b>Increase yield slightly.</b><br>Αύξησε λίγο το yield.";
 
 nextShot=
-"Keep the grind and increase yield by about 3–4 g. Then retaste.";
-
-status="good";
+"Αύξησε το yield περίπου 3–4 g και ξαναδοκίμασε.";
 
 }
 
 
 
-/* RATIO CHECK */
+/* TIME */
 
-else if(actualRatio < 1.7){
+else if(
+actualTime <
+recipe.timeMin
+){
 
 diagnosis=
-"🟠 Very short ratio";
+"🔵 Faster than target · Πολύ γρήγορο";
 
 reason=
-"The current yield is quite low relative to the dose. This can create a very concentrated and intense shot.";
+"Το shot τελείωσε πιο γρήγορα από το προτεινόμενο extraction window.";
 
 firstMove=
-"<b>Increase yield slightly.</b><br>Test a longer ratio before making a large grind change.";
+"<b>Go slightly finer.</b><br>Άλεσε λίγο πιο ψιλά.";
 
 nextShot=
-"Keep dose and grind stable and increase yield by about 3 g.";
-
-status="warn";
+"Ένα μικρό grind step finer και κράτησε dose και yield ίδια.";
 
 }
 
 
-else if(actualRatio > 2.7){
+else if(
+actualTime >
+recipe.timeMax
+){
 
 diagnosis=
-"🔵 Long ratio";
+"🟠 Slower than target · Πολύ αργό";
 
 reason=
-"The current yield is relatively high compared with the dose. This can produce a lighter, more diluted cup.";
+"Το shot χρειάστηκε περισσότερο χρόνο από το προτεινόμενο extraction window.";
 
 firstMove=
-"<b>Reduce yield slightly.</b><br>Test a shorter ratio before making a large grind change.";
+"<b>Go slightly coarser.</b><br>Άλεσε λίγο πιο χοντρά.";
 
 nextShot=
-"Keep dose and grind stable and reduce yield by about 3 g.";
-
-status="blue";
+"Ένα μικρό grind step coarser και κράτησε dose και yield ίδια.";
 
 }
 
+
+
+/* RATIO */
+
+else if(actualRatio<1.7){
+
+diagnosis=
+"🟠 Very Short Ratio";
+
+reason=
+"Το yield είναι πολύ χαμηλό σε σχέση με τη dose.";
+
+firstMove=
+"<b>Increase yield slightly.</b><br>Αύξησε λίγο την απόδοση.";
+
+nextShot=
+"Κράτησε dose και grind σταθερά και αύξησε το yield περίπου 3 g.";
+
+}
+
+
+else if(actualRatio>2.7){
+
+diagnosis=
+"🔵 Long Ratio";
+
+reason=
+"Το yield είναι αρκετά υψηλό σε σχέση με τη dose.";
+
+firstMove=
+"<b>Reduce yield slightly.</b><br>Μείωσε λίγο την απόδοση.";
+
+nextShot=
+"Κράτησε dose και grind σταθερά και μείωσε το yield περίπου 3 g.";
+
+}
 
 
 return{
 diagnosis,
 reason,
 firstMove,
-nextShot,
-status
+nextShot
 };
 
 }
 
 
 
-/* =====================================================
-   GENERATE
-===================================================== */
+/* GENERATE DIAL IN */
 
-function generate(){
+function generateDialIn(){
+
+const recipe=
+getStartingRecipe();
 
 
 const dose=
 parseFloat(
 document.getElementById("dose").value
-) || 18;
+) || recipe.dose;
 
 
 const yieldValue=
 parseFloat(
 document.getElementById("yield").value
-) || 40;
+) || recipe.yieldValue;
 
 
 const time=
 parseFloat(
 document.getElementById("time").value
-) || 28;
+) ||
+Math.round(
+(recipe.timeMin+recipe.timeMax)/2
+);
 
 
 const tempInput=
@@ -1229,13 +1822,6 @@ const actualRatio=
 yieldValue/dose;
 
 
-const recipe=
-getStartingRecipe();
-
-
-
-/* DIAGNOSIS */
-
 const result=
 diagnose(
 taste,
@@ -1247,198 +1833,136 @@ recipe
 
 
 
-/* =========================
-   DIAGNOSIS DISPLAY
-========================= */
+document
+.getElementById("diagnosis")
+.innerHTML=
 
-document.getElementById("diagnosis").innerHTML=
+'<div class="big-result">'+
 
-'<div class="big-result">' +
-result.diagnosis +
-'</div>' +
+result.diagnosis+
 
-'<span class="badge">' +
-"Current 1:" +
-actualRatio.toFixed(2) +
-'</span>' +
+'</div>'+
 
-'<span class="badge">' +
-time +
-" s" +
-'</span>' +
+'<span class="badge">Ratio 1:'+
+
+actualRatio.toFixed(2)+
+
+'</span>'+
+
+'<span class="badge">'+
+
+time+
+
+' s</span>'+
 
 (
-tempInput
+Number.isFinite(tempInput)
 ?
-'<span class="badge">' +
-tempInput +
-"°C" +
-'</span>'
+
+'<span class="badge">'+
+tempInput+
+'°C</span>'
+
 :
+
 ''
 );
 
 
 
-/* =========================
-   SHOT METRICS
-========================= */
+document
+.getElementById("shotMetrics")
+.innerHTML=
 
-const timeDifference=
-time-recipe.timeMax;
+metric(
+"Dose · Δόση",
+dose.toFixed(1)+" g"
+)+
 
+metric(
+"Yield · Απόδοση",
+yieldValue.toFixed(1)+" g"
+)+
 
-let timeStatus="On target";
+metric(
+"Ratio",
+"1:"+actualRatio.toFixed(2)
+)+
 
+metric(
+"Time · Χρόνος",
+time+" s"
+)+
 
-if(time < recipe.timeMin){
+metric(
+"Target",
+recipe.timeMin+"–"+recipe.timeMax+" s"
+)+
 
-timeStatus=
-"Faster than target";
-
-}
-
-else if(time > recipe.timeMax){
-
-timeStatus=
-"Slower than target";
-
-}
-
-
-document.getElementById("shotMetrics").innerHTML=
-
-'<div class="metric">' +
-'<small>Dose</small>' +
-'<strong>' +
-dose.toFixed(1) +
-' g</strong>' +
-'</div>' +
-
-'<div class="metric">' +
-'<small>Yield</small>' +
-'<strong>' +
-yieldValue.toFixed(1) +
-' g</strong>' +
-'</div>' +
-
-'<div class="metric">' +
-'<small>Ratio</small>' +
-'<strong>1:' +
-actualRatio.toFixed(2) +
-'</strong>' +
-'</div>' +
-
-'<div class="metric">' +
-'<small>Time</small>' +
-'<strong>' +
-time +
-' s</strong>' +
-'</div>' +
-
-'<div class="metric">' +
-'<small>Target</small>' +
-'<strong>' +
-recipe.timeMin +
-'–' +
-recipe.timeMax +
-' s</strong>' +
-'</div>' +
-
-'<div class="metric">' +
-'<small>Flow</small>' +
-'<strong>' +
-flowLabel(flow) +
-'</strong>' +
-'</div>';
+metric(
+"Flow · Ροή",
+flowLabel(flow)
+);
 
 
 
-/* =========================
-   STARTING RECIPE
-========================= */
+document
+.getElementById("recipe")
+.innerHTML=
 
-document.getElementById("recipe").innerHTML=
+"<b>"+
 
-"<b>" +
+recipe.dose.toFixed(1)+
 
-recipe.dose.toFixed(1) +
+" g in → "+
 
-" g in → " +
+recipe.yieldValue.toFixed(1)+
 
-recipe.yieldValue.toFixed(1) +
+" g out</b><br>"+
 
-" g out" +
+"Ratio <b>1:"+
 
-"</b><br>" +
+recipe.ratio.toFixed(2)+
 
-"Ratio <b>1:" +
+"</b> · Time <b>"+
 
-recipe.ratio.toFixed(2) +
+recipe.timeMin+
 
-"</b>" +
+"–"+
 
-" · Time <b>" +
+recipe.timeMax+
 
-recipe.timeMin +
+" s</b> · Temp <b>"+
 
-"–" +
-
-recipe.timeMax +
-
-" s</b>" +
-
-" · Temp <b>" +
-
-recipe.temperature +
+recipe.temperature+
 
 "°C</b>";
 
 
 
-/* =========================
-   WHY
-========================= */
-
-document.getElementById("reason")
+document
+.getElementById("reason")
 .innerHTML=
 result.reason;
 
 
-
-/* =========================
-   FIRST MOVE
-========================= */
-
-document.getElementById("firstMove")
+document
+.getElementById("firstMove")
 .innerHTML=
 result.firstMove;
 
 
-
-/* =========================
-   NEXT SHOT
-========================= */
-
-document.getElementById("nextShot")
+document
+.getElementById("nextShot")
 .innerHTML=
 result.nextShot;
 
 
-
-/* =========================
-   SHOW RESULT
-========================= */
-
 document
-.getElementById("result")
+.getElementById("dialResult")
 .classList.remove("hide");
 
 
-
-/* =========================
-   HISTORY
-========================= */
 
 shots.unshift({
 
@@ -1446,21 +1970,22 @@ dose,
 yieldValue,
 time,
 ratio:actualRatio,
-diagnosis:result.diagnosis
+diagnosis:result.diagnosis,
+date:Date.now()
 
 });
 
 
+shots=
+shots.slice(0,20);
+
+
+saveHistory();
 renderHistory();
 
 
-
-/* =========================
-   SCROLL
-========================= */
-
 document
-.getElementById("result")
+.getElementById("dialResult")
 .scrollIntoView({
 
 behavior:"smooth",
@@ -1472,19 +1997,45 @@ block:"start"
 
 
 
-/* =====================================================
-   FLOW LABEL
-===================================================== */
+/* METRIC */
+
+function metric(label,value){
+
+return`
+
+<div class="metric">
+
+<small>
+${label}
+</small>
+
+<strong>
+${value}
+</strong>
+
+</div>
+
+`;
+
+}
+
+
+
+/* FLOW LABEL */
 
 function flowLabel(flow){
 
-if(flow==="normal") return "Even";
+if(flow==="normal")
+return "Even · Ομοιόμορφη";
 
-if(flow==="fast") return "Fast";
+if(flow==="fast")
+return "Fast · Γρήγορη";
 
-if(flow==="slow") return "Slow";
+if(flow==="slow")
+return "Slow · Αργή";
 
-if(flow==="channel") return "Uneven";
+if(flow==="channel")
+return "Uneven · Channeling";
 
 return "Unknown";
 
@@ -1492,51 +2043,54 @@ return "Unknown";
 
 
 
-/* =====================================================
-   HISTORY
-===================================================== */
+/* HISTORY */
+
+function saveHistory(){
+
+try{
+
+localStorage.setItem(
+
+STORAGE_KEY,
+
+JSON.stringify(shots)
+
+);
+
+}catch(e){}
+
+}
+
+
 
 function renderHistory(){
-
-
-const history=
-document.getElementById("history");
 
 const list=
 document.getElementById("historyList");
 
+const note=
+document.getElementById("historyNote");
 
 
 if(shots.length===0){
 
 list.innerHTML="";
 
-document
-.getElementById("historyNote")
-.textContent=
-"No shots recorded yet.";
+note.textContent=
+"Δεν υπάρχουν ακόμα αποθηκευμένα shots.";
 
 return;
 
 }
 
 
-
-history.classList.remove("hide");
-
-
-document
-.getElementById("historyNote")
-.textContent=
-"Your most recent shots appear first.";
-
+note.textContent=
+"Τα πιο πρόσφατα shots εμφανίζονται πρώτα.";
 
 
 list.innerHTML=
 
-shots
-.slice(0,8)
-.map(
+shots.map(
 
 (s,i)=>`
 
@@ -1547,134 +2101,87 @@ Shot ${shots.length-i}
 </b>
 
 <small>
-${s.dose.toFixed(1)} g →
-${s.yieldValue.toFixed(1)} g
+${Number(s.dose).toFixed(1)} g →
+${Number(s.yieldValue).toFixed(1)} g
 </small>
 
 <small>
 ${s.time} s ·
-1:${s.ratio.toFixed(2)}
+1:${Number(s.ratio).toFixed(2)}
 </small>
 
 <span class="badge">
-${s.diagnosis
+
+${String(s.diagnosis)
 .replace(/<[^>]+>/g,"")
-.slice(0,24)}
+.slice(0,30)}
+
 </span>
 
 </div>
 
 `
 
+).join("");
+
+}
+
+
+
+function clearHistory(){
+
+if(
+!confirm(
+"Να διαγραφεί όλο το ιστορικό;"
 )
-.join("");
+){
+
+return;
 
 }
 
+shots=[];
 
-
-/* =====================================================
-   NEW DIAL-IN
-===================================================== */
-
-function showNew(){
-
-document
-.getElementById("result")
-.classList.add("hide");
-
-document
-.getElementById("history")
-.classList.add("hide");
-
-window.scrollTo({
-
-top:0,
-behavior:"smooth"
-
-});
-
-}
-
-
-
-/* =====================================================
-   HISTORY BUTTON
-===================================================== */
-
-function showHistory(){
+saveHistory();
 
 renderHistory();
 
-
-document
-.getElementById("history")
-.classList.remove("hide");
+}
 
 
-document
-.getElementById("history")
-.scrollIntoView({
 
-behavior:"smooth",
-block:"start"
+/* SERVICE WORKER */
+
+if(
+"serviceWorker"
+in navigator
+){
+
+window.addEventListener(
+"load",
+()=>{
+
+navigator
+.serviceWorker
+.register("./sw.js")
+.catch(
+error=>
+console.log(
+"Service worker error:",
+error
+)
+);
 
 });
 
 }
 
 
-
-/* =====================================================
-   GUIDE
-===================================================== */
-
-function showGuide(){
-
-alert(
-
-"ESPRESSO DIAL-IN GUIDE\n\n" +
-
-"1. Start with the suggested recipe.\n\n" +
-
-"2. Taste first.\n\n" +
-
-"SOUR / SHARP\n" +
-"→ Usually needs more extraction.\n" +
-"→ Try slightly finer.\n\n" +
-
-"BITTER / DRY\n" +
-"→ Usually needs less extraction.\n" +
-"→ Try slightly coarser.\n\n" +
-
-"FAST FLOW\n" +
-"→ Go slightly finer.\n\n" +
-
-"SLOW FLOW\n" +
-"→ Go slightly coarser.\n\n" +
-
-"THIN / WEAK\n" +
-"→ Try a slightly shorter yield.\n\n" +
-
-"HEAVY / STRONG\n" +
-"→ Try a slightly longer yield.\n\n" +
-
-"CHANNELING\n" +
-"→ Fix puck preparation before changing grind.\n\n" +
-
-"IMPORTANT\n" +
-"Change one major variable at a time.\n" +
-"Let taste lead the dial-in."
-
-);
-
-}
-
+renderHistory();
 
 
 </script>
 
 
 </body>
-
 </html>
