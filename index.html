@@ -10,16 +10,37 @@ name="viewport"
 content="width=device-width,initial-scale=1,viewport-fit=cover"
 >
 
-<meta name="theme-color" content="#f4f1ec">
+<meta
+name="theme-color"
+content="#f4f1ec"
+>
 
 <title>Espresso Dial-In Assistant</title>
 
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./icon.svg">
+<link
+rel="manifest"
+href="./manifest.webmanifest"
+>
 
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Dial-In">
+<link
+rel="apple-touch-icon"
+href="./icon.svg"
+>
+
+<meta
+name="apple-mobile-web-app-capable"
+content="yes"
+>
+
+<meta
+name="apple-mobile-web-app-status-bar-style"
+content="default"
+>
+
+<meta
+name="apple-mobile-web-app-title"
+content="Dial-In"
+>
 
 
 <style>
@@ -28,20 +49,27 @@ content="width=device-width,initial-scale=1,viewport-fit=cover"
 
 --bg:#f4f1ec;
 --card:#ffffff;
---card-soft:#f8f6f2;
---text:#151515;
---muted:#77736d;
---border:#e8e3dc;
+--soft:#f8f6f2;
+--text:#171614;
+--muted:#77716b;
+--border:#e7e1da;
+
 --dark:#1c1b19;
---brown:#655346;
+
+--brown:#685548;
 --brown-soft:#eee7df;
---purple:#7152b8;
+
+--purple:#7355b8;
 --purple-soft:#eee8ff;
+
 --green:#4f8a59;
 --green-soft:#eaf4e9;
+
 --orange:#a76e2a;
---orange-soft:#f8eddd;
---shadow:0 8px 28px rgba(30,25,20,.045);
+--orange-soft:#f7eddf;
+
+--shadow:
+0 8px 28px rgba(30,25,20,.05);
 
 }
 
@@ -79,12 +107,17 @@ color:var(--text);
 button,
 input,
 select{
+
 font:inherit;
+
 }
 
 
 button{
--webkit-tap-highlight-color:transparent;
+
+-webkit-tap-highlight-color:
+transparent;
+
 }
 
 
@@ -96,25 +129,98 @@ margin:auto;
 
 padding:
 
-max(24px,env(safe-area-inset-top))
+max(
+24px,
+env(safe-area-inset-top)
+)
 
 16px
 
-calc(110px + env(safe-area-inset-bottom));
+calc(
+110px +
+env(safe-area-inset-bottom)
+);
 
 }
 
 
+/* =========================
+   GENERAL
+========================= */
+
+.hide{
+
+display:none !important;
+
+}
+
+
+.card{
+
+background:var(--card);
+
+border:
+1px solid var(--border);
+
+border-radius:24px;
+
+padding:18px;
+
+margin:12px 0;
+
+box-shadow:var(--shadow);
+
+}
+
+
+.section-title{
+
+font-size:13px;
+
+font-weight:800;
+
+letter-spacing:.09em;
+
+text-transform:uppercase;
+
+color:#57524c;
+
+margin-bottom:14px;
+
+}
+
+
+.note{
+
+font-size:14px;
+
+line-height:1.5;
+
+color:var(--muted);
+
+}
+
+
+.divider{
+
+height:1px;
+
+background:var(--border);
+
+margin:18px 0;
+
+}
+
 
 /* =========================
-   HEADER
+   HOME
 ========================= */
 
 .brand{
 
 font-size:13px;
 
-font-weight:750;
+font-weight:800;
 
 letter-spacing:.22em;
 
@@ -151,123 +257,6 @@ margin-top:10px;
 }
 
 
-
-/* =========================
-   GENERAL
-========================= */
-
-.hide{
-display:none !important;
-}
-
-
-.card{
-
-background:var(--card);
-
-border:1px solid var(--border);
-
-border-radius:24px;
-
-padding:18px;
-
-box-shadow:var(--shadow);
-
-margin:12px 0;
-
-}
-
-
-.soft-card{
-
-background:var(--card-soft);
-
-border:1px solid var(--border);
-
-border-radius:20px;
-
-padding:16px;
-
-}
-
-
-.section-title{
-
-font-size:13px;
-
-font-weight:800;
-
-letter-spacing:.09em;
-
-text-transform:uppercase;
-
-color:#56514b;
-
-margin-bottom:14px;
-
-}
-
-
-.title-row{
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-gap:10px;
-
-}
-
-
-.title-row h2{
-
-font-size:24px;
-
-letter-spacing:-.035em;
-
-margin:0;
-
-}
-
-
-.small{
-
-font-size:13px;
-
-color:var(--muted);
-
-}
-
-
-.note{
-
-font-size:14px;
-
-line-height:1.5;
-
-color:var(--muted);
-
-}
-
-
-.divider{
-
-height:1px;
-
-background:var(--border);
-
-margin:18px 0;
-
-}
-
-
-
-/* =========================
-   HOME MENU
-========================= */
-
 .home-menu{
 
 display:grid;
@@ -283,7 +272,8 @@ margin-top:28px;
 
 width:100%;
 
-border:1px solid var(--border);
+border:
+1px solid var(--border);
 
 background:var(--card);
 
@@ -297,7 +287,8 @@ display:flex;
 
 align-items:center;
 
-justify-content:space-between;
+justify-content:
+space-between;
 
 gap:14px;
 
@@ -310,10 +301,11 @@ color:var(--text);
 
 .home-action.primary{
 
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
 #eee7df,
-#f7f3ef
+#f8f4ef
 );
 
 }
@@ -341,11 +333,26 @@ margin-top:4px;
 }
 
 
+.home-small{
+
+font-size:12px;
+
+font-weight:800;
+
+letter-spacing:.08em;
+
+color:var(--brown);
+
+margin-bottom:5px;
+
+}
+
+
 .arrow{
 
-font-size:26px;
+font-size:28px;
 
-color:var(--muted);
+color:#99928b;
 
 }
 
@@ -365,13 +372,13 @@ padding:18px;
 
 .tip-label{
 
-font-size:13px;
+font-size:12px;
 
 font-weight:800;
 
-text-transform:uppercase;
-
 letter-spacing:.08em;
+
+text-transform:uppercase;
 
 color:var(--brown);
 
@@ -389,16 +396,60 @@ margin-top:8px;
 }
 
 
+/* =========================
+   HEADERS
+========================= */
+
+.page-head{
+
+display:flex;
+
+align-items:center;
+
+justify-content:
+space-between;
+
+margin-bottom:18px;
+
+}
+
+
+.page-title{
+
+font-size:31px;
+
+font-weight:800;
+
+letter-spacing:-.045em;
+
+}
+
+
+.reset{
+
+border:0;
+
+background:transparent;
+
+color:var(--muted);
+
+padding:8px;
+
+font-size:14px;
+
+}
+
 
 /* =========================
-   FORM
+   FORMS
 ========================= */
 
 .form-grid{
 
 display:grid;
 
-grid-template-columns:1fr 1fr;
+grid-template-columns:
+1fr 1fr;
 
 gap:10px;
 
@@ -406,7 +457,9 @@ gap:10px;
 
 
 .field{
+
 margin-top:10px;
+
 }
 
 
@@ -414,9 +467,9 @@ label{
 
 display:block;
 
-font-weight:700;
-
 font-size:14px;
+
+font-weight:700;
 
 margin-bottom:6px;
 
@@ -447,7 +500,8 @@ min-height:54px;
 
 padding:14px;
 
-border:1px solid var(--border);
+border:
+1px solid var(--border);
 
 background:#faf9f7;
 
@@ -465,20 +519,22 @@ outline:none;
 input:focus,
 select:focus{
 
-border-color:#aaa096;
-
 background:white;
 
+border-color:#aaa096;
+
 box-shadow:
-0 0 0 3px rgba(101,83,70,.08);
+0 0 0 3px
+rgba(104,85,72,.08);
 
 }
 
 
 input::placeholder{
-color:#aaa6a0;
-}
 
+color:#aaa6a0;
+
+}
 
 
 /* =========================
@@ -509,7 +565,9 @@ margin-top:16px;
 
 
 .main-btn:active{
+
 transform:scale(.99);
+
 }
 
 
@@ -532,10 +590,34 @@ font-weight:650;
 }
 
 
-
 /* =========================
    QUICK RECIPE
 ========================= */
+
+.quick-title-row{
+
+display:flex;
+
+align-items:center;
+
+justify-content:
+space-between;
+
+gap:10px;
+
+}
+
+
+.quick-title-row h2{
+
+font-size:24px;
+
+letter-spacing:-.035em;
+
+margin:0;
+
+}
+
 
 .recipe-main{
 
@@ -543,7 +625,8 @@ display:flex;
 
 align-items:center;
 
-justify-content:space-between;
+justify-content:
+space-between;
 
 gap:20px;
 
@@ -587,7 +670,8 @@ color:#99938c;
 
 display:grid;
 
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:
+repeat(3,1fr);
 
 gap:8px;
 
@@ -598,9 +682,10 @@ margin-top:12px;
 
 .info-tile{
 
-background:var(--card-soft);
+background:var(--soft);
 
-border:1px solid var(--border);
+border:
+1px solid var(--border);
 
 border-radius:16px;
 
@@ -615,9 +700,9 @@ text-align:center;
 
 display:block;
 
-color:var(--muted);
-
 font-size:12px;
+
+color:var(--muted);
 
 margin-bottom:4px;
 
@@ -631,53 +716,16 @@ font-size:17px;
 }
 
 
-
 /* =========================
-   DIAL-IN
+   SHOT DATA
 ========================= */
-
-.page-head{
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-margin-bottom:18px;
-
-}
-
-
-.page-title{
-
-font-size:30px;
-
-font-weight:800;
-
-letter-spacing:-.045em;
-
-}
-
-
-.reset{
-
-border:0;
-
-background:none;
-
-color:var(--muted);
-
-font-size:14px;
-
-}
-
 
 .data-grid{
 
 display:grid;
 
-grid-template-columns:1fr 1fr;
+grid-template-columns:
+1fr 1fr;
 
 gap:10px;
 
@@ -686,9 +734,10 @@ gap:10px;
 
 .data-box{
 
-background:var(--card-soft);
+background:var(--soft);
 
-border:1px solid var(--border);
+border:
+1px solid var(--border);
 
 border-radius:17px;
 
@@ -698,7 +747,9 @@ padding:13px;
 
 
 .data-box label{
+
 margin:0 0 5px;
+
 }
 
 
@@ -720,9 +771,10 @@ font-weight:750;
 
 
 .data-box input:focus{
-box-shadow:none;
-}
 
+box-shadow:none;
+
+}
 
 
 /* =========================
@@ -733,7 +785,8 @@ box-shadow:none;
 
 background:var(--purple-soft);
 
-border:1px solid #ded4f9;
+border:
+1px solid #ded4f9;
 
 border-radius:20px;
 
@@ -748,9 +801,10 @@ margin-top:12px;
 
 display:flex;
 
-justify-content:space-between;
-
 align-items:center;
+
+justify-content:
+space-between;
 
 gap:10px;
 
@@ -783,7 +837,6 @@ border-color:#ddd3f3;
 }
 
 
-
 /* =========================
    CHOICES
 ========================= */
@@ -814,7 +867,8 @@ gap:7px;
 
 .choice{
 
-border:1px solid var(--border);
+border:
+1px solid var(--border);
 
 background:#faf9f7;
 
@@ -827,17 +881,6 @@ padding:9px 4px;
 font-size:12px;
 
 color:var(--text);
-
-}
-
-
-.choice.active{
-
-background:var(--brown);
-
-border-color:var(--brown);
-
-color:white;
 
 }
 
@@ -855,6 +898,16 @@ margin-top:2px;
 }
 
 
+.choice.active{
+
+background:var(--brown);
+
+border-color:var(--brown);
+
+color:white;
+
+}
+
 
 /* =========================
    RESULT
@@ -864,7 +917,8 @@ margin-top:2px;
 
 background:var(--green-soft);
 
-border:1px solid #d4e7d3;
+border:
+1px solid #d4e7d3;
 
 border-radius:22px;
 
@@ -926,7 +980,8 @@ line-height:1.4;
 
 display:grid;
 
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:
+repeat(3,1fr);
 
 gap:8px;
 
@@ -939,7 +994,8 @@ margin-top:12px;
 
 background:white;
 
-border:1px solid var(--border);
+border:
+1px solid var(--border);
 
 border-radius:17px;
 
@@ -974,7 +1030,8 @@ letter-spacing:-.025em;
 
 background:white;
 
-border:1px solid var(--border);
+border:
+1px solid var(--border);
 
 border-radius:20px;
 
@@ -1024,7 +1081,8 @@ overflow:hidden;
 
 height:100%;
 
-background:linear-gradient(
+background:
+linear-gradient(
 90deg,
 #9fcba3,
 #4f8a59
@@ -1043,7 +1101,8 @@ transition:.35s;
 
 display:flex;
 
-justify-content:space-between;
+justify-content:
+space-between;
 
 font-size:12px;
 
@@ -1058,7 +1117,8 @@ margin-top:7px;
 
 background:white;
 
-border:1px solid var(--border);
+border:
+1px solid var(--border);
 
 border-radius:20px;
 
@@ -1100,7 +1160,6 @@ border-color:#dfd1c4;
 }
 
 
-
 /* =========================
    HISTORY
 ========================= */
@@ -1109,7 +1168,8 @@ border-color:#dfd1c4;
 
 background:white;
 
-border:1px solid var(--border);
+border:
+1px solid var(--border);
 
 border-radius:20px;
 
@@ -1126,7 +1186,8 @@ display:flex;
 
 align-items:center;
 
-justify-content:space-between;
+justify-content:
+space-between;
 
 gap:10px;
 
@@ -1147,6 +1208,27 @@ font-weight:750;
 font-size:12px;
 
 color:var(--muted);
+
+margin-top:2px;
+
+}
+
+
+.status{
+
+display:inline-block;
+
+border-radius:99px;
+
+padding:5px 8px;
+
+font-size:11px;
+
+font-weight:700;
+
+background:var(--green-soft);
+
+color:#3f7448;
 
 }
 
@@ -1190,26 +1272,6 @@ color:var(--muted);
 }
 
 
-.status{
-
-display:inline-block;
-
-border-radius:99px;
-
-padding:5px 8px;
-
-font-size:11px;
-
-font-weight:700;
-
-background:var(--green-soft);
-
-color:#3f7448;
-
-}
-
-
-
 /* =========================
    GUIDE
 ========================= */
@@ -1218,7 +1280,8 @@ color:#3f7448;
 
 background:white;
 
-border:1px solid var(--border);
+border:
+1px solid var(--border);
 
 border-radius:20px;
 
@@ -1249,7 +1312,6 @@ margin:7px 0 0;
 }
 
 
-
 /* =========================
    BOTTOM NAV
 ========================= */
@@ -1260,20 +1322,33 @@ position:fixed;
 
 left:50%;
 
-transform:translateX(-50%);
+transform:
+translateX(-50%);
 
 bottom:0;
 
-width:min(720px,100%);
+width:
+min(
+720px,
+100%
+);
 
 padding:
 
 10px
 14px
-calc(10px + env(safe-area-inset-bottom));
+calc(
+10px +
+env(safe-area-inset-bottom)
+);
 
 background:
-rgba(249,247,243,.92);
+rgba(
+249,
+247,
+243,
+.93
+);
 
 backdrop-filter:
 blur(20px);
@@ -1281,7 +1356,14 @@ blur(20px);
 -webkit-backdrop-filter:
 blur(20px);
 
-border-top:1px solid rgba(210,205,198,.75);
+border-top:
+1px solid
+rgba(
+210,
+205,
+198,
+.75
+);
 
 display:grid;
 
@@ -1330,7 +1412,6 @@ color:#191816;
 }
 
 
-
 /* =========================
    MOBILE
 ========================= */
@@ -1338,35 +1419,30 @@ color:#191816;
 @media(max-width:520px){
 
 .hero-title{
+
 font-size:46px;
+
 }
 
 
 .metric-grid{
+
 grid-template-columns:
 repeat(3,1fr);
-}
-
-
-.history-metrics{
-grid-template-columns:
-repeat(5,1fr);
-}
 
 }
 
+}
 
 </style>
 
 </head>
 
 
-
 <body>
 
 
 <main>
-
 
 
 <!-- =========================
@@ -1402,7 +1478,7 @@ onclick="openQuick()"
 
 <div>
 
-<div class="small">
+<div class="home-small">
 QUICK START
 </div>
 
@@ -1513,7 +1589,7 @@ Change one variable at a time.
 </strong>
 
 <div class="note">
-Small controlled changes make dial-in much easier to understand.
+Small controlled changes make dial-in easier to understand.
 </div>
 
 </div>
@@ -1531,7 +1607,7 @@ class="hide"
 <div class="card">
 
 
-<div class="title-row">
+<div class="quick-title-row">
 
 <h2>
 Coffee Profile
@@ -1819,9 +1895,8 @@ Continue to Dial-In →
 
 
 
-
 <!-- =========================
-     DIAL IN
+     DIAL-IN
 ========================= -->
 
 <section
@@ -2360,7 +2435,9 @@ First Move · Πρώτη αλλαγή
 
 
 
-<div class="result-section next-shot">
+<div
+class="result-section next-shot"
+>
 
 <h3>
 Suggested Next Shot
@@ -2377,7 +2454,6 @@ Suggested Next Shot
 
 
 </section>
-
 
 
 
@@ -2407,9 +2483,7 @@ Clear
 </div>
 
 
-<div
-id="historyList"
->
+<div id="historyList">
 </div>
 
 
@@ -2424,7 +2498,6 @@ id="emptyHistory"
 
 
 </section>
-
 
 
 
@@ -2474,7 +2547,6 @@ Extraction Yield · EY
 <br><br>
 
 EY = (Yield × TDS) ÷ Dose
-
 </p>
 
 </div>
@@ -2544,7 +2616,7 @@ Taste + Flow + Ratio + Time + TDS/EY πρέπει να διαβάζονται μ
 
 
 <!-- =========================
-     BOTTOM NAVIGATION
+     BOTTOM NAV
 ========================= -->
 
 <nav class="bottom-nav">
@@ -2614,7 +2686,6 @@ Guide
 
 
 
-
 <script>
 
 
@@ -2622,8 +2693,8 @@ Guide
    STORAGE
 ========================= */
 
-const STORAGE_KEY =
-"espresso-dial-in-minimal-v6";
+const STORAGE_KEY=
+"espresso-dial-in-minimal-v7";
 
 
 let shots=[];
@@ -2638,7 +2709,7 @@ localStorage.getItem(STORAGE_KEY)
 
 }
 
-catch(e){
+catch(error){
 
 shots=[];
 
@@ -2650,9 +2721,12 @@ shots=[];
    STATE
 ========================= */
 
-let selectedTaste="unknown";
+let selectedTaste=
+"unknown";
 
-let selectedFlow="unknown";
+
+let selectedFlow=
+"unknown";
 
 
 
@@ -2667,37 +2741,55 @@ function showTab(tab){
 .forEach(name=>{
 
 document
-.getElementById(name+"Panel")
-.classList.add("hide");
+.getElementById(
+name+"Panel"
+)
+.classList
+.add("hide");
 
 });
 
 
 document
-.getElementById(tab+"Panel")
-.classList.remove("hide");
+.getElementById(
+tab+"Panel"
+)
+.classList
+.remove("hide");
 
 
 document
-.querySelectorAll(".nav-item")
-.forEach(item=>
-item.classList.remove("active")
-);
+.querySelectorAll(
+".nav-item"
+)
+.forEach(item=>{
+
+item
+.classList
+.remove("active");
+
+});
 
 
 const navMap={
 
 home:"navHome",
+
 dial:"navDial",
+
 history:"navHistory",
+
 guide:"navGuide"
 
 };
 
 
 document
-.getElementById(navMap[tab])
-.classList.add("active");
+.getElementById(
+navMap[tab]
+)
+.classList
+.add("active");
 
 
 if(tab==="history"){
@@ -2720,14 +2812,16 @@ behavior:"smooth"
 
 
 /* =========================
-   QUICK OPEN
+   QUICK
 ========================= */
 
 function openQuick(){
 
+
 document
 .getElementById("quickSetup")
-.classList.remove("hide");
+.classList
+.remove("hide");
 
 
 document
@@ -2750,26 +2844,42 @@ block:"start"
 
 function getProfile(prefix){
 
+
 return{
 
 type:
+
 document
-.getElementById(prefix+"Type")
+.getElementById(
+prefix+"Type"
+)
 .value,
+
 
 roast:
+
 document
-.getElementById(prefix+"Roast")
+.getElementById(
+prefix+"Roast"
+)
 .value,
+
 
 process:
+
 document
-.getElementById(prefix+"Process")
+.getElementById(
+prefix+"Process"
+)
 .value,
 
+
 days:
+
 document
-.getElementById(prefix+"Days")
+.getElementById(
+prefix+"Days"
+)
 .value
 
 };
@@ -2780,39 +2890,59 @@ document
 
 function syncProfile(from,to){
 
+
 document
-.getElementById(to+"Type")
+.getElementById(
+to+"Type"
+)
 .value=
 
 document
-.getElementById(from+"Type")
+.getElementById(
+from+"Type"
+)
 .value;
 
 
+
 document
-.getElementById(to+"Roast")
+.getElementById(
+to+"Roast"
+)
 .value=
 
 document
-.getElementById(from+"Roast")
+.getElementById(
+from+"Roast"
+)
 .value;
 
 
+
 document
-.getElementById(to+"Process")
+.getElementById(
+to+"Process"
+)
 .value=
 
 document
-.getElementById(from+"Process")
+.getElementById(
+from+"Process"
+)
 .value;
 
 
+
 document
-.getElementById(to+"Days")
+.getElementById(
+to+"Days"
+)
 .value=
 
 document
-.getElementById(from+"Days")
+.getElementById(
+from+"Days"
+)
 .value;
 
 }
@@ -2820,7 +2950,7 @@ document
 
 
 /* =========================
-   RECIPE ENGINE
+   RECIPE
 ========================= */
 
 function getStartingRecipe(profile){
@@ -2851,7 +2981,9 @@ timeMax=32;
 }
 
 
-else if(profile.roast==="Medium"){
+else if(
+profile.roast==="Medium"
+){
 
 ratio=2.2;
 
@@ -2864,7 +2996,9 @@ timeMax=30;
 }
 
 
-else if(profile.roast==="Medium-Dark"){
+else if(
+profile.roast==="Medium-Dark"
+){
 
 ratio=2.0;
 
@@ -2877,7 +3011,9 @@ timeMax=28;
 }
 
 
-else if(profile.roast==="Dark"){
+else if(
+profile.roast==="Dark"
+){
 
 ratio=1.9;
 
@@ -2891,7 +3027,9 @@ timeMax=26;
 
 
 
-if(profile.type==="Commercial"){
+if(
+profile.type==="Commercial"
+){
 
 ratio=
 Math.min(
@@ -2920,7 +3058,9 @@ temperature=93;
 if(profile.days!==""){
 
 const days=
-parseFloat(profile.days);
+parseFloat(
+profile.days
+);
 
 
 if(days<7){
@@ -2994,28 +3134,33 @@ getProfile("h");
 
 
 const recipe=
-getStartingRecipe(profile);
+getStartingRecipe(
+profile
+);
 
 
 document
 .getElementById("quickDose")
 .textContent=
 
-recipe.dose.toFixed(1)+" g";
+recipe.dose.toFixed(1)+
+" g";
 
 
 document
 .getElementById("quickYield")
 .textContent=
 
-recipe.yieldValue.toFixed(1)+" g";
+recipe.yieldValue.toFixed(1)+
+" g";
 
 
 document
 .getElementById("quickRatio")
 .textContent=
 
-"1:"+recipe.ratio.toFixed(2);
+"1:"+
+recipe.ratio.toFixed(2);
 
 
 document
@@ -3032,7 +3177,8 @@ document
 .getElementById("quickTemp")
 .textContent=
 
-recipe.temperature+"°C";
+recipe.temperature+
+"°C";
 
 
 document
@@ -3046,7 +3192,8 @@ profile
 
 document
 .getElementById("quickResult")
-.classList.remove("hide");
+.classList
+.remove("hide");
 
 
 document
@@ -3063,42 +3210,63 @@ block:"start"
 
 
 
-/* =========================
-   QUICK WHY
-========================= */
-
 function getRecipeReason(profile){
 
 
-if(profile.roast==="Light"){
+if(
+profile.roast==="Light"
+){
 
-return "Light roast: higher temperature and a slightly longer extraction window are used as a starting point.";
-
-}
-
-
-if(profile.roast==="Dark"){
-
-return "Dark roast: lower temperature and a shorter ratio help avoid excessive extraction.";
+return(
+"Light roast: higher temperature and a slightly longer extraction window are used as a starting point."
+);
 
 }
 
 
-if(profile.roast==="Medium-Dark"){
+if(
+profile.roast==="Dark"
+){
 
-return "Medium-dark roast usually needs less extraction energy than a lighter roast.";
+return(
+"Dark roast: lower temperature and a shorter ratio help avoid excessive extraction."
+);
 
 }
 
 
-return "A balanced neutral starting point. Taste and flow should guide the final dial-in.";
+if(
+profile.roast==="Medium-Dark"
+){
+
+return(
+"Medium-dark roast usually needs less extraction energy than a lighter roast."
+);
+
+}
+
+
+if(
+profile.roast==="Unknown"
+){
+
+return(
+"Unknown roast: the app uses a neutral medium-style starting point."
+);
+
+}
+
+
+return(
+"A balanced neutral starting point. Taste and flow should guide the final dial-in."
+);
 
 }
 
 
 
 /* =========================
-   CONTINUE
+   CONTINUE TO DIAL
 ========================= */
 
 function continueToDial(){
@@ -3145,22 +3313,30 @@ showTab("dial");
 
 
 /* =========================
-   CHOICES
+   TASTE + FLOW
 ========================= */
 
-function selectTaste(value,button){
+function selectTaste(
+value,
+button
+){
 
 
-selectedTaste=value;
+selectedTaste=
+value;
 
 
 document
-.querySelectorAll(".taste-choice")
-.forEach(item=>
+.querySelectorAll(
+".taste-choice"
+)
+.forEach(item=>{
 
-item.classList.remove("active")
+item
+.classList
+.remove("active");
 
-);
+});
 
 
 button
@@ -3171,19 +3347,27 @@ button
 
 
 
-function selectFlow(value,button){
+function selectFlow(
+value,
+button
+){
 
 
-selectedFlow=value;
+selectedFlow=
+value;
 
 
 document
-.querySelectorAll(".flow-choice")
-.forEach(item=>
+.querySelectorAll(
+".flow-choice"
+)
+.forEach(item=>{
 
-item.classList.remove("active")
+item
+.classList
+.remove("active");
 
-);
+});
 
 
 button
@@ -3199,13 +3383,9 @@ button
 ========================= */
 
 function calculateEY(
-
 dose,
-
 yieldValue,
-
 tds
-
 ){
 
 
@@ -3278,6 +3458,8 @@ let next=
 
 
 
+/* CHANNELING */
+
 if(flow==="channel"){
 
 return{
@@ -3302,6 +3484,8 @@ next:
 }
 
 
+
+/* BALANCED */
 
 if(taste==="balanced"){
 
@@ -3344,6 +3528,8 @@ next:
 }
 
 
+
+/* SOUR */
 
 if(taste==="sour"){
 
@@ -3435,6 +3621,8 @@ next:
 
 
 
+/* BITTER */
+
 if(taste==="bitter"){
 
 
@@ -3509,11 +3697,9 @@ next:
 
 
 
-if(
+/* THIN */
 
-taste==="thin"
-
-){
+if(taste==="thin"){
 
 return{
 
@@ -3550,6 +3736,8 @@ next:
 }
 
 
+
+/* HEAVY */
 
 if(taste==="heavy"){
 
@@ -3588,6 +3776,8 @@ next:
 }
 
 
+
+/* FLOW */
 
 if(flow==="fast"){
 
@@ -3639,13 +3829,21 @@ next:
 
 
 
-if(time<recipe.timeMin){
+/* TIME */
+
+if(
+time<
+recipe.timeMin
+){
 
 title=
 "Faster than target";
 
 subtitle=
 "Short extraction time.";
+
+why=
+"The shot finished faster than the starting target window.";
 
 move=
 "Go slightly finer.";
@@ -3656,14 +3854,19 @@ next=
 }
 
 
-
-else if(time>recipe.timeMax){
+else if(
+time>
+recipe.timeMax
+){
 
 title=
 "Slower than target";
 
 subtitle=
 "Long extraction time.";
+
+why=
+"The shot finished slower than the starting target window.";
 
 move=
 "Go slightly coarser.";
@@ -3672,7 +3875,6 @@ next=
 "Keep dose and yield stable.";
 
 }
-
 
 
 return{
@@ -3694,7 +3896,7 @@ next
 
 
 /* =========================
-   ANALYSE
+   ANALYSE SHOT
 ========================= */
 
 function generateDialIn(){
@@ -3705,13 +3907,17 @@ getProfile("d");
 
 
 const recipe=
-getStartingRecipe(profile);
+getStartingRecipe(
+profile
+);
 
 
 const dose=
 
 parseFloat(
-document.getElementById("dDose").value
+document
+.getElementById("dDose")
+.value
 )
 
 ||
@@ -3722,7 +3928,9 @@ recipe.dose;
 const yieldValue=
 
 parseFloat(
-document.getElementById("dYield").value
+document
+.getElementById("dYield")
+.value
 )
 
 ||
@@ -3733,7 +3941,9 @@ recipe.yieldValue;
 const time=
 
 parseFloat(
-document.getElementById("dTime").value
+document
+.getElementById("dTime")
+.value
 )
 
 ||
@@ -3742,9 +3952,7 @@ Math.round(
 
 (
 recipe.timeMin+
-
 recipe.timeMax
-
 )/2
 
 );
@@ -3753,7 +3961,9 @@ recipe.timeMax
 const temp=
 
 parseFloat(
-document.getElementById("dTemp").value
+document
+.getElementById("dTemp")
+.value
 )
 
 ||
@@ -3764,13 +3974,17 @@ recipe.temperature;
 const tdsInput=
 
 parseFloat(
-document.getElementById("dTds").value
+document
+.getElementById("dTds")
+.value
 );
 
 
 const tds=
 
-Number.isFinite(tdsInput)
+Number.isFinite(
+tdsInput
+)
 
 ?
 
@@ -3783,7 +3997,8 @@ null;
 
 const ratio=
 
-yieldValue/dose;
+yieldValue/
+dose;
 
 
 const ey=
@@ -3875,10 +4090,15 @@ temp+"°C"
 
 metric(
 "TDS",
+
 tds!==null
+
 ?
+
 tds.toFixed(2)+"%"
+
 :
+
 "—"
 );
 
@@ -3901,7 +4121,8 @@ document
 .getElementById("eyValue")
 .textContent=
 
-ey.toFixed(1)+"%";
+ey.toFixed(1)+
+"%";
 
 
 const progress=
@@ -3915,7 +4136,8 @@ Math.min(
 100,
 
 (
-(ey-12)/14
+(ey-12)/
+14
 )*100
 
 )
@@ -3927,7 +4149,8 @@ document
 .getElementById("eyFill")
 .style.width=
 
-progress+"%";
+progress+
+"%";
 
 }
 
@@ -3943,8 +4166,10 @@ eyCard
 
 
 document
-.getElementById("startingRecipeResult")
-.innerHTML=
+.getElementById(
+"startingRecipeResult"
+)
+.textContent=
 
 recipe.dose.toFixed(1)+
 
@@ -3995,7 +4220,8 @@ result.next;
 
 document
 .getElementById("resultPanel")
-.classList.remove("hide");
+.classList
+.remove("hide");
 
 
 
@@ -4025,7 +4251,10 @@ Date.now()
 
 
 shots=
-shots.slice(0,30);
+shots.slice(
+0,
+30
+);
 
 
 saveHistory();
@@ -4051,11 +4280,8 @@ block:"start"
 ========================= */
 
 function metric(
-
 label,
-
 value
-
 ){
 
 return`
@@ -4090,13 +4316,15 @@ localStorage.setItem(
 
 STORAGE_KEY,
 
-JSON.stringify(shots)
+JSON.stringify(
+shots
+)
 
 );
 
 }
 
-catch(e){}
+catch(error){}
 
 }
 
@@ -4108,13 +4336,17 @@ function renderHistory(){
 const list=
 
 document
-.getElementById("historyList");
+.getElementById(
+"historyList"
+);
 
 
 const empty=
 
 document
-.getElementById("emptyHistory");
+.getElementById(
+"emptyHistory"
+);
 
 
 if(shots.length===0){
@@ -4148,14 +4380,16 @@ s.date
 
 ?
 
-new Date(s.date)
+new Date(
+s.date
+)
 
 :
 
 new Date();
 
 
-const time=
+const shotTime=
 
 date.toLocaleTimeString(
 
@@ -4176,6 +4410,7 @@ return`
 
 <div class="history-card">
 
+
 <div class="history-head">
 
 <div>
@@ -4188,11 +4423,12 @@ Shot ${shots.length-i}
 
 <div class="history-time">
 
-${time}
+${shotTime}
 
 </div>
 
 </div>
+
 
 <span class="status">
 
@@ -4203,13 +4439,18 @@ ${s.title}
 </div>
 
 
+
 <div class="history-metrics">
 
 
 <div class="history-metric">
 
 <strong>
-${Number(s.dose).toFixed(1)}
+
+${Number(
+s.dose
+).toFixed(1)}
+
 </strong>
 
 <small>
@@ -4219,10 +4460,15 @@ Dose
 </div>
 
 
+
 <div class="history-metric">
 
 <strong>
-${Number(s.yieldValue).toFixed(1)}
+
+${Number(
+s.yieldValue
+).toFixed(1)}
+
 </strong>
 
 <small>
@@ -4232,10 +4478,13 @@ Yield
 </div>
 
 
+
 <div class="history-metric">
 
 <strong>
+
 ${s.time}
+
 </strong>
 
 <small>
@@ -4243,6 +4492,7 @@ Time
 </small>
 
 </div>
+
 
 
 <div class="history-metric">
@@ -4255,7 +4505,9 @@ s.tds!==undefined
 
 ?
 
-Number(s.tds).toFixed(2)+"%"
+Number(
+s.tds
+).toFixed(2)+"%"
 
 :
 
@@ -4271,6 +4523,7 @@ TDS
 </div>
 
 
+
 <div class="history-metric">
 
 <strong>
@@ -4281,7 +4534,9 @@ s.ey!==undefined
 
 ?
 
-Number(s.ey).toFixed(1)+"%"
+Number(
+s.ey
+).toFixed(1)+"%"
 
 :
 
@@ -4298,6 +4553,7 @@ EY
 
 
 </div>
+
 
 </div>
 
@@ -4317,6 +4573,7 @@ EY
 
 function clearHistory(){
 
+
 if(
 
 !confirm(
@@ -4332,7 +4589,9 @@ return;
 
 shots=[];
 
+
 saveHistory();
+
 
 renderHistory();
 
@@ -4372,23 +4631,31 @@ document
 .value="";
 
 
-selectedTaste="unknown";
+selectedTaste=
+"unknown";
 
-selectedFlow="unknown";
+
+selectedFlow=
+"unknown";
 
 
 document
-.querySelectorAll(".choice")
-.forEach(item=>
+.querySelectorAll(
+".choice"
+)
+.forEach(item=>{
 
-item.classList.remove("active")
+item
+.classList
+.remove("active");
 
-);
+});
 
 
 document
 .getElementById("resultPanel")
-.classList.add("hide");
+.classList
+.add("hide");
 
 }
 
@@ -4396,21 +4663,30 @@ document
 
 function resetHomeProfile(){
 
+
 document
 .getElementById("hType")
-.value="Unknown";
+.value=
+"Unknown";
+
 
 document
 .getElementById("hRoast")
-.value="Medium";
+.value=
+"Medium";
+
 
 document
 .getElementById("hProcess")
-.value="Unknown";
+.value=
+"Unknown";
+
 
 document
 .getElementById("hDays")
-.value="";
+.value=
+"";
+
 
 syncProfile(
 "h",
@@ -4422,7 +4698,7 @@ syncProfile(
 
 
 /* =========================
-   PWA
+   SERVICE WORKER
 ========================= */
 
 if(
@@ -4438,8 +4714,12 @@ window.addEventListener(
 
 navigator
 .serviceWorker
-.register("./sw.js")
-.catch(()=>{});
+.register(
+"./sw.js"
+)
+.catch(
+()=>{}
+);
 
 }
 
@@ -4450,7 +4730,6 @@ navigator
 
 
 renderHistory();
-
 
 </script>
 
