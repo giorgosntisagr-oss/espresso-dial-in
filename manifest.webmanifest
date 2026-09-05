@@ -3,15 +3,15 @@
   "short_name": "Dial-In",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#111111",
-  "theme_color": "#171717",
+  "background_color": "#f4f1ec",
+  "theme_color": "#f4f1ec",
   "description": "Personal espresso dial-in assistant.",
   "icons": [
     {
-      "src": "icon.svg",
+      "src": "./665D55B8-C1A2-45C8-AD36-18C9E9E2C281.PNG",
       "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
