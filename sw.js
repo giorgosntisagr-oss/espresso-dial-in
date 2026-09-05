@@ -1,10 +1,10 @@
-const CACHE = "espresso-dial-in-v4";
+const CACHE = "espresso-dial-in-v5";
 
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
-  "./icon.svg"
+  "./665D55B8-C1A2-45C8-AD36-18C9E9E2C281.PNG"
 ];
 
 self.addEventListener("install", event => {
@@ -38,6 +38,7 @@ self.addEventListener("fetch", event => {
     event.respondWith(
       fetch(event.request)
         .then(response => {
+
           const copy = response.clone();
 
           caches.open(CACHE)
@@ -46,6 +47,7 @@ self.addEventListener("fetch", event => {
             );
 
           return response;
+
         })
         .catch(() =>
           caches.match("./index.html")
@@ -72,7 +74,10 @@ self.addEventListener("fetch", event => {
               );
 
             return response;
+
           });
+
       })
   );
+
 });
