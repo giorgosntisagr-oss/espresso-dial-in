@@ -2,6 +2,7 @@
 <html lang="el">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -33,6 +34,123 @@
 
 <style>
 
+/* =========================================
+   OPENING ANIMATION
+========================================= */
+
+#appSplash{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  background:#f4f1ec;
+
+  transition:
+    opacity .4s ease,
+    visibility .4s ease;
+}
+
+#appSplash.hideSplash{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.splashBean{
+  width:112px;
+  height:112px;
+
+  object-fit:cover;
+  border-radius:26px;
+
+  opacity:0;
+  transform:scale(.78);
+
+  animation:
+    splashBeanIn
+    .65s
+    cubic-bezier(.2,.8,.2,1)
+    forwards;
+}
+
+.splashTitle{
+  margin-top:22px;
+
+  font-size:27px;
+  font-weight:800;
+  letter-spacing:-.04em;
+
+  color:#171614;
+
+  opacity:0;
+  transform:translateY(8px);
+
+  animation:
+    splashTextIn
+    .45s
+    ease
+    .28s
+    forwards;
+}
+
+.splashSub{
+  margin-top:5px;
+
+  font-size:14px;
+  color:#77716b;
+
+  opacity:0;
+  transform:translateY(8px);
+
+  animation:
+    splashTextIn
+    .4s
+    ease
+    .48s
+    forwards;
+}
+
+@keyframes splashBeanIn{
+
+  0%{
+    opacity:0;
+    transform:scale(.78);
+  }
+
+  70%{
+    opacity:1;
+    transform:scale(1.04);
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes splashTextIn{
+
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+
+/* =========================================
+   COLORS
+========================================= */
+
 :root{
   --bg:#f4f1ec;
   --card:#ffffff;
@@ -40,36 +158,49 @@
   --text:#171614;
   --muted:#77716b;
   --border:#e7e1da;
+
   --dark:#1c1b19;
+
   --brown:#685548;
   --brown-soft:#eee7df;
+
   --purple:#7355b8;
   --purple-soft:#eee8ff;
+
   --green:#4f8a59;
   --green-soft:#eaf4e9;
+
   --shadow:0 8px 28px rgba(30,25,20,.05);
 }
+
 
 *{
   box-sizing:border-box;
 }
 
+
 html{
   background:var(--bg);
 }
 
+
 body{
   margin:0;
+
   background:var(--bg);
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "SF Pro Display",
     "SF Pro Text",
     sans-serif;
+
   color:var(--text);
+
   -webkit-font-smoothing:antialiased;
 }
+
 
 button,
 input,
@@ -77,673 +208,1035 @@ select{
   font:inherit;
 }
 
+
 button{
   -webkit-tap-highlight-color:transparent;
 }
 
+
 main{
   max-width:720px;
   margin:auto;
+
   padding:
     max(24px,env(safe-area-inset-top))
     16px
     calc(110px + env(safe-area-inset-bottom));
 }
 
+
+/* =========================================
+   GENERAL
+========================================= */
+
 .hide{
   display:none !important;
 }
 
+
 .card{
   background:var(--card);
+
   border:1px solid var(--border);
   border-radius:24px;
+
   padding:18px;
   margin:12px 0;
+
   box-shadow:var(--shadow);
 }
+
 
 .section-title{
   font-size:13px;
   font-weight:800;
+
   letter-spacing:.09em;
   text-transform:uppercase;
+
   color:#57524c;
+
   margin-bottom:14px;
 }
+
 
 .note{
   font-size:14px;
   line-height:1.5;
+
   color:var(--muted);
 }
 
+
 .divider{
   height:1px;
+
   background:var(--border);
+
   margin:18px 0;
 }
 
 
-/* HOME */
+/* =========================================
+   HOME
+========================================= */
 
 .brand{
   font-size:13px;
   font-weight:800;
+
   letter-spacing:.22em;
+
   color:var(--brown);
+
   margin-bottom:8px;
 }
+
 
 .hero-title{
   font-size:48px;
   line-height:.98;
+
   letter-spacing:-.055em;
+
   font-weight:800;
+
   margin:0;
 }
 
+
 .hero-sub{
   font-size:18px;
+
   color:var(--muted);
+
   margin-top:10px;
 }
 
+
 .home-menu{
   display:grid;
+
   gap:10px;
+
   margin-top:28px;
 }
 
+
 .home-action{
   width:100%;
+
   border:1px solid var(--border);
+
   background:var(--card);
+
   border-radius:22px;
+
   padding:20px;
+
   text-align:left;
+
   display:flex;
+
   align-items:center;
   justify-content:space-between;
+
   gap:14px;
+
   box-shadow:var(--shadow);
+
   color:var(--text);
 }
 
+
 .home-action.primary{
-  background:linear-gradient(135deg,#eee7df,#f8f4ef);
+  background:
+    linear-gradient(
+      135deg,
+      #eee7df,
+      #f8f4ef
+    );
 }
+
 
 .home-action-title{
   font-size:21px;
   font-weight:750;
+
   letter-spacing:-.025em;
 }
 
+
 .home-action-sub{
   font-size:14px;
+
   color:var(--muted);
+
   margin-top:4px;
 }
+
 
 .home-small{
   font-size:12px;
   font-weight:800;
+
   letter-spacing:.08em;
+
   color:var(--brown);
+
   margin-bottom:5px;
 }
 
+
 .arrow{
   font-size:28px;
+
   color:#99928b;
 }
 
+
 .tip{
   margin-top:18px;
+
   background:#ebe5dd;
+
   border-radius:22px;
+
   padding:18px;
 }
+
 
 .tip-label{
   font-size:12px;
   font-weight:800;
+
   letter-spacing:.08em;
   text-transform:uppercase;
+
   color:var(--brown);
 }
 
+
 .tip strong{
   display:block;
+
   font-size:19px;
+
   margin-top:8px;
 }
 
 
-/* HEADERS */
+/* =========================================
+   PAGE HEADER
+========================================= */
 
 .page-head{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
+
   margin-bottom:18px;
 }
+
 
 .page-title{
   font-size:31px;
   font-weight:800;
+
   letter-spacing:-.045em;
 }
 
+
 .reset{
   border:0;
+
   background:transparent;
+
   color:var(--muted);
+
   padding:8px;
+
   font-size:14px;
 }
 
 
-/* FORMS */
+/* =========================================
+   FORMS
+========================================= */
 
 .form-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:10px;
 }
+
 
 .field{
   margin-top:10px;
 }
 
+
 label{
   display:block;
+
   font-size:14px;
   font-weight:700;
+
   margin-bottom:6px;
 }
 
+
 label span{
   display:block;
+
   font-size:12px;
   font-weight:450;
+
   color:var(--muted);
+
   margin-top:2px;
 }
+
 
 input,
 select{
   width:100%;
+
   min-height:54px;
+
   padding:14px;
+
   border:1px solid var(--border);
+
   background:#faf9f7;
+
   border-radius:15px;
+
   font-size:16px;
+
   color:var(--text);
+
   outline:none;
 }
+
 
 input:focus,
 select:focus{
   background:white;
+
   border-color:#aaa096;
-  box-shadow:0 0 0 3px rgba(104,85,72,.08);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(104,85,72,.08);
 }
+
 
 input::placeholder{
   color:#aaa6a0;
 }
 
 
-/* BUTTONS */
+/* =========================================
+   BUTTONS
+========================================= */
 
 .main-btn{
   width:100%;
+
   border:0;
+
   background:var(--dark);
+
   color:white;
+
   border-radius:17px;
+
   padding:17px 16px;
+
   font-size:17px;
   font-weight:750;
+
   margin-top:16px;
 }
+
 
 .main-btn:active{
   transform:scale(.99);
 }
 
+
 .light-btn{
   border:0;
+
   background:#eeeae5;
+
   color:var(--text);
+
   border-radius:13px;
+
   padding:10px 12px;
+
   font-size:14px;
   font-weight:650;
 }
 
 
-/* QUICK RECIPE */
+/* =========================================
+   QUICK RECIPE
+========================================= */
 
 .quick-title-row{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
+
   gap:10px;
 }
 
+
 .quick-title-row h2{
   font-size:24px;
+
   letter-spacing:-.035em;
+
   margin:0;
 }
 
+
 .recipe-main{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
+
   gap:20px;
+
   padding:10px 4px;
 }
+
 
 .recipe-number{
   font-size:34px;
   font-weight:800;
+
   letter-spacing:-.04em;
 }
 
+
 .recipe-unit{
   font-size:13px;
+
   color:var(--muted);
+
   margin-top:2px;
 }
 
+
 .recipe-arrow{
   font-size:24px;
+
   color:#99938c;
 }
 
+
 .three-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:8px;
+
   margin-top:12px;
 }
 
+
 .info-tile{
   background:var(--soft);
+
   border:1px solid var(--border);
+
   border-radius:16px;
+
   padding:13px;
+
   text-align:center;
 }
 
+
 .info-tile small{
   display:block;
+
   font-size:12px;
+
   color:var(--muted);
+
   margin-bottom:4px;
 }
+
 
 .info-tile strong{
   font-size:17px;
 }
 
 
-/* SHOT DATA */
+/* =========================================
+   SHOT DATA
+========================================= */
 
 .data-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:10px;
 }
 
+
 .data-box{
   background:var(--soft);
+
   border:1px solid var(--border);
+
   border-radius:17px;
+
   padding:13px;
 }
+
 
 .data-box label{
   margin:0 0 5px;
 }
 
+
 .data-box input{
   border:0;
+
   padding:0;
+
   background:transparent;
+
   min-height:auto;
+
   font-size:25px;
   font-weight:750;
 }
+
 
 .data-box input:focus{
   box-shadow:none;
 }
 
 
-/* TDS */
+/* =========================================
+   TDS
+========================================= */
 
 .tds-box{
   background:var(--purple-soft);
+
   border:1px solid #ded4f9;
+
   border-radius:20px;
+
   padding:15px;
+
   margin-top:12px;
 }
 
+
 .tds-top{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
+
   gap:10px;
 }
 
+
 .advanced{
   background:#dfd4fa;
+
   color:#5b3d9c;
+
   font-size:11px;
   font-weight:800;
+
   padding:5px 8px;
+
   border-radius:99px;
 }
 
+
 .tds-box input{
   background:white;
+
   border-color:#ddd3f3;
 }
 
 
-/* CHOICES */
+/* =========================================
+   TASTE + FLOW
+========================================= */
 
 .choice-row{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:7px;
 }
+
 
 .flow-row{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:7px;
 }
 
+
 .choice{
   border:1px solid var(--border);
+
   background:#faf9f7;
+
   border-radius:15px;
+
   min-height:62px;
+
   padding:9px 4px;
+
   font-size:12px;
+
   color:var(--text);
 }
 
+
 .choice small{
   display:block;
+
   font-size:10px;
+
   opacity:.7;
+
   margin-top:2px;
 }
 
+
 .choice.active{
   background:var(--brown);
+
   border-color:var(--brown);
+
   color:white;
 }
 
 
-/* RESULT */
+/* =========================================
+   RESULT
+========================================= */
 
 .result-hero{
   background:var(--green-soft);
+
   border:1px solid #d4e7d3;
+
   border-radius:22px;
+
   padding:18px;
 }
+
 
 .result-icon{
   width:40px;
   height:40px;
+
   display:grid;
+
   place-items:center;
+
   background:var(--green);
+
   color:white;
+
   border-radius:50%;
+
   font-weight:900;
   font-size:20px;
+
   margin-bottom:12px;
 }
+
 
 .result-title{
   font-size:26px;
   font-weight:800;
+
   letter-spacing:-.035em;
 }
 
+
 .result-sub{
   font-size:14px;
+
   color:#526956;
+
   margin-top:5px;
+
   line-height:1.4;
 }
 
+
 .metric-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:8px;
+
   margin-top:12px;
 }
+
 
 .metric{
   background:white;
+
   border:1px solid var(--border);
+
   border-radius:17px;
+
   padding:13px;
 }
 
+
 .metric small{
   display:block;
+
   font-size:12px;
+
   color:var(--muted);
+
   margin-bottom:5px;
 }
 
+
 .metric strong{
   font-size:19px;
+
   letter-spacing:-.025em;
 }
 
+
 .ey-card{
   background:white;
+
   border:1px solid var(--border);
+
   border-radius:20px;
+
   padding:17px;
+
   margin-top:12px;
 }
+
 
 .ey-value{
   font-size:34px;
   font-weight:800;
+
   letter-spacing:-.045em;
 }
 
+
 .ey-label{
   color:var(--muted);
+
   margin-top:2px;
 }
 
+
 .ey-track{
   height:8px;
+
   border-radius:99px;
+
   background:#ebe8e3;
+
   margin-top:16px;
+
   overflow:hidden;
 }
 
+
 .ey-fill{
   height:100%;
-  background:linear-gradient(90deg,#9fcba3,#4f8a59);
+
+  background:
+    linear-gradient(
+      90deg,
+      #9fcba3,
+      #4f8a59
+    );
+
   border-radius:99px;
+
   width:0%;
+
   transition:.35s;
 }
 
+
 .range-row{
   display:flex;
+
   justify-content:space-between;
+
   font-size:12px;
+
   color:var(--muted);
+
   margin-top:7px;
 }
 
+
 .result-section{
   background:white;
+
   border:1px solid var(--border);
+
   border-radius:20px;
+
   padding:16px;
+
   margin-top:10px;
 }
 
+
 .result-section h3{
   font-size:16px;
+
   margin:0 0 7px;
 }
 
+
 .result-section p{
   font-size:14px;
+
   line-height:1.5;
+
   color:#514d48;
+
   margin:0;
 }
 
+
 .next-shot{
   background:#eee4da;
+
   border-color:#dfd1c4;
 }
 
 
-/* HISTORY */
+/* =========================================
+   HISTORY
+========================================= */
 
 .history-card{
   background:white;
+
   border:1px solid var(--border);
+
   border-radius:20px;
+
   padding:16px;
+
   margin:10px 0;
 }
 
+
 .history-head{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
+
   gap:10px;
 }
+
 
 .history-title{
   font-size:18px;
   font-weight:750;
 }
 
+
 .history-time{
   font-size:12px;
+
   color:var(--muted);
+
   margin-top:2px;
 }
 
+
 .status{
   display:inline-block;
+
   border-radius:99px;
+
   padding:5px 8px;
+
   font-size:11px;
   font-weight:700;
+
   background:var(--green-soft);
+
   color:#3f7448;
 }
 
+
 .history-metrics{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
+
+  grid-template-columns:
+    repeat(5,1fr);
+
   gap:6px;
+
   margin-top:14px;
 }
+
 
 .history-metric{
   text-align:center;
 }
 
+
 .history-metric strong{
   display:block;
+
   font-size:14px;
 }
 
+
 .history-metric small{
   font-size:10px;
+
   color:var(--muted);
 }
 
 
-/* GUIDE */
+/* =========================================
+   GUIDE
+========================================= */
 
 .guide-card{
   background:white;
+
   border:1px solid var(--border);
+
   border-radius:20px;
+
   padding:17px;
+
   margin:10px 0;
 }
+
 
 .guide-card strong{
   font-size:17px;
 }
 
+
 .guide-card p{
   font-size:14px;
+
   line-height:1.5;
+
   color:var(--muted);
+
   margin:7px 0 0;
 }
 
 
-/* BOTTOM NAV */
+/* =========================================
+   BOTTOM NAV
+========================================= */
 
 .bottom-nav{
   position:fixed;
+
   left:50%;
+
   transform:translateX(-50%);
+
   bottom:0;
+
   width:min(720px,100%);
+
   padding:
     10px
     14px
     calc(10px + env(safe-area-inset-bottom));
-  background:rgba(249,247,243,.93);
+
+  background:
+    rgba(249,247,243,.93);
+
   backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-top:1px solid rgba(210,205,198,.75);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+
+  border-top:
+    1px solid
+    rgba(210,205,198,.75);
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   z-index:100;
 }
 
+
 .nav-item{
   border:0;
+
   background:transparent;
+
   padding:8px 2px;
+
   color:#918c86;
+
   font-size:11px;
   font-weight:650;
 }
 
+
 .nav-icon{
   display:block;
+
   font-size:19px;
+
   line-height:1;
+
   margin-bottom:5px;
 }
+
 
 .nav-item.active{
   color:#191816;
@@ -754,27 +1247,62 @@ input::placeholder{
 </head>
 
 
+
 <body>
+
+
+<!-- =========================================
+     OPENING SPLASH
+========================================= -->
+
+<div id="appSplash">
+
+  <img
+    class="splashBean"
+    src="./665D55B8-C1A2-45C8-AD36-18C9E9E2C281.PNG"
+    alt="Espresso Dial-In"
+  >
+
+  <div class="splashTitle">
+    Espresso Dial-In
+  </div>
+
+  <div class="splashSub">
+    Better coffee, every day.
+  </div>
+
+</div>
+
+
 
 <main>
 
 
+<!-- =========================================
+     HOME
+========================================= -->
+
 <section id="homePanel">
+
 
 <div class="brand">
 ESPRESSO
 </div>
 
+
 <h1 class="hero-title">
 Dial-In
 </h1>
+
 
 <div class="hero-sub">
 Better coffee, every day.
 </div>
 
 
+
 <div class="home-menu">
+
 
 <button
   class="home-action primary"
@@ -804,6 +1332,7 @@ Based on your coffee profile
 </button>
 
 
+
 <button
   class="home-action"
   onclick="showTab('dial')"
@@ -828,6 +1357,7 @@ Analyse & improve your espresso
 </button>
 
 
+
 <button
   class="home-action"
   onclick="showTab('history')"
@@ -850,6 +1380,7 @@ Your saved shots
 </div>
 
 </button>
+
 
 
 <button
@@ -878,6 +1409,7 @@ Learn & understand extraction
 </div>
 
 
+
 <div class="tip">
 
 <div class="tip-label">
@@ -895,12 +1427,15 @@ Small controlled changes make dial-in easier to understand.
 </div>
 
 
+
 <div
   id="quickSetup"
   class="hide"
 >
 
+
 <div class="card">
+
 
 <div class="quick-title-row">
 
@@ -918,7 +1453,9 @@ Reset
 </div>
 
 
+
 <div class="form-grid">
+
 
 <div class="field">
 
@@ -953,6 +1490,7 @@ Commercial
 </div>
 
 
+
 <div class="field">
 
 <label>
@@ -973,7 +1511,10 @@ Unknown / Δεν ξέρω
 Light
 </option>
 
-<option value="Medium" selected>
+<option
+  value="Medium"
+  selected
+>
 Medium
 </option>
 
@@ -988,6 +1529,7 @@ Dark
 </select>
 
 </div>
+
 
 
 <div class="field">
@@ -1023,6 +1565,7 @@ Honey
 </div>
 
 
+
 <div class="field">
 
 <label>
@@ -1043,6 +1586,7 @@ Days off roast
 </div>
 
 
+
 <button
   class="main-btn"
   onclick="generateQuickRecipe()"
@@ -1050,7 +1594,9 @@ Days off roast
 Generate Starting Recipe
 </button>
 
+
 </div>
+
 
 
 <div
@@ -1058,12 +1604,15 @@ Generate Starting Recipe
   class="card hide"
 >
 
+
 <div class="section-title">
 Starting Recipe
 </div>
 
 
+
 <div class="recipe-main">
+
 
 <div>
 
@@ -1101,10 +1650,13 @@ out
 
 </div>
 
+
 </div>
 
 
+
 <div class="three-grid">
+
 
 <div class="info-tile">
 
@@ -1144,7 +1696,9 @@ Temp
 
 </div>
 
+
 </div>
+
 
 
 <div
@@ -1156,6 +1710,7 @@ Starting point.
 </div>
 
 
+
 <button
   class="main-btn"
   onclick="continueToDial()"
@@ -1163,18 +1718,26 @@ Starting point.
 Continue to Dial-In →
 </button>
 
-</div>
 
 </div>
+
+
+</div>
+
 
 </section>
 
 
 
+<!-- =========================================
+     DIAL IN
+========================================= -->
+
 <section
   id="dialPanel"
   class="hide"
 >
+
 
 <div class="page-head">
 
@@ -1192,14 +1755,18 @@ Reset
 </div>
 
 
+
 <div class="card">
+
 
 <div class="section-title">
 Coffee Profile
 </div>
 
 
+
 <div class="form-grid">
+
 
 <div class="field">
 
@@ -1233,6 +1800,7 @@ Commercial
 </div>
 
 
+
 <div class="field">
 
 <label>
@@ -1252,7 +1820,10 @@ Unknown / Δεν ξέρω
 Light
 </option>
 
-<option value="Medium" selected>
+<option
+  value="Medium"
+  selected
+>
 Medium
 </option>
 
@@ -1267,6 +1838,7 @@ Dark
 </select>
 
 </div>
+
 
 
 <div class="field">
@@ -1301,6 +1873,7 @@ Honey
 </div>
 
 
+
 <div class="field">
 
 <label>
@@ -1317,19 +1890,25 @@ Days off roast
 
 </div>
 
-</div>
 
 </div>
+
+
+</div>
+
 
 
 <div class="card">
+
 
 <div class="section-title">
 Shot Data
 </div>
 
 
+
 <div class="data-grid">
+
 
 <div class="data-box">
 
@@ -1345,6 +1924,7 @@ Dose (g)
 >
 
 </div>
+
 
 
 <div class="data-box">
@@ -1363,6 +1943,7 @@ Yield (g)
 </div>
 
 
+
 <div class="data-box">
 
 <label>
@@ -1377,6 +1958,7 @@ Time (s)
 >
 
 </div>
+
 
 
 <div class="data-box">
@@ -1394,12 +1976,16 @@ Temperature (°C)
 
 </div>
 
+
 </div>
+
 
 
 <div class="tds-box">
 
+
 <div class="tds-top">
+
 
 <label>
 
@@ -1411,11 +1997,14 @@ Total Dissolved Solids · Προαιρετικό
 
 </label>
 
+
 <span class="advanced">
 ADVANCED
 </span>
 
+
 </div>
+
 
 
 <input
@@ -1427,14 +2016,18 @@ ADVANCED
   placeholder="π.χ. 9.20"
 >
 
+
 <div class="note">
 Αν βάλεις TDS, το EY υπολογίζεται αυτόματα.
 </div>
 
+
 </div>
 
 
+
 <div class="divider"></div>
+
 
 
 <div class="section-title">
@@ -1442,7 +2035,9 @@ Taste · Γεύση
 </div>
 
 
+
 <div class="choice-row">
+
 
 <button
   class="choice taste-choice"
@@ -1452,6 +2047,7 @@ Sour
 <small>Ξινό</small>
 </button>
 
+
 <button
   class="choice taste-choice"
   onclick="selectTaste('bitter',this)"
@@ -1459,6 +2055,7 @@ Sour
 Bitter
 <small>Πικρό</small>
 </button>
+
 
 <button
   class="choice taste-choice"
@@ -1468,6 +2065,7 @@ Balanced
 <small>Ισορροπημένο</small>
 </button>
 
+
 <button
   class="choice taste-choice"
   onclick="selectTaste('thin',this)"
@@ -1475,6 +2073,7 @@ Balanced
 Thin
 <small>Νερουλό</small>
 </button>
+
 
 <button
   class="choice taste-choice"
@@ -1484,7 +2083,18 @@ Heavy
 <small>Βαρύ</small>
 </button>
 
+
+<button
+  class="choice taste-choice"
+  onclick="selectTaste('unknown',this)"
+>
+Unknown
+<small>Δεν ξέρω</small>
+</button>
+
+
 </div>
+
 
 
 <div
@@ -1495,7 +2105,9 @@ Flow / Puck · Ροή
 </div>
 
 
+
 <div class="flow-row">
+
 
 <button
   class="choice flow-choice"
@@ -1505,6 +2117,7 @@ Slow
 <small>Αργή</small>
 </button>
 
+
 <button
   class="choice flow-choice"
   onclick="selectFlow('normal',this)"
@@ -1512,6 +2125,7 @@ Slow
 Normal
 <small>Καλή</small>
 </button>
+
 
 <button
   class="choice flow-choice"
@@ -1521,6 +2135,7 @@ Fast
 <small>Γρήγορη</small>
 </button>
 
+
 <button
   class="choice flow-choice"
   onclick="selectFlow('channel',this)"
@@ -1529,7 +2144,18 @@ Channel
 <small>Uneven</small>
 </button>
 
+
+<button
+  class="choice flow-choice"
+  onclick="selectFlow('unknown',this)"
+>
+Unknown
+<small>Δεν ξέρω</small>
+</button>
+
+
 </div>
+
 
 
 <button
@@ -1539,19 +2165,26 @@ Channel
 Analyse Shot →
 </button>
 
+
 </div>
 
+
+
+<!-- RESULT -->
 
 <div
   id="resultPanel"
   class="hide"
 >
 
+
 <div class="result-hero">
+
 
 <div class="result-icon">
 ✓
 </div>
+
 
 <div
   class="result-title"
@@ -1560,6 +2193,7 @@ Analyse Shot →
 Looks great!
 </div>
 
+
 <div
   class="result-sub"
   id="resultSubtitle"
@@ -1567,7 +2201,9 @@ Looks great!
 Your shot is in a good range.
 </div>
 
+
 </div>
+
 
 
 <div
@@ -1577,10 +2213,12 @@ Your shot is in a good range.
 </div>
 
 
+
 <div
   class="ey-card hide"
   id="eyCard"
 >
+
 
 <div
   class="ey-value"
@@ -1589,9 +2227,11 @@ Your shot is in a good range.
 20.0%
 </div>
 
+
 <div class="ey-label">
 Extraction Yield
 </div>
+
 
 <div class="ey-track">
 
@@ -1602,6 +2242,7 @@ Extraction Yield
 </div>
 
 </div>
+
 
 <div class="range-row">
 
@@ -1615,7 +2256,9 @@ Reference 18–22%
 
 </div>
 
+
 </div>
+
 
 
 <div class="result-section">
@@ -1631,6 +2274,7 @@ Starting Recipe
 </div>
 
 
+
 <div class="result-section">
 
 <h3>
@@ -1642,6 +2286,7 @@ What this means · Τι σημαίνει
 </p>
 
 </div>
+
 
 
 <div class="result-section">
@@ -1657,6 +2302,7 @@ First Move · Πρώτη αλλαγή
 </div>
 
 
+
 <div class="result-section next-shot">
 
 <h3>
@@ -1669,16 +2315,23 @@ Suggested Next Shot
 
 </div>
 
+
 </div>
+
 
 </section>
 
 
 
+<!-- =========================================
+     HISTORY
+========================================= -->
+
 <section
   id="historyPanel"
   class="hide"
 >
+
 
 <div class="page-head">
 
@@ -1709,14 +2362,20 @@ Clear
 
 </div>
 
+
 </section>
 
 
+
+<!-- =========================================
+     GUIDE
+========================================= -->
 
 <section
   id="guidePanel"
   class="hide"
 >
+
 
 <div class="page-head">
 
@@ -1725,6 +2384,7 @@ Guide
 </div>
 
 </div>
+
 
 
 <div class="guide-card">
@@ -1740,6 +2400,7 @@ TDS
 </div>
 
 
+
 <div class="guide-card">
 
 <strong>
@@ -1751,6 +2412,7 @@ EY = (Yield × TDS) ÷ Dose
 </p>
 
 </div>
+
 
 
 <div class="guide-card">
@@ -1766,6 +2428,7 @@ Sour · Ξινό
 </div>
 
 
+
 <div class="guide-card">
 
 <strong>
@@ -1777,6 +2440,7 @@ Bitter / Dry
 </p>
 
 </div>
+
 
 
 <div class="guide-card">
@@ -1792,6 +2456,7 @@ Channeling
 </div>
 
 
+
 <div class="guide-card">
 
 <strong>
@@ -1804,6 +2469,7 @@ Taste + Flow + Ratio + Time + TDS/EY πρέπει να διαβάζονται μ
 
 </div>
 
+
 </section>
 
 
@@ -1811,7 +2477,12 @@ Taste + Flow + Ratio + Time + TDS/EY πρέπει να διαβάζονται μ
 
 
 
+<!-- =========================================
+     BOTTOM NAV
+========================================= -->
+
 <nav class="bottom-nav">
+
 
 <button
   class="nav-item active"
@@ -1826,6 +2497,7 @@ Taste + Flow + Ratio + Time + TDS/EY πρέπει να διαβάζονται μ
 Home
 
 </button>
+
 
 
 <button
@@ -1843,6 +2515,7 @@ Dial-In
 </button>
 
 
+
 <button
   class="nav-item"
   id="navHistory"
@@ -1856,6 +2529,7 @@ Dial-In
 History
 
 </button>
+
 
 
 <button
@@ -1872,32 +2546,53 @@ Guide
 
 </button>
 
+
 </nav>
 
 
 
 <script>
 
+
+/* =========================================
+   STORAGE
+========================================= */
+
 const STORAGE_KEY =
 "espresso-dial-in-minimal-v7";
 
+
 let shots=[];
 
+
 try{
+
   shots=
   JSON.parse(
     localStorage.getItem(STORAGE_KEY)
   ) || [];
-}
-catch(error){
-  shots=[];
+
 }
 
+catch(error){
+
+  shots=[];
+
+}
+
+
+
 let selectedTaste="unknown";
+
 let selectedFlow="unknown";
 
 
+/* =========================================
+   NAVIGATION
+========================================= */
+
 function showTab(tab){
+
 
   ["home","dial","history","guide"]
   .forEach(name=>{
@@ -1909,10 +2604,12 @@ function showTab(tab){
 
   });
 
+
   document
   .getElementById(tab+"Panel")
   .classList
   .remove("hide");
+
 
   document
   .querySelectorAll(".nav-item")
@@ -1924,67 +2621,104 @@ function showTab(tab){
 
   });
 
+
   const navMap={
+
     home:"navHome",
+
     dial:"navDial",
+
     history:"navHistory",
+
     guide:"navGuide"
+
   };
+
 
   document
   .getElementById(navMap[tab])
   .classList
   .add("active");
 
+
   if(tab==="history"){
+
     renderHistory();
+
   }
 
+
   window.scrollTo({
+
     top:0,
+
     behavior:"smooth"
+
   });
 
 }
 
 
+
+/* =========================================
+   QUICK
+========================================= */
+
 function openQuick(){
+
 
   document
   .getElementById("quickSetup")
   .classList
   .remove("hide");
 
+
   document
   .getElementById("quickSetup")
   .scrollIntoView({
+
     behavior:"smooth",
+
     block:"start"
+
   });
 
 }
 
 
+
+/* =========================================
+   PROFILE
+========================================= */
+
 function getProfile(prefix){
+
 
   return{
 
     type:
+
     document
     .getElementById(prefix+"Type")
     .value,
 
+
     roast:
+
     document
     .getElementById(prefix+"Roast")
     .value,
 
+
     process:
+
     document
     .getElementById(prefix+"Process")
     .value,
 
+
     days:
+
     document
     .getElementById(prefix+"Days")
     .value
@@ -1994,32 +2728,44 @@ function getProfile(prefix){
 }
 
 
+
 function syncProfile(from,to){
+
 
   document
   .getElementById(to+"Type")
   .value=
+
   document
   .getElementById(from+"Type")
   .value;
 
+
+
   document
   .getElementById(to+"Roast")
   .value=
+
   document
   .getElementById(from+"Roast")
   .value;
 
+
+
   document
   .getElementById(to+"Process")
   .value=
+
   document
   .getElementById(from+"Process")
   .value;
 
+
+
   document
   .getElementById(to+"Days")
   .value=
+
   document
   .getElementById(from+"Days")
   .value;
@@ -2027,193 +2773,375 @@ function syncProfile(from,to){
 }
 
 
+
+/* =========================================
+   STARTING RECIPE
+========================================= */
+
 function getStartingRecipe(profile){
 
+
   let dose=18;
+
   let ratio=2.2;
+
   let temperature=93;
+
   let timeMin=25;
+
   let timeMax=30;
 
+
+
   if(profile.roast==="Light"){
+
     ratio=2.2;
+
     temperature=94;
+
     timeMin=27;
+
     timeMax=32;
+
   }
+
 
   else if(profile.roast==="Medium"){
+
     ratio=2.2;
+
     temperature=93;
+
     timeMin=25;
+
     timeMax=30;
+
   }
+
 
   else if(profile.roast==="Medium-Dark"){
+
     ratio=2.0;
+
     temperature=91;
+
     timeMin=24;
+
     timeMax=28;
+
   }
+
 
   else if(profile.roast==="Dark"){
+
     ratio=1.9;
+
     temperature=89;
+
     timeMin=22;
+
     timeMax=26;
+
   }
+
+
 
   if(profile.type==="Commercial"){
-    ratio=Math.min(ratio,2.1);
+
+    ratio=
+    Math.min(
+      ratio,
+      2.1
+    );
+
   }
 
+
+
   if(
+
     profile.process==="Natural" &&
+
     profile.roast==="Light"
+
   ){
+
     temperature=93;
+
   }
+
+
 
   if(profile.days!==""){
 
+
     const days=
-    parseFloat(profile.days);
+    parseFloat(
+      profile.days
+    );
+
 
     if(days<7){
+
       timeMin-=1;
+
       timeMax+=2;
+
     }
 
-    if(days>=21 && days<=45){
+
+    if(
+
+      days>=21 &&
+
+      days<=45
+
+    ){
+
       temperature+=1;
+
     }
+
 
     if(days>45){
+
       dose=18.5;
-      ratio=Math.max(1.9,ratio-0.1);
+
+      ratio=
+      Math.max(
+        1.9,
+        ratio-0.1
+      );
+
     }
 
   }
 
+
+
   return{
+
     dose,
+
     ratio,
-    yieldValue:dose*ratio,
+
+    yieldValue:
+    dose*ratio,
+
     temperature,
+
     timeMin,
+
     timeMax
+
   };
 
 }
 
 
+
+/* =========================================
+   QUICK RECIPE
+========================================= */
+
 function generateQuickRecipe(){
+
 
   const profile=
   getProfile("h");
 
+
   const recipe=
   getStartingRecipe(profile);
+
+
 
   document
   .getElementById("quickDose")
   .textContent=
-  recipe.dose.toFixed(1)+" g";
+
+  recipe.dose.toFixed(1)+
+  " g";
+
+
 
   document
   .getElementById("quickYield")
   .textContent=
-  recipe.yieldValue.toFixed(1)+" g";
+
+  recipe.yieldValue.toFixed(1)+
+  " g";
+
+
 
   document
   .getElementById("quickRatio")
   .textContent=
-  "1:"+recipe.ratio.toFixed(2);
+
+  "1:"+
+  recipe.ratio.toFixed(2);
+
+
 
   document
   .getElementById("quickTime")
   .textContent=
-  recipe.timeMin+"–"+recipe.timeMax+" s";
+
+  recipe.timeMin+
+  "–"+
+  recipe.timeMax+
+  " s";
+
+
 
   document
   .getElementById("quickTemp")
   .textContent=
-  recipe.temperature+"°C";
+
+  recipe.temperature+
+  "°C";
+
+
 
   document
   .getElementById("quickWhy")
   .textContent=
+
   getRecipeReason(profile);
+
+
 
   document
   .getElementById("quickResult")
   .classList
   .remove("hide");
 
+
 }
+
 
 
 function getRecipeReason(profile){
 
+
   if(profile.roast==="Light"){
-    return "Light roast: higher temperature and a slightly longer extraction window are used as a starting point.";
+
+    return(
+      "Light roast: higher temperature and a slightly longer extraction window are used as a starting point."
+    );
+
   }
+
 
   if(profile.roast==="Dark"){
-    return "Dark roast: lower temperature and a shorter ratio help avoid excessive extraction.";
+
+    return(
+      "Dark roast: lower temperature and a shorter ratio help avoid excessive extraction."
+    );
+
   }
+
 
   if(profile.roast==="Medium-Dark"){
-    return "Medium-dark roast usually needs less extraction energy than a lighter roast.";
+
+    return(
+      "Medium-dark roast usually needs less extraction energy than a lighter roast."
+    );
+
   }
+
 
   if(profile.roast==="Unknown"){
-    return "Unknown roast: the app uses a neutral medium-style starting point.";
+
+    return(
+      "Unknown roast: the app uses a neutral medium-style starting point."
+    );
+
   }
 
-  return "A balanced neutral starting point. Taste and flow should guide the final dial-in.";
+
+  return(
+    "A balanced neutral starting point. Taste and flow should guide the final dial-in."
+  );
 
 }
 
 
+
+/* =========================================
+   QUICK → DIAL
+========================================= */
+
 function continueToDial(){
 
-  syncProfile("h","d");
+
+  syncProfile(
+    "h",
+    "d"
+  );
+
 
   const recipe=
+
   getStartingRecipe(
     getProfile("h")
   );
 
+
+
   document
   .getElementById("dDose")
   .value=
+
   recipe.dose.toFixed(1);
+
+
 
   document
   .getElementById("dYield")
   .value=
+
   recipe.yieldValue.toFixed(1);
+
+
 
   document
   .getElementById("dTemp")
   .value=
+
   recipe.temperature;
+
 
   showTab("dial");
 
 }
 
 
-function selectTaste(value,button){
 
-  selectedTaste=value;
+/* =========================================
+   TASTE + FLOW
+========================================= */
+
+function selectTaste(
+  value,
+  button
+){
+
+
+  selectedTaste=
+  value;
+
 
   document
   .querySelectorAll(".taste-choice")
   .forEach(item=>{
-    item.classList.remove("active");
+
+    item
+    .classList
+    .remove("active");
+
   });
+
 
   button
   .classList
@@ -2222,15 +3150,27 @@ function selectTaste(value,button){
 }
 
 
-function selectFlow(value,button){
 
-  selectedFlow=value;
+function selectFlow(
+  value,
+  button
+){
+
+
+  selectedFlow=
+  value;
+
 
   document
   .querySelectorAll(".flow-choice")
   .forEach(item=>{
-    item.classList.remove("active");
+
+    item
+    .classList
+    .remove("active");
+
   });
+
 
   button
   .classList
@@ -2238,6 +3178,11 @@ function selectFlow(value,button){
 
 }
 
+
+
+/* =========================================
+   EY
+========================================= */
 
 function calculateEY(
   dose,
@@ -2245,20 +3190,37 @@ function calculateEY(
   tds
 ){
 
+
   if(
+
     !Number.isFinite(tds) ||
+
     tds<=0 ||
+
     dose<=0
+
   ){
+
     return null;
+
   }
 
+
   return(
-    yieldValue*tds
+
+    yieldValue*
+
+    tds
+
   )/dose;
 
 }
 
+
+
+/* =========================================
+   DIAGNOSIS
+========================================= */
 
 function diagnose(
   taste,
@@ -2269,242 +3231,456 @@ function diagnose(
   ey
 ){
 
-  let title="Looks close";
-  let subtitle="Your shot is in a reasonable range.";
-  let why="Use taste to decide the next change.";
-  let move="Keep the recipe stable and change only one major variable at a time.";
-  let next="Repeat the shot once to confirm the result.";
+
+  let title=
+  "Looks close";
+
+
+  let subtitle=
+  "Your shot is in a reasonable range.";
+
+
+  let why=
+  "Use taste to decide the next change.";
+
+
+  let move=
+  "Keep the recipe stable and change only one major variable at a time.";
+
+
+  let next=
+  "Repeat the shot once to confirm the result.";
+
+
 
   if(flow==="channel"){
 
     return{
-      title:"Possible channeling",
-      subtitle:"Fix puck preparation first.",
-      why:"Uneven extraction can make the overall TDS and EY misleading.",
-      move:"Improve distribution, WDT and tamp consistency before changing grind.",
-      next:"Repeat with the same dose, yield and grind after improving puck preparation."
+
+      title:
+      "Possible channeling",
+
+      subtitle:
+      "Fix puck preparation first.",
+
+      why:
+      "Uneven extraction can make the overall TDS and EY misleading.",
+
+      move:
+      "Improve distribution, WDT and tamp consistency before changing grind.",
+
+      next:
+      "Repeat with the same dose, yield and grind after improving puck preparation."
+
     };
 
   }
+
 
 
   if(taste==="balanced"){
 
     return{
 
-      title:"Looks great!",
+      title:
+      "Looks great!",
 
-      subtitle:"Balanced shot · Ισορροπημένο",
+      subtitle:
+      "Balanced shot · Ισορροπημένο",
 
       why:
+
       ey!==null
+
       ?
+
       "Balanced taste with TDS "+
+
       tds.toFixed(2)+
+
       "% and EY "+
+
       ey.toFixed(1)+
+
       "%. Use these measurements as a reference for this coffee."
+
       :
+
       "The shot tastes balanced. Do not change it just to chase theoretical numbers.",
 
-      move:"No major change needed.",
+      move:
+      "No major change needed.",
 
-      next:"Repeat the same recipe to confirm consistency."
+      next:
+      "Repeat the same recipe to confirm consistency."
 
     };
 
   }
+
 
 
   if(taste==="sour"){
 
+
     if(
+
       ey!==null &&
+
       ey<18
+
     ){
 
       return{
-        title:"Under-extraction signal",
-        subtitle:"Sour taste + low EY",
+
+        title:
+        "Under-extraction signal",
+
+        subtitle:
+        "Sour taste + low EY",
+
         why:
+
         "The shot tastes sour and EY is "+
+
         ey.toFixed(1)+
+
         "%, strengthening the under-extraction signal.",
-        move:"Go slightly finer while keeping dose and yield stable.",
-        next:"One small grind step finer. Pull again and compare taste + TDS/EY."
+
+        move:
+        "Go slightly finer while keeping dose and yield stable.",
+
+        next:
+        "One small grind step finer. Pull again and compare taste + TDS/EY."
+
       };
 
     }
 
+
     return{
-      title:"Likely under-extracted",
-      subtitle:"Sour / sharp",
-      why:"The sour character suggests the coffee may need more extraction.",
-      move:"Go slightly finer.",
-      next:"Keep dose and yield stable and pull another shot."
+
+      title:
+      "Likely under-extracted",
+
+      subtitle:
+      "Sour / sharp",
+
+      why:
+      "The sour character suggests the coffee may need more extraction.",
+
+      move:
+      "Go slightly finer.",
+
+      next:
+      "Keep dose and yield stable and pull another shot."
+
     };
 
   }
+
 
 
   if(taste==="bitter"){
 
+
     if(
+
       ey!==null &&
+
       ey>22
+
     ){
 
       return{
-        title:"High extraction signal",
-        subtitle:"Bitter / dry + high EY",
+
+        title:
+        "High extraction signal",
+
+        subtitle:
+        "Bitter / dry + high EY",
+
         why:
+
         "EY is "+
+
         ey.toFixed(1)+
+
         "% and the shot tastes bitter/dry.",
-        move:"Go slightly coarser.",
-        next:"Keep dose and yield stable, then measure TDS again."
+
+        move:
+        "Go slightly coarser.",
+
+        next:
+        "Keep dose and yield stable, then measure TDS again."
+
       };
 
     }
 
+
     return{
-      title:"Bitter / dry",
-      subtitle:"Check extraction and roast.",
-      why:"Bitterness can be caused by extraction, roast or temperature.",
-      move:"Try slightly coarser or reduce temperature by 1°C.",
-      next:"Change one variable only and taste again."
+
+      title:
+      "Bitter / dry",
+
+      subtitle:
+      "Check extraction and roast.",
+
+      why:
+      "Bitterness can be caused by extraction, roast or temperature.",
+
+      move:
+      "Try slightly coarser or reduce temperature by 1°C.",
+
+      next:
+      "Change one variable only and taste again."
+
     };
 
   }
+
 
 
   if(taste==="thin"){
 
     return{
-      title:"Low concentration",
-      subtitle:"Thin / watery",
+
+      title:
+      "Low concentration",
+
+      subtitle:
+      "Thin / watery",
+
       why:
+
       tds!==null
+
       ?
+
       "TDS is "+
+
       tds.toFixed(2)+
+
       "%. The cup may need more concentration."
+
       :
+
       "The cup feels thin or watery.",
-      move:"Reduce the yield slightly.",
-      next:"Try 2–4 g less yield with the same grind."
+
+      move:
+      "Reduce the yield slightly.",
+
+      next:
+      "Try 2–4 g less yield with the same grind."
+
     };
 
   }
+
 
 
   if(taste==="heavy"){
 
     return{
-      title:"High concentration",
-      subtitle:"Heavy / intense",
+
+      title:
+      "High concentration",
+
+      subtitle:
+      "Heavy / intense",
+
       why:
+
       tds!==null
+
       ?
+
       "TDS is "+
+
       tds.toFixed(2)+
+
       "%. The cup may be more concentrated than you want."
+
       :
+
       "The cup feels heavy and intense.",
-      move:"Increase the yield slightly.",
-      next:"Try 3–4 g more yield with the same grind."
+
+      move:
+      "Increase the yield slightly.",
+
+      next:
+      "Try 3–4 g more yield with the same grind."
+
     };
 
   }
+
 
 
   if(flow==="fast"){
 
     return{
-      title:"Fast flow",
-      subtitle:"Shot running too quickly.",
-      why:"Flow is faster than expected.",
-      move:"Go slightly finer.",
-      next:"Keep dose and yield stable."
+
+      title:
+      "Fast flow",
+
+      subtitle:
+      "Shot running too quickly.",
+
+      why:
+      "Flow is faster than expected.",
+
+      move:
+      "Go slightly finer.",
+
+      next:
+      "Keep dose and yield stable."
+
     };
 
   }
+
 
 
   if(flow==="slow"){
 
     return{
-      title:"Slow flow",
-      subtitle:"Shot is restricted.",
-      why:"The puck is restricting flow more than expected.",
-      move:"Go slightly coarser.",
-      next:"Keep dose and yield stable."
+
+      title:
+      "Slow flow",
+
+      subtitle:
+      "Shot is restricted.",
+
+      why:
+      "The puck is restricting flow more than expected.",
+
+      move:
+      "Go slightly coarser.",
+
+      next:
+      "Keep dose and yield stable."
+
     };
 
   }
 
 
+
   if(time<recipe.timeMin){
 
-    title="Faster than target";
-    subtitle="Short extraction time.";
-    why="The shot finished faster than the starting target window.";
-    move="Go slightly finer.";
-    next="Keep dose and yield stable.";
+    title=
+    "Faster than target";
+
+    subtitle=
+    "Short extraction time.";
+
+    why=
+    "The shot finished faster than the starting target window.";
+
+    move=
+    "Go slightly finer.";
+
+    next=
+    "Keep dose and yield stable.";
 
   }
+
 
   else if(time>recipe.timeMax){
 
-    title="Slower than target";
-    subtitle="Long extraction time.";
-    why="The shot finished slower than the starting target window.";
-    move="Go slightly coarser.";
-    next="Keep dose and yield stable.";
+    title=
+    "Slower than target";
+
+    subtitle=
+    "Long extraction time.";
+
+    why=
+    "The shot finished slower than the starting target window.";
+
+    move=
+    "Go slightly coarser.";
+
+    next=
+    "Keep dose and yield stable.";
 
   }
 
 
+
   return{
+
     title,
+
     subtitle,
+
     why,
+
     move,
+
     next
+
   };
 
 }
 
 
+
+/* =========================================
+   ANALYSE SHOT
+========================================= */
+
 function generateDialIn(){
+
 
   const profile=
   getProfile("d");
 
+
   const recipe=
   getStartingRecipe(profile);
 
+
+
   const dose=
+
   parseFloat(
     document
     .getElementById("dDose")
     .value
-  ) || recipe.dose;
+  )
+
+  ||
+
+  recipe.dose;
+
+
 
   const yieldValue=
+
   parseFloat(
     document
     .getElementById("dYield")
     .value
-  ) || recipe.yieldValue;
+  )
+
+  ||
+
+  recipe.yieldValue;
+
+
 
   const time=
+
   parseFloat(
     document
     .getElementById("dTime")
     .value
   )
+
   ||
+
   Math.round(
     (
       recipe.timeMin+
@@ -2512,40 +3688,65 @@ function generateDialIn(){
     )/2
   );
 
+
+
   const temp=
+
   parseFloat(
     document
     .getElementById("dTemp")
     .value
   )
+
   ||
+
   recipe.temperature;
 
+
+
   const tdsInput=
+
   parseFloat(
     document
     .getElementById("dTds")
     .value
   );
 
+
+
   const tds=
+
   Number.isFinite(tdsInput)
+
   ?
+
   tdsInput
+
   :
+
   null;
 
+
+
   const ratio=
-  yieldValue/dose;
+
+  yieldValue/
+  dose;
+
+
 
   const ey=
+
   calculateEY(
     dose,
     yieldValue,
     tds
   );
 
+
+
   const result=
+
   diagnose(
     selectedTaste,
     selectedFlow,
@@ -2556,15 +3757,22 @@ function generateDialIn(){
   );
 
 
+
   document
   .getElementById("resultTitle")
   .textContent=
+
   result.title;
+
+
 
   document
   .getElementById("resultSubtitle")
   .textContent=
+
   result.subtitle;
+
+
 
   document
   .getElementById("resultMetrics")
@@ -2574,68 +3782,104 @@ function generateDialIn(){
     "Dose",
     dose.toFixed(1)+" g"
   )
+
   +
+
   metric(
     "Yield",
     yieldValue.toFixed(1)+" g"
   )
+
   +
+
   metric(
     "Ratio",
     "1:"+ratio.toFixed(2)
   )
+
   +
+
   metric(
     "Time",
     time+" s"
   )
+
   +
+
   metric(
     "Temp",
     temp+"°C"
   )
+
   +
+
   metric(
+
     "TDS",
+
     tds!==null
+
     ?
+
     tds.toFixed(2)+"%"
+
     :
+
     "—"
+
   );
 
 
+
   const eyCard=
+
   document
   .getElementById("eyCard");
 
 
+
   if(ey!==null){
+
 
     eyCard
     .classList
     .remove("hide");
 
+
     document
     .getElementById("eyValue")
     .textContent=
-    ey.toFixed(1)+"%";
+
+    ey.toFixed(1)+
+    "%";
+
 
     const progress=
+
     Math.max(
+
       0,
+
       Math.min(
+
         100,
+
         ((ey-12)/14)*100
+
       )
+
     );
+
 
     document
     .getElementById("eyFill")
     .style.width=
-    progress+"%";
+
+    progress+
+    "%";
 
   }
+
 
   else{
 
@@ -2646,38 +3890,60 @@ function generateDialIn(){
   }
 
 
+
   document
   .getElementById("startingRecipeResult")
   .textContent=
 
   recipe.dose.toFixed(1)+
+
   " g → "+
+
   recipe.yieldValue.toFixed(1)+
+
   " g · 1:"+
+
   recipe.ratio.toFixed(2)+
+
   " · "+
+
   recipe.timeMin+
+
   "–"+
+
   recipe.timeMax+
+
   " s · "+
+
   recipe.temperature+
+
   "°C";
+
 
 
   document
   .getElementById("resultWhy")
   .textContent=
+
   result.why;
+
+
 
   document
   .getElementById("resultMove")
   .textContent=
+
   result.move;
+
+
 
   document
   .getElementById("resultNext")
   .textContent=
+
   result.next;
+
+
 
   document
   .getElementById("resultPanel")
@@ -2685,14 +3951,21 @@ function generateDialIn(){
   .remove("hide");
 
 
+
   shots.unshift({
 
     dose,
+
     yieldValue,
+
     time,
+
     temp,
+
     ratio,
+
     tds,
+
     ey,
 
     title:
@@ -2704,13 +3977,35 @@ function generateDialIn(){
   });
 
 
+
   shots=
-  shots.slice(0,30);
+  shots.slice(
+    0,
+    30
+  );
+
 
   saveHistory();
 
+
+
+  document
+  .getElementById("resultPanel")
+  .scrollIntoView({
+
+    behavior:"smooth",
+
+    block:"start"
+
+  });
+
 }
 
+
+
+/* =========================================
+   METRIC
+========================================= */
 
 function metric(
   label,
@@ -2736,13 +4031,24 @@ function metric(
 }
 
 
+
+/* =========================================
+   HISTORY
+========================================= */
+
 function saveHistory(){
+
 
   try{
 
     localStorage.setItem(
+
       STORAGE_KEY,
-      JSON.stringify(shots)
+
+      JSON.stringify(
+        shots
+      )
+
     );
 
   }
@@ -2752,33 +4058,48 @@ function saveHistory(){
 }
 
 
+
 function renderHistory(){
 
+
   const list=
+
   document
-  .getElementById("historyList");
+  .getElementById(
+    "historyList"
+  );
+
 
   const empty=
+
   document
-  .getElementById("emptyHistory");
+  .getElementById(
+    "emptyHistory"
+  );
+
 
 
   if(shots.length===0){
 
+
     list.innerHTML="";
+
 
     empty
     .classList
     .remove("hide");
+
 
     return;
 
   }
 
 
+
   empty
   .classList
   .add("hide");
+
 
 
   list.innerHTML=
@@ -2787,54 +4108,87 @@ function renderHistory(){
 
     (s,i)=>{
 
+
       const date=
+
       s.date
+
       ?
+
       new Date(s.date)
+
       :
+
       new Date();
 
+
+
       const shotTime=
+
       date.toLocaleTimeString(
+
         [],
+
         {
+
           hour:"2-digit",
+
           minute:"2-digit"
+
         }
+
       );
+
 
 
       return`
 
       <div class="history-card">
 
+
       <div class="history-head">
+
 
       <div>
 
+
       <div class="history-title">
+
       Shot ${shots.length-i}
+
       </div>
+
 
       <div class="history-time">
+
       ${shotTime}
-      </div>
 
       </div>
+
+
+      </div>
+
 
       <span class="status">
+
       ${s.title}
+
       </span>
 
+
       </div>
+
 
 
       <div class="history-metrics">
 
+
       <div class="history-metric">
 
       <strong>
+
       ${Number(s.dose).toFixed(1)}
+
       </strong>
 
       <small>
@@ -2844,10 +4198,13 @@ function renderHistory(){
       </div>
 
 
+
       <div class="history-metric">
 
       <strong>
+
       ${Number(s.yieldValue).toFixed(1)}
+
       </strong>
 
       <small>
@@ -2857,10 +4214,13 @@ function renderHistory(){
       </div>
 
 
+
       <div class="history-metric">
 
       <strong>
+
       ${s.time}
+
       </strong>
 
       <small>
@@ -2870,17 +4230,24 @@ function renderHistory(){
       </div>
 
 
+
       <div class="history-metric">
 
       <strong>
+
       ${
         s.tds!==null &&
         s.tds!==undefined
+
         ?
+
         Number(s.tds).toFixed(2)+"%"
+
         :
+
         "—"
       }
+
       </strong>
 
       <small>
@@ -2890,17 +4257,24 @@ function renderHistory(){
       </div>
 
 
+
       <div class="history-metric">
 
       <strong>
+
       ${
         s.ey!==null &&
         s.ey!==undefined
+
         ?
+
         Number(s.ey).toFixed(1)+"%"
+
         :
+
         "—"
       }
+
       </strong>
 
       <small>
@@ -2909,7 +4283,9 @@ function renderHistory(){
 
       </div>
 
+
       </div>
+
 
       </div>
 
@@ -2922,55 +4298,89 @@ function renderHistory(){
 }
 
 
+
+/* =========================================
+   CLEAR HISTORY
+========================================= */
+
 function clearHistory(){
 
+
   if(
+
     !confirm(
       "Να διαγραφεί όλο το ιστορικό;"
     )
+
   ){
+
     return;
+
   }
+
 
   shots=[];
 
+
   saveHistory();
+
 
   renderHistory();
 
 }
 
 
+
+/* =========================================
+   RESET
+========================================= */
+
 function resetDial(){
+
 
   document
   .getElementById("dDose")
   .value="";
 
+
   document
   .getElementById("dYield")
   .value="";
+
 
   document
   .getElementById("dTime")
   .value="";
 
+
   document
   .getElementById("dTemp")
   .value="";
+
 
   document
   .getElementById("dTds")
   .value="";
 
-  selectedTaste="unknown";
-  selectedFlow="unknown";
+
+  selectedTaste=
+  "unknown";
+
+
+  selectedFlow=
+  "unknown";
+
 
   document
   .querySelectorAll(".choice")
   .forEach(item=>{
-    item.classList.remove("active");
+
+    item
+    .classList
+    .remove("active");
+
   });
+
 
   document
   .getElementById("resultPanel")
@@ -2980,28 +4390,46 @@ function resetDial(){
 }
 
 
+
 function resetHomeProfile(){
+
 
   document
   .getElementById("hType")
-  .value="Unknown";
+  .value=
+  "Unknown";
+
 
   document
   .getElementById("hRoast")
-  .value="Medium";
+  .value=
+  "Medium";
+
 
   document
   .getElementById("hProcess")
-  .value="Unknown";
+  .value=
+  "Unknown";
+
 
   document
   .getElementById("hDays")
-  .value="";
+  .value=
+  "";
 
-  syncProfile("h","d");
+
+  syncProfile(
+    "h",
+    "d"
+  );
 
 }
 
+
+
+/* =========================================
+   SERVICE WORKER
+========================================= */
 
 if(
   "serviceWorker"
@@ -3009,23 +4437,79 @@ if(
 ){
 
   window.addEventListener(
+
     "load",
+
     ()=>{
 
       navigator
       .serviceWorker
-      .register("./sw.js")
-      .catch(()=>{});
+      .register(
+        "./sw.js"
+      )
+      .catch(
+        ()=>{}
+      );
 
     }
+
   );
 
 }
 
 
+
+/* =========================================
+   OPENING ANIMATION
+========================================= */
+
+window.addEventListener(
+  "load",
+  ()=>{
+
+
+    const splash=
+    document
+    .getElementById("appSplash");
+
+
+    if(!splash){
+      return;
+    }
+
+
+    setTimeout(
+      ()=>{
+
+        splash
+        .classList
+        .add("hideSplash");
+
+      },
+      1300
+    );
+
+
+    setTimeout(
+      ()=>{
+
+        splash.remove();
+
+      },
+      1800
+    );
+
+  }
+);
+
+
+
 renderHistory();
+
 
 </script>
 
+
 </body>
+
 </html>
